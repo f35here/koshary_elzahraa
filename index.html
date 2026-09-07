@@ -1,0 +1,4768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كشري الزهراء - أطلب أونلاين</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="test/logo/logo.jpg" type="image/jpeg" />
+    <link rel="shortcut icon" href="test/logo/logo.jpg" type="image/jpeg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
+
+    <style>
+        /* ============================================================
+               ROOT – Refined Professional Palette
+               ============================================================ */
+        :root {
+            --primary: #A61C2C;
+            --primary-light: #C62828;
+            --primary-dark: #8B1A1A;
+            --primary-gradient: linear-gradient(135deg, #A61C2C 0%, #C62828 100%);
+            --on-primary: #ffffff;
+
+            --secondary: #B8860B;
+            --secondary-light: #D4A017;
+            --secondary-dark: #8B6508;
+            --secondary-gradient: linear-gradient(135deg, #B8860B 0%, #D4A017 100%);
+            --on-secondary: #ffffff;
+
+            --tertiary: #5D6D4A;
+            --on-tertiary: #ffffff;
+
+            --surface: #F8F5F2;
+            --surface-dim: #EDE8E2;
+            --surface-bright: #FCFAF7;
+            --surface-container-lowest: #FFFFFF;
+            --surface-container-low: #F6F1EB;
+            --surface-container: #EFEAE4;
+            --surface-container-high: #E8E1D9;
+            --surface-container-highest: #DFD7CE;
+            --on-surface: #2C1F16;
+            --on-surface-variant: #5E4B3C;
+
+            --inverse-surface: #3D2C20;
+            --inverse-on-surface: #F8F5F2;
+
+            --outline: #A68B7A;
+            --outline-variant: #D5C5B8;
+
+            --error: #B71C1C;
+            --on-error: #ffffff;
+            --error-container: #FFCDD2;
+            --on-error-container: #8B1A1A;
+
+            --font-display: 'Be Vietnam Pro', sans-serif;
+            --font-body: 'Be Vietnam Pro', sans-serif;
+            --font-label: 'Plus Jakarta Sans', sans-serif;
+
+            --display-lg: 900 48px/56px var(--font-display);
+            --headline-lg: 800 32px/40px var(--font-display);
+            --headline-lg-mobile: 800 24px/32px var(--font-display);
+            --headline-md: 700 24px/32px var(--font-display);
+            --title-lg: 700 20px/28px var(--font-display);
+            --title-md: 600 18px/26px var(--font-display);
+            --body-lg: 400 18px/28px var(--font-display);
+            --body-md: 400 16px/26px var(--font-display);
+            --body-sm: 400 14px/22px var(--font-display);
+            --label-lg: 700 14px/20px var(--font-label);
+            --label-md: 600 12px/18px var(--font-label);
+            --label-sm: 700 11px/14px var(--font-label);
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 40px;
+            --space-3xl: 56px;
+            --space-4xl: 72px;
+
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-2xl: 20px;
+            --radius-full: 9999px;
+
+            --shadow-xs: 0 1px 2px rgba(44, 31, 22, 0.04);
+            --shadow-sm: 0 2px 6px rgba(44, 31, 22, 0.06);
+            --shadow-md: 0 4px 16px rgba(44, 31, 22, 0.08);
+            --shadow-lg: 0 8px 32px rgba(44, 31, 22, 0.12);
+            --shadow-xl: 0 16px 48px rgba(44, 31, 22, 0.16);
+            --shadow-glow: 0 0 30px rgba(166, 28, 44, 0.12);
+
+            --glass-bg: rgba(255, 255, 255, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.30);
+            --glass-blur: 18px;
+
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            --duration-fast: 160ms;
+            --duration-med: 320ms;
+            --duration-slow: 500ms;
+
+            --container-margin: 16px;
+            --container-max: 1240px;
+        }
+
+        /* ============================================================
+               RESET & BASE
+               ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font: var(--body-md);
+            background: var(--surface);
+            color: var(--on-surface);
+            font-family: var(--font-body);
+            padding-bottom: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        :focus-visible {
+            outline: 2.5px solid var(--primary);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-margin);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* ============================================================
+               SCROLLBAR
+               ============================================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--surface-container);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--outline-variant);
+            border-radius: var(--radius-full);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--outline);
+        }
+
+        /* ============================================================
+               HEADER
+               ============================================================ */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--glass-border);
+            transition: box-shadow var(--duration-med) var(--ease-out), background var(--duration-med) var(--ease-out);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 255, 255, 0.94);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--container-margin);
+            min-height: 64px;
+            gap: var(--space-sm);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+            background: var(--surface-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.04);
+            transition: transform var(--duration-med) var(--ease-spring);
+        }
+
+        .header-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .header-brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--on-surface);
+            letter-spacing: -0.02em;
+        }
+
+        .header-brand-name span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-brand-slogan {
+            font-size: 11px;
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            flex-shrink: 0;
+        }
+
+        .header-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 700;
+            background: var(--surface-container);
+            color: var(--on-surface);
+            transition: all var(--duration-fast) var(--ease-out);
+            border: 1px solid transparent;
+            white-space: nowrap;
+            min-height: 36px;
+            position: relative;
+        }
+
+        .header-btn:hover {
+            background: var(--surface-container-high);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-btn:active {
+            transform: scale(0.94);
+        }
+
+        .header-btn-branches {
+            background: var(--surface-container-low);
+            border-color: var(--outline-variant);
+        }
+
+        .header-btn-branches:hover {
+            border-color: var(--outline);
+        }
+
+        .header-btn-cart {
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            padding: var(--space-xs) var(--space-lg);
+            min-width: 52px;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-btn-cart:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .header-btn-cart:active {
+            transform: scale(0.94);
+        }
+
+        .header-btn-label {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--secondary-gradient);
+            color: var(--on-secondary);
+            font-size: 10px;
+            font-weight: 800;
+            min-width: 20px;
+            height: 20px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            border: 2px solid var(--surface-container-lowest);
+            transition: transform var(--duration-med) var(--ease-spring);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .cart-badge.bump {
+            animation: bump 0.45s var(--ease-spring);
+        }
+
+        @keyframes bump {
+            0% {
+                transform: scale(1);
+            }
+            35% {
+                transform: scale(1.5);
+            }
+            70% {
+                transform: scale(0.85);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ============================================================
+               MAIN
+               ============================================================ */
+        .main-content {
+            flex: 1;
+            padding-top: var(--space-lg);
+        }
+
+        /* ============================================================
+               CATEGORY NAV – Fixed Bottom
+               ============================================================ */
+        .category-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            padding: var(--space-xs) 0 var(--space-sm);
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-top: 1px solid var(--glass-border);
+            box-shadow: 0 -4px 24px rgba(44, 31, 22, 0.06);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-nav-inner {
+            display: flex;
+            gap: var(--space-sm);
+            padding: 0 var(--container-margin);
+            min-width: max-content;
+            align-items: center;
+        }
+
+        .category-chip {
+            flex-shrink: 0;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--surface-container);
+            color: var(--on-surface-variant);
+            border: 1px solid var(--outline-variant);
+            transition: all var(--duration-fast) var(--ease-out);
+            white-space: nowrap;
+            user-select: none;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .category-chip:hover {
+            background: var(--surface-container-high);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-chip:active {
+            transform: scale(0.94);
+        }
+
+        .category-chip.active {
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .category-chip i {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .category-chip.active i {
+            opacity: 1;
+        }
+
+        /* ============================================================
+               MENU SECTIONS
+               ============================================================ */
+        .menu-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .menu-section-title {
+            font: var(--headline-md);
+            color: var(--on-surface);
+            margin-bottom: var(--space-md);
+            padding: 0 var(--container-margin);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            position: relative;
+        }
+
+        .menu-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--outline-variant) 0%, transparent 100%);
+            border-radius: var(--radius-full);
+        }
+
+        .menu-section-title i {
+            color: var(--primary);
+            font-size: 22px;
+            opacity: 0.8;
+        }
+
+        /* ============================================================
+               MENU GRID
+               ============================================================ */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            padding: 0 var(--container-margin);
+        }
+
+        /* ============================================================
+               MENU CARD
+               ============================================================ */
+        .menu-card {
+            background: var(--surface-container-lowest);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--duration-med) var(--ease-out);
+            border: 1px solid var(--surface-container);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: cardFadeIn 0.5s var(--ease-spring) forwards;
+            will-change: transform, opacity;
+        }
+
+        .menu-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: var(--outline-variant);
+        }
+
+        .menu-card:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-card-image-wrap {
+            position: relative;
+            padding-top: 60%;
+            background: var(--surface-container);
+            overflow: hidden;
+        }
+
+        .menu-card-image-wrap img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--duration-slow) var(--ease-out), opacity var(--duration-med) var(--ease-out);
+            opacity: 0;
+        }
+
+        .menu-card-image-wrap img.loaded {
+            opacity: 1;
+        }
+
+        .menu-card:hover .menu-card-image-wrap img {
+            transform: scale(1.05);
+        }
+
+        .menu-card-image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-container);
+            color: var(--on-surface-variant);
+            font-size: 28px;
+            opacity: 1;
+            transition: opacity var(--duration-med) var(--ease-out);
+        }
+
+        .menu-card-image-placeholder.hidden {
+            opacity: 0;
+        }
+
+        .menu-card-body {
+            padding: var(--space-md);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .menu-card-name {
+            font: var(--title-md);
+            color: var(--on-surface);
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .menu-card-desc {
+            font: var(--body-sm);
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .variations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: var(--space-xs) 0;
+        }
+
+        .variation-btn {
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--surface-container);
+            color: var(--on-surface-variant);
+            border: 1px solid var(--outline-variant);
+            transition: all var(--duration-fast) var(--ease-out);
+            cursor: pointer;
+            flex: 1 0 auto;
+            max-width: 60px;
+            text-align: center;
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+        }
+
+        .variation-btn:hover {
+            background: var(--surface-container-high);
+            transform: translateY(-1px);
+        }
+
+        .variation-btn:active {
+            transform: scale(0.92);
+        }
+
+        .variation-btn.active {
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .menu-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: var(--space-xs);
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .menu-card-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--on-secondary);
+            background: var(--secondary-gradient);
+            padding: 2px var(--space-md);
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            box-shadow: var(--shadow-xs);
+            letter-spacing: 0.02em;
+        }
+
+        .menu-card-price::before {
+            content: 'ج.م';
+            font-weight: 500;
+            font-size: 10px;
+            opacity: 0.8;
+        }
+
+        .menu-card-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-full);
+            background: var(--surface-container);
+            color: var(--on-surface);
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--duration-fast) var(--ease-out);
+            border: 1px solid transparent;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .qty-btn:hover {
+            background: var(--surface-container-high);
+            transform: translateY(-1px);
+        }
+
+        .qty-btn:active {
+            transform: scale(0.84);
+        }
+
+        .qty-btn.add {
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .qty-btn.add:hover {
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px) scale(1.04);
+        }
+
+        .qty-btn.add.in-cart {
+            background: var(--secondary-gradient);
+        }
+
+        .qty-value {
+            font-size: 14px;
+            font-weight: 800;
+            min-width: 20px;
+            text-align: center;
+            color: var(--on-surface);
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: var(--surface-container);
+            border-radius: var(--radius-full);
+            padding: 2px 4px;
+        }
+
+        .qty-controls .qty-btn {
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            background: transparent;
+        }
+
+        .qty-controls .qty-btn:hover {
+            background: var(--surface-container-high);
+        }
+
+        .qty-controls .qty-value {
+            font-size: 13px;
+            min-width: 16px;
+        }
+
+        /* ============================================================
+               MODALS
+               ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(44, 31, 22, 0.50);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--duration-med) var(--ease-out), visibility var(--duration-med) var(--ease-out);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content {
+            background: var(--surface-container-lowest);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-width: 600px;
+            width: 100%;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform var(--duration-slow) var(--ease-spring);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg) var(--space-lg) var(--space-sm);
+            border-bottom: 1px solid var(--outline-variant);
+            flex-shrink: 0;
+            background: var(--surface-container-low);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        .modal-header h2 {
+            font: var(--headline-md);
+            color: var(--on-surface);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .modal-header h2 i {
+            color: var(--primary);
+            font-size: 22px;
+        }
+
+        .modal-header h2 .count {
+            font-size: 13px;
+            font-weight: 700;
+            background: var(--surface-container);
+            padding: 0 var(--space-md);
+            border-radius: var(--radius-full);
+            color: var(--on-surface-variant);
+            min-width: 28px;
+            text-align: center;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            background: var(--surface-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all var(--duration-fast) var(--ease-out);
+            color: var(--on-surface-variant);
+            border: 1px solid transparent;
+        }
+
+        .modal-close:hover {
+            background: var(--surface-container-high);
+            transform: rotate(90deg) scale(1.05);
+        }
+
+        .modal-close:active {
+            transform: scale(0.88);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-md) var(--space-lg);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid var(--outline-variant);
+            flex-shrink: 0;
+            background: var(--surface-container-low);
+            border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+        }
+
+        /* ============================================================
+               CHOICE MODAL
+               ============================================================ */
+        .choice-modal-content {
+            max-width: 520px;
+            border-radius: var(--radius-2xl);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-2xl) var(--space-xl);
+            background: var(--surface-container-lowest);
+            transform: scale(0.92) translateY(20px);
+            transition: transform var(--duration-slow) var(--ease-spring), opacity var(--duration-med) var(--ease-out);
+        }
+
+        .modal-overlay.open .choice-modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .choice-header h2 {
+            font: var(--headline-lg);
+            color: var(--on-surface);
+            margin-bottom: var(--space-xs);
+        }
+
+        .choice-header p {
+            font: var(--body-lg);
+            color: var(--on-surface-variant);
+            opacity: 0.8;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .choice-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            width: 100%;
+        }
+
+        .choice-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 2px solid var(--outline-variant);
+            background: var(--surface-container-low);
+            transition: all var(--duration-fast) var(--ease-out);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--on-surface);
+            cursor: pointer;
+            width: 100%;
+            text-align: right;
+        }
+
+        .choice-btn i {
+            font-size: 32px;
+            color: var(--primary);
+            width: 48px;
+            text-align: center;
+        }
+
+        .choice-btn:hover {
+            border-color: var(--primary);
+            background: var(--surface-container);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .choice-btn:active {
+            transform: scale(0.96);
+        }
+
+        .choice-btn .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-xs);
+        }
+
+        .choice-btn .btn-text small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+        }
+
+        .choice-btn.delivery-btn i {
+            color: var(--secondary);
+        }
+
+        .choice-btn.dinein-btn i {
+            color: var(--primary);
+        }
+
+        @media (min-width: 600px) {
+            .choice-options {
+                flex-direction: row;
+            }
+            .choice-btn {
+                flex: 1;
+            }
+            .modal-overlay {
+                align-items: center;
+            }
+            .choice-modal-content {
+                border-radius: var(--radius-2xl);
+            }
+        }
+
+        /* ============================================================
+               CART EMPTY
+               ============================================================ */
+        .cart-empty {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-lg);
+            color: var(--on-surface-variant);
+        }
+
+        .cart-empty i {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+            opacity: 0.3;
+            display: block;
+            color: var(--on-surface-variant);
+        }
+
+        .cart-empty h3 {
+            font: var(--headline-md);
+            color: var(--on-surface);
+            margin-bottom: var(--space-xs);
+        }
+
+        .cart-empty p {
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+            font: var(--body-md);
+        }
+
+        /* ============================================================
+               CART ITEMS
+               ============================================================ */
+        .cart-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--outline-variant);
+            align-items: center;
+            animation: cardFadeIn 0.3s var(--ease-spring) forwards;
+            transition: background var(--duration-fast) var(--ease-out);
+            border-radius: var(--radius-md);
+            padding-left: var(--space-sm);
+            padding-right: var(--space-sm);
+        }
+
+        .cart-item:hover {
+            background: var(--surface-container-low);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            background: var(--surface-container);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-name {
+            font: var(--title-md);
+            color: var(--on-surface);
+            line-height: 1.2;
+        }
+
+        .cart-item-price {
+            font: var(--body-sm);
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            flex-shrink: 0;
+        }
+
+        .cart-item-controls .qty-btn {
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            background: var(--surface-container);
+        }
+
+        .cart-item-controls .qty-btn:hover {
+            background: var(--surface-container-high);
+        }
+
+        .cart-item-controls .qty-value {
+            font-size: 13px;
+            min-width: 18px;
+            font-weight: 700;
+        }
+
+        .cart-item-remove {
+            color: var(--error);
+            font-size: 14px;
+            padding: var(--space-xs);
+            border-radius: var(--radius-full);
+            transition: all var(--duration-fast) var(--ease-out);
+            background: transparent;
+            margin-right: var(--space-xs);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-remove:hover {
+            background: var(--error-container);
+            transform: scale(1.1);
+        }
+
+        .cart-item-remove:active {
+            transform: scale(0.84);
+        }
+
+        /* ============================================================
+               CART SUMMARY
+               ============================================================ */
+        .cart-summary {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            font: var(--body-md);
+            color: var(--on-surface-variant);
+        }
+
+        .cart-summary-row.total {
+            font: var(--headline-md);
+            font-weight: 800;
+            color: var(--on-surface);
+            border-top: 2px solid var(--outline-variant);
+            padding-top: var(--space-md);
+            margin-top: var(--space-xs);
+        }
+
+        .cart-summary-row.total .amount {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .cart-actions .btn {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            transition: all var(--duration-fast) var(--ease-out);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            min-height: 46px;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        .btn-secondary {
+            background: var(--surface-container);
+            color: var(--on-surface);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-container-high);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.96);
+        }
+
+        .btn-danger {
+            background: var(--error-container);
+            color: var(--on-error-container);
+        }
+
+        .btn-danger:hover {
+            background: var(--error);
+            color: var(--on-error);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger:active {
+            transform: scale(0.96);
+        }
+
+        /* ============================================================
+               CHECKOUT FORM
+               ============================================================ */
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .form-group label {
+            font: var(--label-md);
+            color: var(--on-surface-variant);
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--outline-variant);
+            background: var(--surface-container-lowest);
+            font: var(--body-md);
+            color: var(--on-surface);
+            transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+            width: 100%;
+            font-family: var(--font-body);
+            appearance: auto;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(166, 28, 44, 0.08);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-group .error-text {
+            font: var(--label-sm);
+            color: var(--error);
+            display: none;
+        }
+
+        .form-group.invalid input,
+        .form-group.invalid textarea,
+        .form-group.invalid select {
+            border-color: var(--error);
+        }
+
+        .form-group.invalid .error-text {
+            display: block;
+        }
+
+        .checkout-summary {
+            background: var(--surface-container);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .checkout-summary .row {
+            display: flex;
+            justify-content: space-between;
+            font: var(--body-md);
+            color: var(--on-surface-variant);
+        }
+
+        .checkout-summary .row.total {
+            font: var(--headline-md);
+            font-weight: 800;
+            color: var(--on-surface);
+            border-top: 2px solid var(--outline-variant);
+            padding-top: var(--space-md);
+            margin-top: var(--space-xs);
+        }
+
+        .checkout-summary .row.total .amount {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================================
+               BRANCHES
+               ============================================================ */
+        .branches-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            padding: var(--space-xs) 0;
+        }
+
+        .branch-card {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--surface-container);
+            border-radius: var(--radius-lg);
+            align-items: center;
+            transition: all var(--duration-fast) var(--ease-out);
+            border: 1px solid transparent;
+            flex-wrap: wrap;
+        }
+
+        .branch-card:hover {
+            background: var(--surface-container-high);
+            border-color: var(--outline-variant);
+            transform: translateX(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .branch-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: var(--secondary-gradient);
+            color: var(--on-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .branch-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .branch-name {
+            font: var(--title-md);
+            color: var(--on-surface);
+        }
+
+        .branch-address {
+            font: var(--body-sm);
+            color: var(--on-surface-variant);
+            opacity: 0.7;
+        }
+
+        .branch-phone {
+            font-size: 13px;
+            color: var(--on-surface-variant);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .branch-phone i {
+            font-size: 12px;
+            color: var(--secondary);
+        }
+
+        .branch-map-btn {
+            padding: var(--space-xs) var(--space-lg);
+            border-radius: var(--radius-full);
+            background: var(--primary-gradient);
+            color: var(--on-primary);
+            font-size: 12px;
+            font-weight: 700;
+            transition: all var(--duration-fast) var(--ease-out);
+            flex-shrink: 0;
+            white-space: nowrap;
+            box-shadow: var(--shadow-xs);
+            letter-spacing: 0.02em;
+        }
+
+        .branch-map-btn:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px) scale(1.04);
+        }
+
+        .branch-map-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* ============================================================
+               FOOTER
+               ============================================================ */
+        .footer {
+            margin-top: var(--space-3xl);
+            padding: var(--space-lg) var(--container-margin);
+            border-top: 1px solid var(--outline-variant);
+            text-align: center;
+            font: var(--body-sm);
+            color: var(--on-surface-variant);
+        }
+
+        .footer a {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity var(--duration-fast);
+        }
+
+        .footer a:hover {
+            opacity: 0.7;
+        }
+
+        .footer hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--outline-variant), transparent);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ============================================================
+               RESPONSIVE
+               ============================================================ */
+        @media (max-width: 359px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-brand-name {
+                font-size: 15px;
+            }
+            .header-logo {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-lg);
+            }
+            .header-brand-name {
+                font-size: 22px;
+            }
+            .header-brand-slogan {
+                font-size: 13px;
+            }
+            .header-logo {
+                width: 48px;
+                height: 48px;
+            }
+            .header-btn {
+                font-size: 13px;
+                padding: var(--space-xs) var(--space-lg);
+                min-height: 38px;
+            }
+            .modal-content {
+                border-radius: var(--radius-2xl);
+            }
+            .branches-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--space-xl);
+            }
+            .header-brand-name {
+                font-size: 26px;
+            }
+            .header-brand-slogan {
+                font-size: 14px;
+            }
+            .header-logo {
+                width: 54px;
+                height: 54px;
+            }
+            .header-btn {
+                font-size: 14px;
+                padding: var(--space-sm) var(--space-xl);
+                min-height: 42px;
+            }
+            .container {
+                padding: 0 var(--space-2xl);
+            }
+            .category-nav-inner {
+                justify-content: center;
+                gap: var(--space-md);
+            }
+            .category-chip {
+                font-size: 14px;
+                padding: var(--space-sm) var(--space-xl);
+                min-height: 40px;
+            }
+            .modal-content {
+                max-width: 640px;
+                border-radius: var(--radius-2xl);
+                margin: auto;
+                transform: scale(0.94) translateY(16px);
+            }
+            .modal-overlay.open .modal-content {
+                transform: scale(1) translateY(0);
+            }
+            .modal-overlay {
+                align-items: center;
+            }
+            .branches-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .container {
+                max-width: 1360px;
+            }
+        }
+
+        /* ============================================================
+               REDUCED MOTION
+               ============================================================ */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .menu-card {
+                opacity: 1;
+                transform: none;
+            }
+
+            .cart-badge.bump {
+                animation: none;
+            }
+
+            .modal-content {
+                transition: none;
+            }
+
+            .modal-overlay {
+                transition: none;
+            }
+
+            .header-btn:hover {
+                transform: none;
+            }
+
+            .menu-card:hover {
+                transform: none;
+            }
+
+            .branch-card:hover {
+                transform: none;
+            }
+
+            .qty-btn.add:hover {
+                transform: none;
+            }
+        }
+
+        /* ============================================================
+               UTILITY
+               ============================================================ */
+        .shimmer {
+            background: linear-gradient(90deg, var(--surface-container) 25%, var(--surface-container-high) 50%, var(--surface-container) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .menu-card-image-wrap img.error {
+            object-fit: contain;
+            padding: var(--space-md);
+            background: var(--surface-container);
+        }
+
+        .checkout-modal .modal-content {
+            max-width: 520px;
+        }
+
+        .checkout-modal .modal-body {
+            padding-bottom: var(--space-lg);
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--outline-variant);
+            border-radius: var(--radius-full);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: var(--outline);
+        }
+
+        @media (max-width: 480px) {
+            .header-btn-label {
+                display: none;
+            }
+            .header-btn-branches .header-btn-label {
+                display: none;
+            }
+            .header-btn {
+                padding: var(--space-xs) var(--space-sm);
+                min-height: 32px;
+                font-size: 16px;
+            }
+            .header-btn-cart {
+                padding: var(--space-xs) var(--space-md);
+                min-width: 40px;
+            }
+            .header-brand-slogan {
+                display: none;
+            }
+            .header-brand-name {
+                font-size: 16px;
+            }
+            .menu-card-name {
+                font-size: 15px;
+            }
+            .menu-card-price {
+                font-size: 12px;
+                padding: 2px var(--space-sm);
+            }
+            .menu-card-body {
+                padding: var(--space-sm);
+            }
+            .modal-header h2 {
+                font-size: 18px;
+            }
+            .header-logo {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-logo {
+                width: 30px;
+                height: 30px;
+            }
+            .header-brand-name {
+                font-size: 14px;
+            }
+            .menu-grid {
+                gap: var(--space-sm);
+            }
+            .category-chip {
+                font-size: 11px;
+                padding: var(--space-xs) var(--space-md);
+                min-height: 30px;
+            }
+        }
+
+        .menu-card {
+            border: 1px solid var(--surface-container);
+        }
+
+        .menu-card:hover {
+            border-color: var(--outline-variant);
+        }
+
+        .branch-card {
+            border: 1px solid transparent;
+        }
+
+        .branch-card:hover {
+            border-color: var(--outline-variant);
+        }
+
+        .btn-primary {
+            letter-spacing: 0.04em;
+        }
+
+        .header-btn-cart {
+            letter-spacing: 0.04em;
+        }
+
+        .category-chip {
+            border: 1px solid var(--outline-variant);
+        }
+
+        .category-chip.active {
+            border-color: transparent;
+        }
+
+        .category-chip i {
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+
+        .header-btn i {
+            font-size: 14px;
+        }
+
+        .header-btn-cart i {
+            font-size: 16px;
+        }
+
+        /* --- Dine-in helper --- */
+        .field-dinein-only {
+            display: none;
+        }
+        .field-delivery-only {
+            display: none;
+        }
+
+        body.order-type-dinein .field-dinein-only {
+            display: flex;
+        }
+        body.order-type-dinein .field-delivery-only {
+            display: none;
+        }
+
+        body.order-type-delivery .field-dinein-only {
+            display: none;
+        }
+        body.order-type-delivery .field-delivery-only {
+            display: flex;
+        }
+
+        /* ---- Checkout form field visibility (JS-driven) ---- */
+        .checkout-field {
+            transition: opacity 0.25s ease, max-height 0.35s ease, margin 0.25s ease;
+            overflow: hidden;
+            max-height: 300px;
+            opacity: 1;
+            margin-bottom: 0;
+        }
+
+        .checkout-field.hidden-field {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .checkout-field.hidden-field label,
+        .checkout-field.hidden-field input,
+        .checkout-field.hidden-field select,
+        .checkout-field.hidden-field textarea,
+        .checkout-field.hidden-field .error-text {
+            display: none !important;
+        }
+
+        /* small tweak for the checkout summary */
+        .checkout-summary-wrap {
+            margin-top: var(--space-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="appHeader" role="banner">
+        <div class="header-inner container">
+            <div class="header-brand">
+                <div class="header-logo" aria-hidden="true">
+                    <img src="test/logo/logo.jpg" alt="كشري الزهراء" loading="eager" />
+                </div>
+                <div class="header-brand-text">
+                    <span class="header-brand-name">كشري <span>الزهراء</span></span>
+                    <span class="header-brand-slogan">طعم أصيل • جودة عالية</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn header-btn-branches" id="branchesBtn" aria-label="فروعنا" type="button">
+                    <i class="fas fa-store-alt" aria-hidden="true"></i>
+                    <span class="header-btn-label">فروعنا</span>
+                </button>
+                <button class="header-btn header-btn-cart" id="cartBtn" aria-label="سلة المشتريات" type="button">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                    <span class="header-btn-label" id="cartLabel">السلة</span>
+                    <span class="cart-badge" id="cartBadge" aria-label="عدد العناصر في السلة">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="mainContent" role="main">
+        <div id="menuContainer"></div>
+    </main>
+
+    <nav class="category-nav" id="categoryNav" role="navigation" aria-label="تصنيفات المنيو">
+        <div class="category-nav-inner" id="categoryNavInner"></div>
+    </nav>
+
+    <!-- Choice Modal (Delivery / Dine-in) -->
+    <div class="modal-overlay" id="choiceModal" role="dialog" aria-modal="true" aria-label="اختر طريقة الطلب">
+        <div class="modal-content choice-modal-content">
+            <div class="choice-header">
+                <h2>مرحباً بك في كشري الزهراء</h2>
+                <p>اختر طريقة الطلب</p>
+            </div>
+            <div class="choice-options">
+                <button class="choice-btn delivery-btn" id="deliveryChoice">
+                    <i class="fas fa-truck"></i>
+                    <span class="btn-text">
+                        <span>دليفري</span>
+                        <small>طلب توصيل للمنزل</small>
+                    </span>
+                </button>
+                <button class="choice-btn dinein-btn" id="dineinChoice">
+                    <i class="fas fa-utensils"></i>
+                    <span class="btn-text">
+                        <span>صالة</span>
+                        <small>تناول الطعام في المطعم</small>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModal" role="dialog" aria-modal="true" aria-label="سلة المشتريات">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-bag"></i> سلة الطلبات <span class="count" id="cartModalCount">0</span></h2>
+                <button class="modal-close" id="cartModalClose" aria-label="إغلاق السلة"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="cartModalBody"></div>
+            <div class="modal-footer" id="cartModalFooter"></div>
+        </div>
+    </div>
+
+    <!-- Branches Modal -->
+    <div class="modal-overlay" id="branchesModal" role="dialog" aria-modal="true" aria-label="فروع كشري الزهراء">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-map-marker-alt"></i> فروعنا</h2>
+                <button class="modal-close" id="branchesModalClose" aria-label="إغلاق الفروع"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="branchesModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-label="إتمام الطلب">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-clipboard-list"></i> إتمام الطلب</h2>
+                <button class="modal-close" id="checkoutModalClose" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="checkoutModalBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer container">
+        <hr />
+        <p>Developed by <a href="https://wa.me/201013706142" target="_blank" rel="noopener noreferrer">Abdelkader Mohamed</a></p>
+    </footer>
+
+    <script>
+        'use strict';
+
+        // ─── MENU DATA ──────────────────────────────────────────────────────────
+
+        let MENU_ITEMS = [
+            // ============================================================
+            // 1. البيتزا الإيطالي
+            // ============================================================
+            {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا مارغريتا",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا مارغريتا من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سجق بلدي",
+                prices: { small: 160, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سجق بلدي من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سجق اسكندراني",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سجق اسكندراني من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سوسيس",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سوسيس من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا لحمة مفرومة",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا لحمة مفرومة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس لحوم",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس لحوم من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا مشروم",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا مشروم من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا بسترمة",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا بسترمة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا شاورما لحمة",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا شاورما لحمة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا شاورما فراخ",
+                prices: { small: 170, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا شاورما فراخ من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس شاورما",
+                prices: { small: 180, large: 250 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس شاورما من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس فراخ",
+                prices: { small: 180, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس فراخ من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا فراخ رانش",
+                prices: { small: 160, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا فراخ رانش من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا فراخ باربكيو",
+                prices: { small: 170, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا فراخ باربكيو من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا كريسبي",
+                prices: { small: 180, large: 250 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا كريسبي من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ستربس",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ستربس من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا شيش طاووق",
+                prices: { small: 170, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا شيش طاووق من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا كفتة مشوية",
+                prices: { small: 170, large: 230 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا كفتة مشوية من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس كفتة",
+                prices: { small: 180, large: 250 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس كفتة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا تونة",
+                prices: { small: 150, large: 220 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا تونة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس فراخ بالجبنة",
+                prices: { small: 160, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس فراخ بالجبنة من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سوربريم فراخ",
+                prices: { small: 200, large: 280 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سوربريم فراخ من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس لحوم الزهراء",
+                prices: { small: 200, large: 260 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس لحوم الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سلمى",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سلمى من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سموك تركي",
+                prices: { small: 170, large: 240 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سموك تركي من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا روز بيف",
+                prices: { small: 180, large: 260 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا روز بيف من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سوبرريم",
+                prices: { small: 190, large: 260 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سوبرريم من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا ميكس سجق بلدي كبير",
+                prices: { small: 190, large: 260 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا ميكس سجق بلدي كبير من الزهراء."
+            }, {
+                category: "البيتزا الإيطالي",
+                name: "بيتزا سجق بلدي كبير",
+                prices: { small: 180, large: 260 },
+                image: "test/pizzamargarita.jpg",
+                desc: "بيتزا سجق بلدي كبير من الزهراء."
+            },
+
+            // ============================================================
+            // 2. البيتزا الشرقي
+            // ============================================================
+            {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سجق اسكندراني",
+                prices: { regular: 170, mozzarella: 210 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا سجق اسكندراني من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سجق بلدي",
+                prices: { regular: 200, mozzarella: 230 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا سجق بلدي من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سوسيس",
+                prices: { regular: 190, mozzarella: 230 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا سوسيس من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا لحمة مفرومة",
+                prices: { regular: 190, mozzarella: 220 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا لحمة مفرومة من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا شاورما لحمة",
+                prices: { regular: 200, mozzarella: 230 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا شاورما لحمة من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا بسترمة",
+                prices: { regular: 190, mozzarella: 230 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا بسترمة من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا ميكس لحوم الزهراء",
+                prices: { regular: 210, mozzarella: 250 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا ميكس لحوم الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا مشروم",
+                prices: { regular: 190, mozzarella: 220 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا مشروم من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا شاورما فراخ",
+                prices: { regular: 190, mozzarella: 220 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا شاورما فراخ من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا فراخ رانش",
+                prices: { regular: 210, mozzarella: 240 },
+                image: "test/pizzasogeskandrany.jpg",
+                desc: "بيتزا فراخ رانش من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا فراخ باربكيو",
+                prices: { regular: 200, mozzarella: 240 },
+                image: "assets/pizzasharqy/pizzafarakhbbq.jpg",
+                desc: "بيتزا فراخ باربكيو من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا كريسبي",
+                prices: { regular: 220, mozzarella: 260 },
+                image: "assets/pizzasharqy/pizzacrispy.jpg",
+                desc: "بيتزا كريسبي من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا استربس",
+                prices: { regular: 210, mozzarella: 250 },
+                image: "assets/pizzasharqy/pizzastrips.jpg",
+                desc: "بيتزا استربس من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سوربريم فراخ",
+                prices: { regular: 230, mozzarella: 270 },
+                image: "assets/pizzasharqy/pizzasupremefarakh.jpg",
+                desc: "بيتزا سوربريم فراخ من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا ميكس فراخ الزهراء",
+                prices: { regular: 210, mozzarella: 240 },
+                image: "assets/pizzasharqy/pizzamixfarakh.jpg",
+                desc: "بيتزا ميكس فراخ الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا جبنة رومي",
+                prices: { regular: 180, mozzarella: 220 },
+                image: "assets/pizzasharqy/pizzagebenromy.jpg",
+                desc: "بيتزا جبنة رومي من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا جبنة كبير",
+                prices: { regular: 190, mozzarella: 220 },
+                image: "assets/pizzasharqy/pizzagebenkaber.jpg",
+                desc: "بيتزا جبنة كبير من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا ميكس شيش",
+                prices: { regular: 210, mozzarella: 240 },
+                image: "assets/pizzasharqy/pizzamixshesh.jpg",
+                desc: "بيتزا ميكس شيش من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا تونة",
+                prices: { regular: 190, mozzarella: 230 },
+                image: "assets/pizzasharqy/pizzatona.jpg",
+                desc: "بيتزا تونة من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سلمى",
+                prices: { regular: 200, mozzarella: 230 },
+                image: "assets/pizzasharqy/pizzasalma.jpg",
+                desc: "بيتزا سلمى من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سموك تركي",
+                prices: { regular: 220, mozzarella: 250 },
+                image: "assets/pizzasharqy/pizzasmoktorky.jpg",
+                desc: "بيتزا سموك تركي من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا روز بيف",
+                prices: { regular: 200, mozzarella: 240 },
+                image: "assets/pizzasharqy/pizzarozbeef.jpg",
+                desc: "بيتزا روز بيف من الزهراء."
+            }, {
+                category: "البيتزا الشرقي",
+                name: "بيتزا سوبرريم",
+                prices: { regular: 210, mozzarella: 250 },
+                image: "assets/pizzasharqy/pizzasupreme.jpg",
+                desc: "بيتزا سوبرريم من الزهراء."
+            },
+
+            // ============================================================
+            // 3. إضافات البيتزا
+            // ============================================================
+            {
+                category: "إضافات البيتزا",
+                name: "إضافة لحمة",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/lahma.jpg",
+                desc: "إضافة لحمة للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة فراخ",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/farakh.jpg",
+                desc: "إضافة فراخ للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة سوسيس",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/sosis.jpg",
+                desc: "إضافة سوسيس للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة مشروم",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/mashroom.jpg",
+                desc: "إضافة مشروم للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة سجق",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/sog.jpg",
+                desc: "إضافة سجق للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة جبنة موتزريلا",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/mozzarella.jpg",
+                desc: "إضافة جبنة موتزريلا للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة جبنة رومي",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/romy.jpg",
+                desc: "إضافة جبنة رومي للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة سوبريم",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/supreme.jpg",
+                desc: "إضافة سوبريم للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة بانيه",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/panne.jpg",
+                desc: "إضافة بانيه للبيتزا."
+            }, {
+                category: "إضافات البيتزا",
+                name: "إضافة كريسبي",
+                prices: { regular: 30 },
+                image: "assets/addonspizza/crispy.jpg",
+                desc: "إضافة كريسبي للبيتزا."
+            },
+
+            // ============================================================
+            // 4. الكانزوني
+            // ============================================================
+            {
+                category: "الكانزوني",
+                name: "كانزوني مارغريتا",
+                prices: { small: 135, large: 200 },
+                image: "assets/canzone/canzonemargarita.jpg",
+                desc: "كانزوني مارغريتا من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سجق بلدي",
+                prices: { small: 150, large: 220 },
+                image: "assets/canzone/canzonesogbalady.jpg",
+                desc: "كانزوني سجق بلدي من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سجق اسكندراني",
+                prices: { small: 145, large: 215 },
+                image: "assets/canzone/canzonesogeskandrany.jpg",
+                desc: "كانزوني سجق اسكندراني من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني لحمة مفرومة",
+                prices: { small: 150, large: 220 },
+                image: "assets/canzone/canzonelahmamafrooma.jpg",
+                desc: "كانزوني لحمة مفرومة من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سوسيس",
+                prices: { small: 140, large: 200 },
+                image: "assets/canzone/canzonesosis.jpg",
+                desc: "كانزوني سوسيس من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني شاورما لحمة",
+                prices: { small: 160, large: 220 },
+                image: "assets/canzone/canzoneshawarmalahma.jpg",
+                desc: "كانزوني شاورما لحمة من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني ميكس شاورما",
+                prices: { small: 150, large: 210 },
+                image: "assets/canzone/canzonemixshawarma.jpg",
+                desc: "كانزوني ميكس شاورما من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني بسترمة",
+                prices: { small: 140, large: 210 },
+                image: "assets/canzone/canzonebasterma.jpg",
+                desc: "كانزوني بسترمة من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني ميكس لحوم الزهراء",
+                prices: { small: 180, large: 250 },
+                image: "assets/canzone/canzonemixlahom.jpg",
+                desc: "كانزوني ميكس لحوم الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني مشروم",
+                prices: { small: 140, large: 200 },
+                image: "assets/canzone/canzonemashroom.jpg",
+                desc: "كانزوني مشروم من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني شاورما فراخ",
+                prices: { small: 140, large: 200 },
+                image: "assets/canzone/canzoneshawarmafarakh.jpg",
+                desc: "كانزوني شاورما فراخ من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني فراخ رانش",
+                prices: { small: 140, large: 210 },
+                image: "assets/canzone/canzonefarakhrunch.jpg",
+                desc: "كانزوني فراخ رانش من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني فراخ باربكيو",
+                prices: { small: 140, large: 200 },
+                image: "assets/canzone/canzonefarakhbbq.jpg",
+                desc: "كانزوني فراخ باربكيو من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني كريسبي",
+                prices: { small: 150, large: 210 },
+                image: "assets/canzone/canzonecrispy.jpg",
+                desc: "كانزوني كريسبي من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني استربس",
+                prices: { small: 150, large: 200 },
+                image: "assets/canzone/canzonestrips.jpg",
+                desc: "كانزوني استربس من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني شيشي",
+                prices: { small: 150, large: 200 },
+                image: "assets/canzone/canzonesheshy.jpg",
+                desc: "كانزوني شيشي من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سوربريم فراخ",
+                prices: { small: 200, large: 260 },
+                image: "assets/canzone/canzonesupremefarakh.jpg",
+                desc: "كانزوني سوربريم فراخ من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني ميكس فراخ الزهراء",
+                prices: { small: 170, large: 220 },
+                image: "assets/canzone/canzonemixfarakh.jpg",
+                desc: "كانزوني ميكس فراخ الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني جبنة رومي",
+                prices: { small: 140, large: 180 },
+                image: "assets/canzone/canzonegebenromy.jpg",
+                desc: "كانزوني جبنة رومي من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني جبنة كبير",
+                prices: { small: 150, large: 200 },
+                image: "assets/canzone/canzonegebenkaber.jpg",
+                desc: "كانزوني جبنة كبير من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني ميكس شيش",
+                prices: { small: 160, large: 200 },
+                image: "assets/canzone/canzonemixshesh.jpg",
+                desc: "كانزوني ميكس شيش من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني تونة",
+                prices: { small: 170, large: 220 },
+                image: "assets/canzone/canzonetona.jpg",
+                desc: "كانزوني تونة من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سلمى",
+                prices: { small: 150, large: 200 },
+                image: "assets/canzone/canzonesalma.jpg",
+                desc: "كانزوني سلمى من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سموك تركي",
+                prices: { small: 150, large: 200 },
+                image: "assets/canzone/canzonesmoktorky.jpg",
+                desc: "كانزوني سموك تركي من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني روز بيف",
+                prices: { small: 160, large: 210 },
+                image: "assets/canzone/canzonerozbeef.jpg",
+                desc: "كانزوني روز بيف من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سوبرريم",
+                prices: { small: 150, large: 210 },
+                image: "assets/canzone/canzonesupreme.jpg",
+                desc: "كانزوني سوبرريم من الزهراء."
+            }, {
+                category: "الكانزوني",
+                name: "كانزوني سجق بلدي كبير",
+                prices: { small: 250, large: 280 },
+                image: "assets/canzone/canzonesogbaladykaber.jpg",
+                desc: "كانزوني سجق بلدي كبير من الزهراء."
+            },
+
+            // ============================================================
+            // 5. الفطير الحادق
+            // ============================================================
+            {
+                category: "الفطير الحادق",
+                name: "فطيرة سجق اسكندراني",
+                prices: { small: 160, large: 220 },
+                image: "assets/fteerhadeq/fteersogeskandrany.jpg",
+                desc: "فطيرة سجق اسكندراني من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة سجق بلدي",
+                prices: { small: 200, large: 260 },
+                image: "assets/fteerhadeq/fteersogbalady.jpg",
+                desc: "فطيرة سجق بلدي من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة سوسيس",
+                prices: { small: 180, large: 250 },
+                image: "assets/fteerhadeq/fteersosis.jpg",
+                desc: "فطيرة سوسيس من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة بسترمة",
+                prices: { small: 240, large: 260 },
+                image: "assets/fteerhadeq/fteerbasterma.jpg",
+                desc: "فطيرة بسترمة من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة لحمة مفرومة",
+                prices: { small: 240, large: 280 },
+                image: "assets/fteerhadeq/fteerlahmamafrooma.jpg",
+                desc: "فطيرة لحمة مفرومة من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة شاورما لحمة",
+                prices: { small: 260, large: 280 },
+                image: "assets/fteerhadeq/fteershawarmalahma.jpg",
+                desc: "فطيرة شاورما لحمة من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة شاورما فراخ",
+                prices: { small: 220, large: 260 },
+                image: "assets/fteerhadeq/fteershawarmafarakh.jpg",
+                desc: "فطيرة شاورما فراخ من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة ميكس لحوم الزهراء",
+                prices: { small: 250, large: 290 },
+                image: "assets/fteerhadeq/fteermixlahom.jpg",
+                desc: "فطيرة ميكس لحوم الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة بانيه",
+                prices: { small: 200, large: 250 },
+                image: "assets/fteerhadeq/fteerpanne.jpg",
+                desc: "فطيرة بانيه من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة كريسبي",
+                prices: { small: 220, large: 260 },
+                image: "assets/fteerhadeq/fteercrispy.jpg",
+                desc: "فطيرة كريسبي من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة ستربس",
+                prices: { small: 250, large: 290 },
+                image: "assets/fteerhadeq/fteerstrips.jpg",
+                desc: "فطيرة ستربس من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة شيش طاووق",
+                prices: { small: 240, large: 260 },
+                image: "assets/fteerhadeq/fteershish.jpg",
+                desc: "فطيرة شيش طاووق من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة فراخ",
+                prices: { small: 200, large: 260 },
+                image: "assets/fteerhadeq/fteerfarakh.jpg",
+                desc: "فطيرة فراخ من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة كفتة مشوية",
+                prices: { small: 240, large: 280 },
+                image: "assets/fteerhadeq/fteerkofta.jpg",
+                desc: "فطيرة كفتة مشوية من الزهراء."
+            }, {
+                category: "الفطير الحادق",
+                name: "فطيرة تونة",
+                prices: { small: 250, large: 290 },
+                image: "assets/fteerhadeq/fteertona.jpg",
+                desc: "فطيرة تونة من الزهراء."
+            },
+
+            // ============================================================
+            // 6. الفطير الحلو
+            // ============================================================
+            {
+                category: "الفطير الحلو",
+                name: "فطيرة سادة",
+                prices: { small: 60, large: 90 },
+                image: "assets/fteer/fteersada.jpg",
+                desc: "فطيرة سادة من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة بالشطة",
+                prices: { small: 70, large: 110 },
+                image: "assets/fteer/fteerbelshata.jpg",
+                desc: "فطيرة بالشطة من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة كاستر",
+                prices: { small: 75, large: 130 },
+                image: "assets/fteer/fteercaster.jpg",
+                desc: "فطيرة كاستر من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة كاستر وكنافة",
+                prices: { small: 85, large: 130 },
+                image: "assets/fteer/fteercasterwkonafa.jpg",
+                desc: "فطيرة كاستر وكنافة من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة كاستر وبسكوتة",
+                prices: { small: 85, large: 130 },
+                image: "assets/fteer/fteercasterwbaskota.jpg",
+                desc: "فطيرة كاستر وبسكوتة من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة قشطة وسكر",
+                prices: { small: 100, large: 130 },
+                image: "assets/fteer/fteeroshta.jpg",
+                desc: "فطيرة قشطة وسكر من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة شوكولاتة",
+                prices: { small: 110, large: 140 },
+                image: "assets/fteer/fteershokolata.jpg",
+                desc: "فطيرة شوكولاتة من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة قشطة وعسل",
+                prices: { small: 110, large: 140 },
+                image: "assets/fteer/fteeroshtawaasal.jpg",
+                desc: "فطيرة قشطة وعسل من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة شوكولاتة موز",
+                prices: { small: 120, large: 150 },
+                image: "assets/fteer/fteershokolatamoz.jpg",
+                desc: "فطيرة شوكولاتة موز من الزهراء."
+            }, {
+                category: "الفطير الحلو",
+                name: "فطيرة ميكس شوكولاتة",
+                prices: { small: 130, large: 160 },
+                image: "assets/fteer/fteermixshokolata.jpg",
+                desc: "فطيرة ميكس شوكولاتة من الزهراء."
+            },
+
+            // ============================================================
+            // 7. نجرسكو
+            // ============================================================
+            {
+                category: "نجرسكو",
+                name: "نجرسكو فراخ",
+                prices: { regular: 130 },
+                image: "assets/negresso/farakh.jpg",
+                desc: "نجرسكو فراخ من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو سجق اسكندراني",
+                prices: { regular: 115 },
+                image: "assets/negresso/sogeskandrany.jpg",
+                desc: "نجرسكو سجق اسكندراني من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو سجق بلدي",
+                prices: { regular: 125 },
+                image: "assets/negresso/sogbalady.jpg",
+                desc: "نجرسكو سجق بلدي من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو استربس",
+                prices: { regular: 125 },
+                image: "assets/negresso/strips.jpg",
+                desc: "نجرسكو استربس من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو سوسيس",
+                prices: { regular: 125 },
+                image: "assets/negresso/sosis.jpg",
+                desc: "نجرسكو سوسيس من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو فاهيتا لحمة",
+                prices: { regular: 135 },
+                image: "assets/negresso/fahitalahma.jpg",
+                desc: "نجرسكو فاهيتا لحمة من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو ميكس فراخ",
+                prices: { regular: 145 },
+                image: "assets/negresso/mixfarakh.jpg",
+                desc: "نجرسكو ميكس فراخ من الزهراء."
+            }, {
+                category: "نجرسكو",
+                name: "نجرسكو ميكس لحوم",
+                prices: { regular: 145 },
+                image: "assets/negresso/mixlahom.jpg",
+                desc: "نجرسكو ميكس لحوم من الزهراء."
+            },
+
+            // ============================================================
+            // 8. إضافات الحلو
+            // ============================================================
+            {
+                category: "إضافات الحلو",
+                name: "إضافة عسل",
+                prices: { regular: 10 },
+                image: "assets/addonssweet/asal.jpg",
+                desc: "إضافة عسل للحلويات."
+            }, {
+                category: "إضافات الحلو",
+                name: "إضافة سكر",
+                prices: { regular: 10 },
+                image: "assets/addonssweet/sokar.jpg",
+                desc: "إضافة سكر للحلويات."
+            }, {
+                category: "إضافات الحلو",
+                name: "إضافة شوكولاتة",
+                prices: { regular: 10 },
+                image: "assets/addonssweet/shokolata.jpg",
+                desc: "إضافة شوكولاتة للحلويات."
+            }, {
+                category: "إضافات الحلو",
+                name: "إضافة مكسرات",
+                prices: { regular: 15 },
+                image: "assets/addonssweet/mokassarat.jpg",
+                desc: "إضافة مكسرات للحلويات."
+            }, {
+                category: "إضافات الحلو",
+                name: "إضافة فواكه",
+                prices: { regular: 20 },
+                image: "assets/addonssweet/fawakeh.jpg",
+                desc: "إضافة فواكه للحلويات."
+            }, {
+                category: "إضافات الحلو",
+                name: "إضافة قشطة",
+                prices: { regular: 20 },
+                image: "assets/addonssweet/oshta.jpg",
+                desc: "إضافة قشطة للحلويات."
+            },
+
+            // ============================================================
+            // 9. سواريه الزهراء
+            // ============================================================
+            {
+                category: "سواريه الزهراء",
+                name: "سواريه شاورما فراخ",
+                prices: { regular: 120 },
+                image: "assets/swarya/swaryashawarmafarakh.jpg",
+                desc: "سواريه شاورما فراخ من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه شيش",
+                prices: { regular: 120 },
+                image: "assets/swarya/swaryashesh.jpg",
+                desc: "سواريه شيش من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه فراخ",
+                prices: { regular: 130 },
+                image: "assets/swarya/swaryafarakh.jpg",
+                desc: "سواريه فراخ من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه اسكندراني كبير",
+                prices: { regular: 140 },
+                image: "assets/swarya/swaryaeskandrany.jpg",
+                desc: "سواريه اسكندراني كبير من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه جبنة رومي",
+                prices: { regular: 140 },
+                image: "assets/swarya/swaryagebenromy.jpg",
+                desc: "سواريه جبنة رومي من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه جبنة موتزريلا",
+                prices: { regular: 140 },
+                image: "assets/swarya/swaryamozzarella.jpg",
+                desc: "سواريه جبنة موتزريلا من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سجق اسكندراني",
+                prices: { regular: 150 },
+                image: "assets/swarya/swaryasogeskandrany.jpg",
+                desc: "سواريه سجق اسكندراني من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سجق",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryasog.jpg",
+                desc: "سواريه سجق من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه مشروم",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryamashroom.jpg",
+                desc: "سواريه مشروم من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سوسيس",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryasosis.jpg",
+                desc: "سواريه سوسيس من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سجق بلدي",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryasogbalady.jpg",
+                desc: "سواريه سجق بلدي من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ساجي",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryasagy.jpg",
+                desc: "سواريه ساجي من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سموك تركي",
+                prices: { regular: 160 },
+                image: "assets/swarya/swaryasmoktorky.jpg",
+                desc: "سواريه سموك تركي من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه سجق بلدي كبير",
+                prices: { regular: 170 },
+                image: "assets/swarya/swaryasogbaladykaber.jpg",
+                desc: "سواريه سجق بلدي كبير من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه استربس",
+                prices: { regular: 170 },
+                image: "assets/swarya/swaryastrips.jpg",
+                desc: "سواريه استربس من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه تونة",
+                prices: { regular: 170 },
+                image: "assets/swarya/swaryatona.jpg",
+                desc: "سواريه تونة من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ميكس فراخ",
+                prices: { regular: 180 },
+                image: "assets/swarya/swaryamixfarakh.jpg",
+                desc: "سواريه ميكس فراخ من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ميكس فراخ بالجبنة",
+                prices: { regular: 180 },
+                image: "assets/swarya/swaryamixfarakhbelgeben.jpg",
+                desc: "سواريه ميكس فراخ بالجبنة من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ميكس لحمة",
+                prices: { regular: 180 },
+                image: "assets/swarya/swaryamixlahma.jpg",
+                desc: "سواريه ميكس لحمة من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه بسترمة",
+                prices: { regular: 180 },
+                image: "assets/swarya/swaryabasterma.jpg",
+                desc: "سواريه بسترمة من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ميكس شاورما",
+                prices: { regular: 180 },
+                image: "assets/swarya/swaryamixshawarma.jpg",
+                desc: "سواريه ميكس شاورما من الزهراء."
+            }, {
+                category: "سواريه الزهراء",
+                name: "سواريه ميكس لحمة بالجبنة",
+                prices: { regular: 190 },
+                image: "assets/swarya/swaryamixlahmabelgeben.jpg",
+                desc: "سواريه ميكس لحمة بالجبنة من الزهراء."
+            },
+
+            // ============================================================
+            // 10. الكشري
+            // ============================================================
+            {
+                category: "الكشري",
+                name: "علبة صغير",
+                prices: { regular: 30 },
+                image: "assets/koshary/albasoghir.jpg",
+                desc: "علبة كشري صغير من الزهراء."
+            }, {
+                category: "الكشري",
+                name: "علبة سوبر",
+                prices: { regular: 35 },
+                image: "assets/koshary/albasuper.jpg",
+                desc: "علبة كشري سوبر من الزهراء."
+            }, {
+                category: "الكشري",
+                name: "علبة الزعفران",
+                prices: { regular: 40 },
+                image: "assets/koshary/albaalzaafaran.jpg",
+                desc: "علبة كشري بالزعفران من الزهراء."
+            }, {
+                category: "الكشري",
+                name: "دبل كشري",
+                prices: { regular: 50 },
+                image: "assets/koshary/doublekoshary.jpg",
+                desc: "دبل كشري من الزهراء."
+            }, {
+                category: "الكشري",
+                name: "فول علباني",
+                prices: { regular: 60 },
+                image: "assets/koshary/foolalbani.jpg",
+                desc: "فول علباني من الزهراء."
+            },
+
+            // ============================================================
+            // 11. طواجن الزهراء
+            // ============================================================
+            {
+                category: "طواجن الزهراء",
+                name: "طاجن فراخ",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/tawagen/tagenfarakh.jpg",
+                desc: "طاجن فراخ من الزهراء."
+            }, {
+                category: "طواجن الزهراء",
+                name: "طاجن لحمة",
+                prices: { regular: 55, mozzarella: 80 },
+                image: "assets/tawagen/tagenlahma.jpg",
+                desc: "طاجن لحمة من الزهراء."
+            }, {
+                category: "طواجن الزهراء",
+                name: "طاجن كفتة",
+                prices: { regular: 70, mozzarella: 95 },
+                image: "assets/tawagen/tagenkofta.jpg",
+                desc: "طاجن كفتة من الزهراء."
+            }, {
+                category: "طواجن الزهراء",
+                name: "طاجن سجق",
+                prices: { regular: 75, mozzarella: 100 },
+                image: "assets/tawagen/tagensog.jpg",
+                desc: "طاجن سجق من الزهراء."
+            }, {
+                category: "طواجن الزهراء",
+                name: "طاجن سادة",
+                prices: { regular: 70, mozzarella: 95 },
+                image: "assets/tawagen/tagensada.jpg",
+                desc: "طاجن سادة من الزهراء."
+            },
+
+            // ============================================================
+            // 12. وجبات الزهراء
+            // ============================================================
+            {
+                category: "وجبات الزهراء",
+                name: "علبة كشري معدل",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/webtat/albakosharymoadal.jpg",
+                desc: "علبة كشري معدل من الزهراء."
+            }, {
+                category: "وجبات الزهراء",
+                name: "فول كشري سوبر",
+                prices: { regular: 85, mozzarella: 110 },
+                image: "assets/webtat/foolkosharysuper.jpg",
+                desc: "فول كشري سوبر من الزهراء."
+            }, {
+                category: "وجبات الزهراء",
+                name: "فول كشري الزهراء",
+                prices: { regular: 90, mozzarella: 115 },
+                image: "assets/webtat/foolkoshary.jpg",
+                desc: "فول كشري الزهراء المميز."
+            },
+
+            // ============================================================
+            // 13. وجبات الطواجن
+            // ============================================================
+            {
+                category: "وجبات الطواجن",
+                name: "طاجن فراخ",
+                prices: { regular: 100, mozzarella: 125 },
+                image: "assets/webtattagen/tagenfarakhwebta.jpg",
+                desc: "طاجن فراخ من وجبات الزهراء."
+            }, {
+                category: "وجبات الطواجن",
+                name: "طاجن لحمة",
+                prices: { regular: 95, mozzarella: 120 },
+                image: "assets/webtattagen/tagenlahmawebta.jpg",
+                desc: "طاجن لحمة من وجبات الزهراء."
+            }, {
+                category: "وجبات الطواجن",
+                name: "طاجن كفتة",
+                prices: { regular: 85, mozzarella: 110 },
+                image: "assets/webtattagen/tagenkoftawebta.jpg",
+                desc: "طاجن كفتة من وجبات الزهراء."
+            }, {
+                category: "وجبات الطواجن",
+                name: "طاجن سجق",
+                prices: { regular: 90, mozzarella: 115 },
+                image: "assets/webtattagen/tagensogwebta.jpg",
+                desc: "طاجن سجق من وجبات الزهراء."
+            },
+
+            // ============================================================
+            // 14. الإضافات الجانبية
+            // ============================================================
+            {
+                category: "الإضافات الجانبية",
+                name: "إضافة لحمة",
+                prices: { regular: 30 },
+                image: "assets/sideaddons/lahma.jpg",
+                desc: "إضافة لحمة للوجبة."
+            }, {
+                category: "الإضافات الجانبية",
+                name: "إضافة فراخ",
+                prices: { regular: 40 },
+                image: "assets/sideaddons/farakh.jpg",
+                desc: "إضافة فراخ للوجبة."
+            }, {
+                category: "الإضافات الجانبية",
+                name: "إضافة سجق",
+                prices: { regular: 30 },
+                image: "assets/sideaddons/sog.jpg",
+                desc: "إضافة سجق للوجبة."
+            }, {
+                category: "الإضافات الجانبية",
+                name: "إضافة موتزريلا",
+                prices: { regular: 30 },
+                image: "assets/sideaddons/mozzarella.jpg",
+                desc: "إضافة موتزريلا للوجبة."
+            }, {
+                category: "الإضافات الجانبية",
+                name: "إضافة رومي",
+                prices: { regular: 20 },
+                image: "assets/sideaddons/romy.jpg",
+                desc: "إضافة رومي للوجبة."
+            }, {
+                category: "الإضافات الجانبية",
+                name: "إضافة لحوم",
+                prices: { regular: 50 },
+                image: "assets/sideaddons/lahom.jpg",
+                desc: "إضافة لحوم للوجبة."
+            },
+
+            // ============================================================
+            // 15. المقبلات الجانبية
+            // ============================================================
+            {
+                category: "المقبلات الجانبية",
+                name: "عدس",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/adas.jpg",
+                desc: "طبق عدس."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "تقلية",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/taklya.jpg",
+                desc: "طبق تقلية."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "حمص",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/homos.jpg",
+                desc: "طبق حمص."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "خيار",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/khayar.jpg",
+                desc: "طبق خيار طازج."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "مخلل",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/mokhalal.jpg",
+                desc: "طبق مخلل."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "عيش توست",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/ayshtost.jpg",
+                desc: "عيش توست."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "علبة خس",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/albakhos.jpg",
+                desc: "علبة خس طازج."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "طحينة",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/tahina.jpg",
+                desc: "طحينة من الزهراء."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "شطة",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/shata.jpg",
+                desc: "شطة من الزهراء."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "طماطم",
+                prices: { regular: 10 },
+                image: "assets/sidemokablat/tamatom.jpg",
+                desc: "طبق طماطم طازج."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "بطاطس مقلية",
+                prices: { regular: 15 },
+                image: "assets/sidemokablat/batatesmaklya.jpg",
+                desc: "بطاطس مقلية من الزهراء."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "علبة كبدة",
+                prices: { regular: 30 },
+                image: "assets/sidemokablat/albakebda.jpg",
+                desc: "علبة كبدة من الزهراء."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "علبة لحمة",
+                prices: { regular: 30 },
+                image: "assets/sidemokablat/albalahma.jpg",
+                desc: "علبة لحمة من الزهراء."
+            }, {
+                category: "المقبلات الجانبية",
+                name: "علبة فراخ",
+                prices: { regular: 40 },
+                image: "assets/sidemokablat/albafarakh.jpg",
+                desc: "علبة فراخ من الزهراء."
+            },
+
+            // ============================================================
+            // 16. مكرونات الزهراء
+            // ============================================================
+            {
+                category: "مكرونات الزهراء",
+                name: "مكرونة اسباجيتي سجق",
+                prices: { regular: 30 },
+                image: "assets/macaron/macaronisog.jpg",
+                desc: "مكرونة اسباجيتي بسجق من الزهراء."
+            }, {
+                category: "مكرونات الزهراء",
+                name: "مكرونة اسباجيتي سادة",
+                prices: { regular: 40 },
+                image: "assets/macaron/macaronisada.jpg",
+                desc: "مكرونة اسباجيتي سادة من الزهراء."
+            }, {
+                category: "مكرونات الزهراء",
+                name: "مكرونة اسباجيتي كفتة",
+                prices: { regular: 60 },
+                image: "assets/macaron/macaronikofta.jpg",
+                desc: "مكرونة اسباجيتي بكفتة من الزهراء."
+            }, {
+                category: "مكرونات الزهراء",
+                name: "مكرونة اسباجيتي لحمة",
+                prices: { regular: 60 },
+                image: "assets/macaron/macaronilahma.jpg",
+                desc: "مكرونة اسباجيتي بلحمة من الزهراء."
+            }, {
+                category: "مكرونات الزهراء",
+                name: "مكرونة اسباجيتي فراخ",
+                prices: { regular: 60 },
+                image: "assets/macaron/macaronifarakh.jpg",
+                desc: "مكرونة اسباجيتي بفراخ من الزهراء."
+            },
+
+            // ============================================================
+            // 17. ميكسات الزهراء
+            // ============================================================
+            {
+                category: "ميكسات الزهراء",
+                name: "ميكس فراخ",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/mixes/mixfarakh.jpg",
+                desc: "ميكس فراخ طازج مع صوص الزهراء المميز."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "ميكس كفتة",
+                prices: { regular: 95, mozzarella: 120 },
+                image: "assets/mixes/mixkofta.jpg",
+                desc: "ميكس كفتة مشوية على الفحم مع صوص خاص."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "ميكس لحمة",
+                prices: { regular: 75, mozzarella: 100 },
+                image: "assets/mixes/mixlahma.jpg",
+                desc: "ميكس لحمة من أجود المكونات مع صوص الزهراء المميز."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "ميكس شاورما لحمة",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/mixes/mixshawarmalahma.jpg",
+                desc: "شاورما لحمة مع مكس الزهراء الشهي."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "فراخ دوبل",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/mixes/farakhdouble.jpg",
+                desc: "وجبة فراخ دوبل مع صوص الزهراء."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "كفتة دوبل",
+                prices: { regular: 75, mozzarella: 100 },
+                image: "assets/mixes/koftadouble.jpg",
+                desc: "كفتة دوبل مشوية مع صوص خاص."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "لحمة دوبل",
+                prices: { regular: 70, mozzarella: 95 },
+                image: "assets/mixes/lahmadouble.jpg",
+                desc: "لحمة دوبل مع صوص الزهراء المميز."
+            }, {
+                category: "ميكسات الزهراء",
+                name: "سجق دوبل",
+                prices: { regular: 80, mozzarella: 105 },
+                image: "assets/mixes/sogdouble.jpg",
+                desc: "سجق دوبل مع صوص الزهراء الشهي."
+            },
+
+            // ============================================================
+            // 18. حواوشي الزهراء
+            // ============================================================
+            {
+                category: "حواوشي الزهراء",
+                name: "حواوشي لحمة",
+                prices: { small: 50, regular: 65, large: 85 },
+                image: "assets/hawawshy/hawawshylahma.jpg",
+                desc: "حواوشي لحمة من الزهراء."
+            }, {
+                category: "حواوشي الزهراء",
+                name: "حواوشي سجق",
+                prices: { small: 50, regular: 65, large: 85 },
+                image: "assets/hawawshy/hawawshysog.jpg",
+                desc: "حواوشي سجق من الزهراء."
+            }, {
+                category: "حواوشي الزهراء",
+                name: "حواوشي مفروم",
+                prices: { small: 60, regular: 75, large: 95 },
+                image: "assets/hawawshy/hawawshymafroom.jpg",
+                desc: "حواوشي مفروم من الزهراء."
+            }, {
+                category: "حواوشي الزهراء",
+                name: "حواوشي ميكس لحوم",
+                prices: { small: 65, regular: 80, large: 100 },
+                image: "assets/hawawshy/hawawshymixlahom.jpg",
+                desc: "حواوشي ميكس لحوم من الزهراء."
+            }, {
+                category: "حواوشي الزهراء",
+                name: "حواوشي ميكس الزهراء",
+                prices: { small: 70, regular: 85, large: 105 },
+                image: "assets/hawawshy/hawawshymix.jpg",
+                desc: "حواوشي ميكس الزهراء المميز."
+            },
+
+            // ============================================================
+            // 19. حواوشي وفت بيتزا
+            // ============================================================
+            {
+                category: "حواوشي وفت بيتزا",
+                name: "حواوشي لحمة",
+                prices: { small: 105, regular: 130, large: 160 },
+                image: "assets/hawawshypizza/hawawshylahmapizza.jpg",
+                desc: "حواوشي لحمة مع فت بيتزا."
+            }, {
+                category: "حواوشي وفت بيتزا",
+                name: "حواوشي سجق",
+                prices: { small: 105, regular: 130, large: 160 },
+                image: "assets/hawawshypizza/hawawshysogpizza.jpg",
+                desc: "حواوشي سجق مع فت بيتزا."
+            }, {
+                category: "حواوشي وفت بيتزا",
+                name: "حواوشي ميكس لحوم",
+                prices: { small: 115, regular: 140, large: 170 },
+                image: "assets/hawawshypizza/hawawshymixlahompizza.jpg",
+                desc: "حواوشي ميكس لحوم مع فت بيتزا."
+            }, {
+                category: "حواوشي وفت بيتزا",
+                name: "حواوشي فراخ",
+                prices: { small: 115, regular: 140, large: 170 },
+                image: "assets/hawawshypizza/hawawshyfarakhpizza.jpg",
+                desc: "حواوشي فراخ مع فت بيتزا."
+            }, {
+                category: "حواوشي وفت بيتزا",
+                name: "حواوشي ميكس الزهراء",
+                prices: { small: 120, regular: 150, large: 180 },
+                image: "assets/hawawshypizza/hawawshymixpizza.jpg",
+                desc: "حواوشي ميكس الزهراء مع فت بيتزا."
+            },
+
+            // ============================================================
+            // 20. اضافات حواوشي
+            // ============================================================
+            {
+                category: "اضافات حواوشي",
+                name: "اضافة لحمة",
+                prices: { regular: 30 },
+                image: "assets/addonshawawshy/lahma.jpg",
+                desc: "اضافة لحمة للحواوشي."
+            }, {
+                category: "اضافات حواوشي",
+                name: "اضافة فراخ",
+                prices: { regular: 40 },
+                image: "assets/addonshawawshy/farakh.jpg",
+                desc: "اضافة فراخ للحواوشي."
+            }, {
+                category: "اضافات حواوشي",
+                name: "اضافة سجق",
+                prices: { regular: 30 },
+                image: "assets/addonshawawshy/sog.jpg",
+                desc: "اضافة سجق للحواوشي."
+            }, {
+                category: "اضافات حواوشي",
+                name: "اضافة لحوم",
+                prices: { regular: 50 },
+                image: "assets/addonshawawshy/lahom.jpg",
+                desc: "اضافة لحوم للحواوشي."
+            }, {
+                category: "اضافات حواوشي",
+                name: "اضافة موتزاريلا",
+                prices: { regular: 30 },
+                image: "assets/addonshawawshy/mozzarella.jpg",
+                desc: "اضافة موتزاريلا للحواوشي."
+            }, {
+                category: "اضافات حواوشي",
+                name: "اضافة رومي",
+                prices: { regular: 20 },
+                image: "assets/addonshawawshy/romy.jpg",
+                desc: "اضافة رومي للحواوشي."
+            },
+
+            // ============================================================
+            // 21. المشروبات
+            // ============================================================
+            {
+                category: "المشروبات",
+                name: "بيبسي",
+                prices: { regular: 20 },
+                image: "assets/drinks/pepsi.jpg",
+                desc: "بيبسي من الزهراء."
+            }, {
+                category: "المشروبات",
+                name: "سفن أب",
+                prices: { regular: 20 },
+                image: "assets/drinks/sevenup.jpg",
+                desc: "سفن أب من الزهراء."
+            }, {
+                category: "المشروبات",
+                name: "ميرندا",
+                prices: { regular: 20 },
+                image: "assets/drinks/mirinda.jpg",
+                desc: "ميرندا من الزهراء."
+            }, {
+                category: "المشروبات",
+                name: "مياه معدنية صغيرة",
+                prices: { regular: 8 },
+                image: "assets/drinks/maya.jpg",
+                desc: "مياه معدنية صغيرة."
+            }, {
+                category: "المشروبات",
+                name: "مياه معدنية كبيرة",
+                prices: { regular: 15 },
+                image: "assets/drinks/mayakabera.jpg",
+                desc: "مياه معدنية كبيرة."
+            },
+
+            // ============================================================
+            // 22. الكريب
+            // ============================================================
+            {
+                category: "الكريب",
+                name: "كريب بطاطس",
+                prices: { regular: 60 },
+                image: "assets/crepe/crepebatates.jpg",
+                desc: "كريب محشي ببطاطس مقلية مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب بجبن",
+                prices: { regular: 80 },
+                image: "assets/crepe/crepebgeben.jpg",
+                desc: "كريب محشي بجبنة ذائبة مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب فاهيتا فراخ",
+                prices: { regular: 80 },
+                image: "assets/crepe/crepefahitafarakh.jpg",
+                desc: "كريب فاهيتا فراخ مع خضار طازجة."
+            }, {
+                category: "الكريب",
+                name: "كريب سوسيس",
+                prices: { regular: 80 },
+                image: "assets/crepe/crepesosis.jpg",
+                desc: "كريب محشي سوسيس مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب سجق",
+                prices: { regular: 90 },
+                image: "assets/crepe/crepesog.jpg",
+                desc: "كريب محشي سجق مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب بانيه",
+                prices: { regular: 95 },
+                image: "assets/crepe/crepepanne.jpg",
+                desc: "كريب بانيه مقرمش مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب كريسبي",
+                prices: { regular: 100 },
+                image: "assets/crepe/crepecrispy.jpg",
+                desc: "كريب كريسبي مع صوص الزهراء المميز."
+            }, {
+                category: "الكريب",
+                name: "كريب فاهيتا لحمة",
+                prices: { regular: 100 },
+                image: "assets/crepe/crepefahitalahma.jpg",
+                desc: "كريب فاهيتا لحمة مع خضار طازجة."
+            }, {
+                category: "الكريب",
+                name: "كريب ميكس جبن",
+                prices: { regular: 100 },
+                image: "assets/crepe/crepemixgeben.jpg",
+                desc: "كريب بمزيج من الأجبان مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب جبنة رومي",
+                prices: { regular: 100 },
+                image: "assets/crepe/crepegebenromy.jpg",
+                desc: "كريب بجبنة رومي مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب جبنة موتزريلا",
+                prices: { regular: 100 },
+                image: "assets/crepe/crepemozzarella.jpg",
+                desc: "كريب بجبنة موتزريلا مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب شيش طاووق",
+                prices: { regular: 105 },
+                image: "assets/crepe/crepeshish.jpg",
+                desc: "كريب شيش طاووق مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب مشروم",
+                prices: { regular: 105 },
+                image: "assets/crepe/crepemashroom.jpg",
+                desc: "كريب محشي مشروم مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب بسترمة",
+                prices: { regular: 105 },
+                image: "assets/crepe/crepebasterma.jpg",
+                desc: "كريب بسترمة مع صوص الزهراء المميز."
+            }, {
+                category: "الكريب",
+                name: "كريب كفتة",
+                prices: { regular: 110 },
+                image: "assets/crepe/crepekofta.jpg",
+                desc: "كريب محشي كفتة مشوية مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب سوير كرانشي",
+                prices: { regular: 110 },
+                image: "assets/crepe/crepeswiercrunchy.jpg",
+                desc: "كريب سوير كرانشي مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب سمك فيليه",
+                prices: { regular: 110 },
+                image: "assets/crepe/crepesamak.jpg",
+                desc: "كريب بسمك فيليه مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب سموك تركي",
+                prices: { regular: 115 },
+                image: "assets/crepe/crepesmoktorky.jpg",
+                desc: "كريب سموك تركي مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب ستربس",
+                prices: { regular: 125 },
+                image: "assets/crepe/crepestrips.jpg",
+                desc: "كريب ستربس مقرمش مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب شاورما فراخ",
+                prices: { regular: 125 },
+                image: "assets/crepe/crepeshawarmafarakh.jpg",
+                desc: "كريب شاورما فراخ مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب شاورما لحمة",
+                prices: { regular: 125 },
+                image: "assets/crepe/crepeshawarmalahma.jpg",
+                desc: "كريب شاورما لحمة مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب ميكس شاورما",
+                prices: { regular: 135 },
+                image: "assets/crepe/crepemixshawarma.jpg",
+                desc: "كريب ميكس شاورما مع صوص الزهراء."
+            }, {
+                category: "الكريب",
+                name: "كريب ميكس فراخ",
+                prices: { regular: 140 },
+                image: "assets/crepe/crepemixfarakh.jpg",
+                desc: "كريب ميكس فراخ مع صوص خاص."
+            }, {
+                category: "الكريب",
+                name: "كريب سوربريم",
+                prices: { regular: 140 },
+                image: "assets/crepe/crepesupreme.jpg",
+                desc: "كريب سوربريم مع صوص الزهراء المميز."
+            }, {
+                category: "الكريب",
+                name: "كريب ميكس لحوم الزهراء",
+                prices: { regular: 170 },
+                image: "assets/crepe/crepemixlahom.jpg",
+                desc: "كريب ميكس لحوم الزهراء مع صوص خاص."
+            },
+
+            // ============================================================
+            // 23. إضافات الكريب
+            // ============================================================
+            {
+                category: "إضافات الكريب",
+                name: "إضافة موتزريلا",
+                prices: { regular: 15 },
+                image: "assets/addons/mozzarella.jpg",
+                desc: "إضافة جبنة موتزريلا للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "إضافة صوص شيدر",
+                prices: { regular: 15 },
+                image: "assets/addons/cheddar.jpg",
+                desc: "إضافة صوص شيدر للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "إضافة لحوم",
+                prices: { regular: 30 },
+                image: "assets/addons/lahom.jpg",
+                desc: "إضافة لحوم للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "إضافة خضار",
+                prices: { regular: 15 },
+                image: "assets/addons/khodar.jpg",
+                desc: "إضافة خضار طازجة للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "إضافة بطاطس",
+                prices: { regular: 15 },
+                image: "assets/addons/batates.jpg",
+                desc: "إضافة بطاطس مقلية للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "إضافة مشروم",
+                prices: { regular: 30 },
+                image: "assets/addons/mashroom.jpg",
+                desc: "إضافة مشروم للكريب."
+            }, {
+                category: "إضافات الكريب",
+                name: "باكيت بطاطس",
+                prices: { regular: 30 },
+                image: "assets/addons/baketbatates.jpg",
+                desc: "باكيت بطاطس مقلية."
+            },
+
+            // ============================================================
+            // 24. كريب لولو (كريب حلو)
+            // ============================================================
+            {
+                category: "كريب لولو",
+                name: "كريب توتال",
+                prices: { regular: 60 },
+                image: "assets/lolo/crepetotal.jpg",
+                desc: "كريب توتال بحشوة مميزة."
+            }, {
+                category: "كريب لولو",
+                name: "كريب توتال موز",
+                prices: { regular: 60 },
+                image: "assets/lolo/crepetotalmoz.jpg",
+                desc: "كريب توتال بموز مع صوص خاص."
+            }, {
+                category: "كريب لولو",
+                name: "كريب توتال مكسرات",
+                prices: { regular: 60 },
+                image: "assets/lolo/crepetotalmokassarat.jpg",
+                desc: "كريب توتال بمكسرات مع صوص الزهراء."
+            }, {
+                category: "كريب لولو",
+                name: "كريب فراكاسة",
+                prices: { regular: 125 },
+                image: "assets/lolo/crepefrakasa.jpg",
+                desc: "كريب فراكاسة بحشوة مميزة."
+            }, {
+                category: "كريب لولو",
+                name: "كريب قطعة وعسل",
+                prices: { regular: 125 },
+                image: "assets/lolo/crepeotaweasal.jpg",
+                desc: "كريب قطعة وعسل مع صوص خاص."
+            },
+
+            // ============================================================
+            // 25. حلو الزهراء
+            // ============================================================
+            {
+                category: "حلو الزهراء",
+                name: "أرز بلبن سادة",
+                prices: { regular: 25 },
+                image: "assets/sweets/arazbalabansada.jpg",
+                desc: "أرز بلبن سادة من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "أرز بلبن مكسرات",
+                prices: { regular: 30 },
+                image: "assets/sweets/arazbalabanmokassarat.jpg",
+                desc: "أرز بلبن بمكسرات مع صوص خاص."
+            }, {
+                category: "حلو الزهراء",
+                name: "أرز بلبن كنافة",
+                prices: { regular: 30 },
+                image: "assets/sweets/arazbalabankonafa.jpg",
+                desc: "أرز بلبن بكنافة مع صوص الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "أرز بلبن نوتيلا",
+                prices: { regular: 35 },
+                image: "assets/sweets/arazbalabannotella.jpg",
+                desc: "أرز بلبن بنوتيلا مع صوص خاص."
+            }, {
+                category: "حلو الزهراء",
+                name: "أرز بلبن فرن",
+                prices: { regular: 35 },
+                image: "assets/sweets/arazbalabanforn.jpg",
+                desc: "أرز بلبن محضر بالفرن."
+            }, {
+                category: "حلو الزهراء",
+                name: "أم علي",
+                prices: { regular: 25 },
+                image: "assets/sweets/omali.jpg",
+                desc: "أم علي من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "كريم كراميل",
+                prices: { regular: 25 },
+                image: "assets/sweets/creamcaramel.jpg",
+                desc: "كريم كراميل من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "مهلبية",
+                prices: { regular: 25 },
+                image: "assets/sweets/mahalabya.jpg",
+                desc: "مهلبية من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "كاسترد",
+                prices: { regular: 25 },
+                image: "assets/sweets/custard.jpg",
+                desc: "كاسترد من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "قطينة شوكولاتة",
+                prices: { regular: 25 },
+                image: "assets/sweets/otaynashokolata.jpg",
+                desc: "قطينة شوكولاتة من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "قطينة كريمة",
+                prices: { regular: 25 },
+                image: "assets/sweets/otaynacrema.jpg",
+                desc: "قطينة كريمة من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "قطينة فراولة",
+                prices: { regular: 25 },
+                image: "assets/sweets/otaynafarawla.jpg",
+                desc: "قطينة فراولة من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "ديسي باتشو",
+                prices: { regular: 30 },
+                image: "assets/sweets/desypatcho.jpg",
+                desc: "ديسي باتشو من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "ديسي باتشو كبير",
+                prices: { regular: 40 },
+                image: "assets/sweets/desypatchokaber.jpg",
+                desc: "ديسي باتشو كبير من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "مولتن كيك",
+                prices: { regular: 40 },
+                image: "assets/sweets/moltencake.jpg",
+                desc: "مولتن كيك من الزهراء."
+            }, {
+                category: "حلو الزهراء",
+                name: "إضافات إضافية",
+                prices: { small: 40, large: 55 },
+                image: "assets/sweets/addonssweet.jpg",
+                desc: "إضافات إضافية للحلويات."
+            },
+
+            // ============================================================
+            // 26. إضافات الحادق
+            // ============================================================
+            {
+                category: "إضافات الحادق",
+                name: "إضافة لحمة",
+                prices: { regular: 50 },
+                image: "assets/addonshadeq/lahma.jpg",
+                desc: "إضافة لحمة للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة فراخ",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/farakh.jpg",
+                desc: "إضافة فراخ للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة جبنة موتزريلا",
+                prices: { regular: 40 },
+                image: "assets/addonshadeq/mozzarella.jpg",
+                desc: "إضافة جبنة موتزريلا للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة سوسيس",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/sosis.jpg",
+                desc: "إضافة سوسيس للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة سجق",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/sog.jpg",
+                desc: "إضافة سجق للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة مشروم",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/mashroom.jpg",
+                desc: "إضافة مشروم للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة بانيه",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/panne.jpg",
+                desc: "إضافة بانيه للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة كريسبي",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/crispy.jpg",
+                desc: "إضافة كريسبي للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة ستربس",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/strips.jpg",
+                desc: "إضافة ستربس للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة شيش طاووق",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/shesh.jpg",
+                desc: "إضافة شيش طاووق للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة ميكس فراخ",
+                prices: { regular: 35 },
+                image: "assets/addonshadeq/mixfarakh.jpg",
+                desc: "إضافة ميكس فراخ للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة ميكس لحوم",
+                prices: { regular: 35 },
+                image: "assets/addonshadeq/mixlahom.jpg",
+                desc: "إضافة ميكس لحوم للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة جبنة رومي",
+                prices: { regular: 25 },
+                image: "assets/addonshadeq/romy.jpg",
+                desc: "إضافة جبنة رومي للفطير الحادق."
+            }, {
+                category: "إضافات الحادق",
+                name: "إضافة ميكس شاورما",
+                prices: { regular: 35 },
+                image: "assets/addonshadeq/mixshawarma.jpg",
+                desc: "إضافة ميكس شاورما للفطير الحادق."
+            }
+        ];
+
+        // ─── BUILD MENU DATA ──────────────────────────────────────────────────
+
+        function buildMenuData(items) {
+            let result = [];
+            let idCounter = 0;
+            items.forEach(item => {
+                const baseName = item.name;
+                const desc = item.desc || `من تشكيلة ${item.category}`;
+                let variations = [];
+                const labelMap = { 'regular': 'عادي', 'small': 'صغير', 'large': 'كبير', 'mozzarella': 'موتزريلا' };
+                const order = ['small', 'regular', 'large', 'mozzarella'];
+                order.forEach(key => {
+                    if (item.prices[key] !== undefined) {
+                        variations.push({ label: labelMap[key] || key, price: item.prices[key] });
+                    }
+                });
+                if (variations.length === 0) {
+                    for (const [key, value] of Object.entries(item.prices)) {
+                        variations.push({ label: key, price: value });
+                    }
+                }
+                if (variations.length === 0) {
+                    variations = [{ label: 'عادي', price: 0 }];
+                }
+                result.push({
+                    id: `item-${idCounter++}`,
+                    category: item.category,
+                    name: baseName,
+                    desc: desc,
+                    image: item.image || `https://picsum.photos/seed/${encodeURIComponent(baseName)}/400/300`,
+                    variations: variations,
+                    defaultVariation: 0
+                });
+            });
+            return result;
+        }
+
+        let MENU_DATA = buildMenuData(MENU_ITEMS);
+
+        // ─── CATEGORIES ──────────────────────────────────────────────────────
+
+        const categorySet = new Set();
+        MENU_DATA.forEach(item => categorySet.add(item.category));
+        let CATEGORIES = Array.from(categorySet).map(cat => ({ id: cat, label: cat }));
+        CATEGORIES.unshift({ id: 'all', label: 'الكل' });
+
+        const BRANCHES = [
+            { id: 'b1', name: 'فرع وسط البلد', address: 'شارع طلعت حرب، وسط البلد، القاهرة',
+                mapUrl: 'https://maps.google.com/?q=30.0444,31.2357' },
+            { id: 'b2', name: 'فرع المعادي', address: 'شارع النصر، المعادي، القاهرة',
+                mapUrl: 'https://maps.google.com/?q=29.9644,31.2567' },
+            { id: 'b3', name: 'فرع مدينة نصر', address: 'شارع عباس العقاد، مدينة نصر، القاهرة',
+                mapUrl: 'https://maps.google.com/?q=30.0604,31.3457' },
+            { id: 'b4', name: 'فرع الشيخ زايد', address: 'شارع السادس، الشيخ زايد، الجيزة',
+                mapUrl: 'https://maps.google.com/?q=30.0174,31.0127' }
+        ];
+
+        const BRANCH_PHONES = '201013706142 / 201060524239';
+
+        // ─── GLOBAL ORDER TYPE ──────────────────────────────────────────────
+
+        let orderType = null; // 'delivery' or 'dinein'
+
+        // ─── STORAGE ────────────────────────────────────────────────────────
+
+        const Storage = {
+            get(key, fallback) { try { const data = localStorage.getItem(key); return data ? JSON.parse(data) :
+                    fallback; } catch { return fallback; } },
+            set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { console.warn(
+                        'Storage set error:', e); } },
+            remove(key) { localStorage.removeItem(key); }
+        };
+
+        // ─── CART ───────────────────────────────────────────────────────────
+
+        const Cart = {
+            key: 'koshary_cart',
+            data: [],
+            init() { this.data = Storage.get(this.key, []); return this; },
+            save() { Storage.set(this.key, this.data); return this; },
+            getItems() { return this.data; },
+            getTotalItems() { return this.data.reduce((sum, item) => sum + item.quantity, 0); },
+            getTotalPrice() { return this.data.reduce((sum, item) => sum + (item.price * item.quantity), 0); },
+            addItem(menuItem, variationIndex) {
+                const variation = menuItem.variations[variationIndex];
+                const fullName = `${menuItem.name} (${variation.label})`;
+                const id = `${menuItem.id}-${variation.label}`;
+                const existing = this.data.find(item => item.id === id);
+                if (existing) { existing.quantity += 1; } else { this.data.push({ id, name: fullName, price: variation
+                            .price, image: menuItem.image, quantity: 1 }); }
+                this.save();
+                return this;
+            },
+            removeItem(id) { this.data = this.data.filter(item => item.id !== id); this.save(); return this; },
+            updateQuantity(id, delta) {
+                const item = this.data.find(i => i.id === id);
+                if (!item) return this;
+                const newQty = item.quantity + delta;
+                if (newQty <= 0) { return this.removeItem(id); }
+                item.quantity = newQty;
+                this.save();
+                return this;
+            },
+            clear() { this.data = []; this.save(); return this; },
+            getItem(id) { return this.data.find(item => item.id === id); }
+        };
+
+        // ─── UI HELPERS ────────────────────────────────────────────────────
+
+        const UI = {
+            formatPrice(amount) { return `${amount} ج.م`; },
+            throttleRAF(fn) { let ticking = false; return (...args) => { if (!ticking) { requestAnimationFrame(
+                        () => { fn(...args);
+                            ticking = false; });
+                    ticking = true; } }; }
+        };
+
+        // ─── LAZY LOADER ────────────────────────────────────────────────────
+
+        const LazyLoader = {
+            observer: null,
+            initialized: false,
+            init() {
+                if (this.initialized) return;
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const src = img.dataset.src;
+                            if (src) {
+                                img.src = src;
+                                img.onload = () => { img.classList.add('loaded'); const placeholder = img
+                                        .parentElement.querySelector('.menu-card-image-placeholder'); if (
+                                        placeholder) placeholder.classList.add('hidden'); };
+                                img.onerror = () => { img.classList.add('error');
+                                    img.alt = 'صورة غير متوفرة'; const placeholder = img.parentElement
+                                        .querySelector('.menu-card-image-placeholder'); if (placeholder)
+                                        placeholder.classList.add('hidden'); };
+                                img.removeAttribute('data-src');
+                            }
+                            this.observer.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '150px 0px', threshold: 0.01 });
+                this.initialized = true;
+            },
+            observeAll(images) {
+                if (!this.initialized) this.init();
+                images.forEach(img => {
+                    if (img.dataset.src) { this.observer.observe(img); }
+                });
+            }
+        };
+
+        // ─── MENU ───────────────────────────────────────────────────────────
+
+        const Menu = {
+            currentCategory: 'all',
+            container: null,
+            navContainer: null,
+            selectedVariations: {},
+
+            init() {
+                this.container = document.getElementById('menuContainer');
+                this.navContainer = document.getElementById('categoryNavInner');
+                this.renderCategories();
+                this.renderItems('all');
+                this.bindCategoryEvents();
+                this.bindQuantityEvents();
+                this.bindVariationEvents();
+                return this;
+            },
+
+            renderCategories() {
+                this.navContainer.innerHTML = CATEGORIES.map(cat => {
+                    let icon = '';
+                    if (cat.id === 'all') icon = '<i class="fas fa-th-list"></i>';
+                    else if (cat.id.includes('كريب')) icon = '<i class="fas fa-utensil-spoon"></i>';
+                    else if (cat.id.includes('بيتزا')) icon = '<i class="fas fa-pizza-slice"></i>';
+                    else if (cat.id.includes('كشري')) icon = '<i class="fas fa-bowl-food"></i>';
+                    else if (cat.id.includes('حلو')) icon = '<i class="fas fa-cake"></i>';
+                    else if (cat.id.includes('مشروبات')) icon = '<i class="fas fa-wine-bottle"></i>';
+                    else icon = '<i class="fas fa-circle"></i>';
+                    return `<button class="category-chip ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}" type="button" role="tab" aria-selected="${cat.id === 'all'}">${icon} ${cat.label}</button>`;
+                }).join('');
+            },
+
+            renderItems(categoryId) {
+                this.currentCategory = categoryId;
+                const items = categoryId === 'all' ? MENU_DATA : MENU_DATA.filter(item => item.category === categoryId);
+                const grouped = {};
+                items.forEach(item => { if (!grouped[item.category]) grouped[item.category] = []; grouped[item.category]
+                        .push(item); });
+
+                let html = '';
+                for (const [cat, catItems] of Object.entries(grouped)) {
+                    html +=
+                        `<div class="menu-section" data-category="${cat}"><h2 class="menu-section-title"><i class="fas fa-tag"></i> ${cat}</h2><div class="menu-grid">`;
+                    catItems.forEach((item, index) => {
+                        if (!this.selectedVariations[item.id]) { this.selectedVariations[item.id] = item
+                                .defaultVariation || 0; }
+                        const selectedIdx = this.selectedVariations[item.id];
+                        const selectedVar = item.variations[selectedIdx];
+                        const currentPrice = selectedVar ? selectedVar.price : item.variations[0].price;
+                        const cartItem = Cart.getItem(`${item.id}-${selectedVar.label}`);
+                        const qty = cartItem ? cartItem.quantity : 0;
+
+                        let variationsHtml = '';
+                        if (item.variations.length > 1) {
+                            variationsHtml = `<div class="variations">`;
+                            item.variations.forEach((v, idx) => {
+                                const activeClass = idx === selectedIdx ? 'active' : '';
+                                variationsHtml +=
+                                    `<button class="variation-btn ${activeClass}" data-item-id="${item.id}" data-var-index="${idx}">${v.label}</button>`;
+                            });
+                            variationsHtml += `</div>`;
+                        }
+
+                        html += `
+                                    <div class="menu-card" style="animation-delay: ${(index % 6) * 0.05}s" role="article" aria-label="${item.name}">
+                                        <div class="menu-card-image-wrap">
+                                            <img data-src="${item.image}" alt="${item.name}" loading="lazy" width="400" height="300" />
+                                            <div class="menu-card-image-placeholder" aria-hidden="true"><i class="fas fa-utensils"></i></div>
+                                        </div>
+                                        <div class="menu-card-body">
+                                            <h3 class="menu-card-name">${item.name}</h3>
+                                            <p class="menu-card-desc">${item.desc}</p>
+                                            ${variationsHtml}
+                                            <div class="menu-card-footer">
+                                                <span class="menu-card-price">${UI.formatPrice(currentPrice)}</span>
+                                                <div class="menu-card-actions" data-item-id="${item.id}">
+                                                    ${this.renderQuantityControls(item.id, qty)}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                    });
+                    html += `</div></div>`;
+                }
+
+                this.container.innerHTML = html;
+                const images = this.container.querySelectorAll('img[data-src]');
+                LazyLoader.observeAll(images);
+            },
+
+            renderQuantityControls(itemId, qty) {
+                if (qty > 0) {
+                    return `<div class="qty-controls" data-item-id="${itemId}">
+                                <button class="qty-btn" data-action="decrease" aria-label="تقليل الكمية"><i class="fas fa-minus"></i></button>
+                                <span class="qty-value" aria-label="الكمية">${qty}</span>
+                                <button class="qty-btn" data-action="increase" aria-label="زيادة الكمية"><i class="fas fa-plus"></i></button>
+                            </div>`;
+                }
+                return `<button class="qty-btn add" data-action="add" aria-label="إضافة إلى السلة"><i class="fas fa-plus"></i></button>`;
+            },
+
+            bindCategoryEvents() {
+                this.navContainer.addEventListener('click', (e) => {
+                    const chip = e.target.closest('.category-chip');
+                    if (!chip) return;
+                    const cat = chip.dataset.category;
+                    if (cat === this.currentCategory) return;
+                    this.navContainer.querySelectorAll('.category-chip').forEach(c => { c.classList.remove('active');
+                        c.setAttribute('aria-selected', 'false'); });
+                    chip.classList.add('active');
+                    chip.setAttribute('aria-selected', 'true');
+                    chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    this.renderItems(cat);
+                });
+            },
+
+            bindQuantityEvents() {
+                this.container.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.qty-btn');
+                    if (!btn) return;
+                    const controls = btn.closest('[data-item-id]');
+                    if (!controls) return;
+                    const itemId = controls.dataset.itemId;
+                    if (!itemId) return;
+                    const action = btn.dataset.action;
+                    const menuItem = MENU_DATA.find(i => i.id === itemId);
+                    if (!menuItem) return;
+                    const selectedIdx = this.selectedVariations[itemId] || 0;
+                    const selectedVar = menuItem.variations[selectedIdx];
+
+                    if (action === 'add') {
+                        Cart.addItem(menuItem, selectedIdx);
+                        App.updateCartUI();
+                        this.updateItemQuantity(itemId);
+                        btn.style.transform = 'scale(0.8)';
+                        setTimeout(() => { btn.style.transform = ''; }, 200);
+                        const badge = document.getElementById('cartBadge');
+                        if (badge) { badge.classList.remove('bump');
+                            void badge.offsetWidth;
+                            badge.classList.add('bump'); }
+                    } else if (action === 'increase') {
+                        const cartId = `${itemId}-${selectedVar.label}`;
+                        Cart.updateQuantity(cartId, 1);
+                        App.updateCartUI();
+                        this.updateItemQuantity(itemId);
+                    } else if (action === 'decrease') {
+                        const cartId = `${itemId}-${selectedVar.label}`;
+                        Cart.updateQuantity(cartId, -1);
+                        App.updateCartUI();
+                        this.updateItemQuantity(itemId);
+                    }
+                });
+            },
+
+            updateItemQuantity(itemId) {
+                const menuItem = MENU_DATA.find(i => i.id === itemId);
+                if (!menuItem) return;
+                const selectedIdx = this.selectedVariations[itemId] || 0;
+                const selectedVar = menuItem.variations[selectedIdx];
+                const cartId = `${itemId}-${selectedVar.label}`;
+                const cartItem = Cart.getItem(cartId);
+                const qty = cartItem ? cartItem.quantity : 0;
+                const actionsEl = this.container.querySelector(`.menu-card-actions[data-item-id="${itemId}"]`);
+                if (!actionsEl) return;
+                actionsEl.innerHTML = this.renderQuantityControls(itemId, qty);
+            },
+
+            bindVariationEvents() {
+                this.container.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.variation-btn');
+                    if (!btn) return;
+                    const itemId = btn.dataset.itemId;
+                    const varIndex = parseInt(btn.dataset.varIndex, 10);
+                    if (isNaN(varIndex)) return;
+                    const menuItem = MENU_DATA.find(i => i.id === itemId);
+                    if (!menuItem) return;
+                    this.selectedVariations[itemId] = varIndex;
+
+                    const card = btn.closest('.menu-card');
+                    if (card) {
+                        const priceEl = card.querySelector('.menu-card-price');
+                        const selectedVar = menuItem.variations[varIndex];
+                        if (priceEl && selectedVar) {
+                            priceEl.textContent = UI.formatPrice(selectedVar.price);
+                        }
+                        const allVarBtns = card.querySelectorAll('.variation-btn');
+                        allVarBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.updateItemQuantity(itemId);
+                    }
+                });
+            }
+        };
+
+        // ─── CART UI ────────────────────────────────────────────────────────
+
+        const CartUI = {
+            modal: null,
+            body: null,
+            footer: null,
+            countEl: null,
+            isOpen: false,
+            bound: false,
+
+            init() {
+                this.modal = document.getElementById('cartModal');
+                this.body = document.getElementById('cartModalBody');
+                this.footer = document.getElementById('cartModalFooter');
+                this.countEl = document.getElementById('cartModalCount');
+
+                document.getElementById('cartModalClose').addEventListener('click', () => this.close());
+                this.modal.addEventListener('click', (e) => { if (e.target === this.modal) this.close(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.isOpen) this.close(); });
+
+                this.bindBodyEvents();
+                this.bindFooterEvents();
+                this.bound = true;
+                return this;
+            },
+
+            open() {
+                this.isOpen = true;
+                this.modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                this.render();
+                document.getElementById('cartModalClose').focus();
+            },
+
+            close() {
+                this.isOpen = false;
+                this.modal.classList.remove('open');
+                document.body.style.overflow = '';
+                document.getElementById('cartBtn').focus();
+            },
+
+            render() {
+                const items = Cart.getItems();
+                const totalItems = Cart.getTotalItems();
+                const totalPrice = Cart.getTotalPrice();
+                this.countEl.textContent = totalItems;
+
+                if (items.length === 0) {
+                    this.body.innerHTML =
+                        `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><h3>السلة فارغة</h3><p>أضف بعض الأطباق الشهية من منيو كشري الزهراء</p></div>`;
+                    this.footer.innerHTML =
+                        `<button class="btn btn-secondary" id="continueShoppingBtn" style="width:100%;">استمر في التسوق</button>`;
+                    return;
+                }
+
+                let itemsHtml = '';
+                items.forEach(item => {
+                    itemsHtml += `
+                                <div class="cart-item" data-item-id="${item.id}">
+                                    <img class="cart-item-image" src="${item.image}" alt="${item.name}" loading="lazy" />
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">${item.name}</div>
+                                        <div class="cart-item-price">${UI.formatPrice(item.price)}</div>
+                                    </div>
+                                    <div class="cart-item-controls">
+                                        <button class="qty-btn" data-action="cart-decrease" aria-label="تقليل الكمية"><i class="fas fa-minus"></i></button>
+                                        <span class="qty-value">${item.quantity}</span>
+                                        <button class="qty-btn" data-action="cart-increase" aria-label="زيادة الكمية"><i class="fas fa-plus"></i></button>
+                                        <button class="cart-item-remove" data-action="cart-remove" aria-label="إزالة العنصر"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                });
+                this.body.innerHTML = itemsHtml;
+
+                this.footer.innerHTML = `
+                            <div class="cart-summary">
+                                <div class="cart-summary-row"><span>عدد العناصر</span><span>${totalItems}</span></div>
+                                <div class="cart-summary-row total"><span>المجموع</span><span class="amount">${UI.formatPrice(totalPrice)}</span></div>
+                            </div>
+                            <div class="cart-actions">
+                                <button class="btn btn-danger" id="clearCartBtn"><i class="fas fa-trash-alt"></i> مسح السلة</button>
+                                <button class="btn btn-primary" id="checkoutBtn"><i class="fas fa-clipboard-list"></i> إتمام الطلب</button>
+                            </div>
+                        `;
+            },
+
+            bindBodyEvents() {
+                this.body.addEventListener('click', (e) => {
+                    const btn = e.target.closest('button[data-action]');
+                    if (!btn) return;
+                    const action = btn.dataset.action;
+                    const itemEl = btn.closest('.cart-item');
+                    if (!itemEl) return;
+                    const id = itemEl.dataset.itemId;
+                    if (!id) return;
+
+                    if (action === 'cart-increase') {
+                        Cart.updateQuantity(id, 1);
+                        App.updateCartUI();
+                        this.render();
+                        const baseId = id.split('-')[0];
+                        if (baseId) { Menu.updateItemQuantity(baseId); }
+                    } else if (action === 'cart-decrease') {
+                        Cart.updateQuantity(id, -1);
+                        App.updateCartUI();
+                        this.render();
+                        const baseId = id.split('-')[0];
+                        if (baseId) { Menu.updateItemQuantity(baseId); }
+                    } else if (action === 'cart-remove') {
+                        Swal.fire({
+                            title: 'إزالة العنصر؟',
+                            text: `هل تريد إزالة هذا العنصر من السلة؟`,
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#A61C2C',
+                            cancelButtonColor: '#A68B7A',
+                            confirmButtonText: 'نعم، إزالة',
+                            cancelButtonText: 'إلغاء'
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                Cart.removeItem(id);
+                                App.updateCartUI();
+                                this.render();
+                                const baseId = id.split('-')[0];
+                                if (baseId) { Menu.updateItemQuantity(baseId); }
+                            }
+                        });
+                    }
+                });
+            },
+
+            bindFooterEvents() {
+                this.footer.addEventListener('click', (e) => {
+                    if (e.target.closest('#continueShoppingBtn')) {
+                        this.close();
+                        return;
+                    }
+                    if (e.target.closest('#clearCartBtn')) {
+                        Swal.fire({
+                            title: 'مسح السلة؟',
+                            text: 'سيتم حذف جميع العناصر من السلة',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#A61C2C',
+                            cancelButtonColor: '#A68B7A',
+                            confirmButtonText: 'نعم، مسح الكل',
+                            cancelButtonText: 'إلغاء'
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                Cart.clear();
+                                App.updateCartUI();
+                                this.render();
+                                Menu.renderItems(Menu.currentCategory);
+                                Swal.fire('تم المسح', 'تم إفراغ السلة بنجاح', 'success');
+                            }
+                        });
+                        return;
+                    }
+                    if (e.target.closest('#checkoutBtn')) {
+                        this.close();
+                        CheckoutUI.open();
+                    }
+                });
+            }
+        };
+
+        // ─── CHECKOUT UI ────────────────────────────────────────────────────
+
+        const CheckoutUI = {
+            modal: null,
+            body: null,
+            isOpen: false,
+            DELIVERY_WHATSAPP: '201013706142',
+            DINEIN_WHATSAPP: '201060524239',
+
+            init() {
+                this.modal = document.getElementById('checkoutModal');
+                this.body = document.getElementById('checkoutModalBody');
+                document.getElementById('checkoutModalClose').addEventListener('click', () => this.close());
+                this.modal.addEventListener('click', (e) => { if (e.target === this.modal) this.close(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.isOpen) this.close(); });
+                return this;
+            },
+
+            open() {
+                this.isOpen = true;
+                this.modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                this.render();
+                document.getElementById('checkoutModalClose').focus();
+            },
+
+            close() {
+                this.isOpen = false;
+                this.modal.classList.remove('open');
+                document.body.style.overflow = '';
+            },
+
+            render() {
+                const items = Cart.getItems();
+                const totalItems = Cart.getTotalItems();
+                const totalPrice = Cart.getTotalPrice();
+                const isDineIn = orderType === 'dinein';
+
+                if (items.length === 0) {
+                    this.body.innerHTML =
+                        `<div class="cart-empty"><i class="fas fa-clipboard-list"></i><h3>السلة فارغة</h3><p>أضف أطباقك المفضلة أولاً</p><button class="btn btn-primary" id="backToCartBtn" style="margin-top:var(--space-md);">العودة للسلة</button></div>`;
+                    const backBtn = document.getElementById('backToCartBtn');
+                    if (backBtn) { backBtn.addEventListener('click', () => { this.close();
+                            CartUI.open(); }); }
+                    return;
+                }
+
+                const branchOptions = BRANCHES.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+
+                // Build summary of items
+                let summaryHtml = '';
+                items.forEach(item => {
+                    summaryHtml +=
+                        `<div style="display:flex;justify-content:space-between;font-size:14px;padding:var(--space-xs) 0;border-bottom:1px solid var(--outline-variant);"><span>${item.name} × ${item.quantity}</span><span>${UI.formatPrice(item.price * item.quantity)}</span></div>`;
+                });
+
+                // ─── Build the form conditionally ──────────────────────────
+
+                let formHtml = `<form class="checkout-form" id="checkoutForm" novalidate>`;
+
+                // ── DINE-IN FIELDS ──
+                if (isDineIn) {
+                    formHtml += `
+                                <div class="form-group" id="tableGroup">
+                                    <label for="tableNumber">رقم التابل *</label>
+                                    <input type="text" id="tableNumber" placeholder="أدخل رقم التابل الذي تجلس عليه" required aria-required="true" autofocus />
+                                    <span class="error-text">الرجاء إدخال رقم التابل</span>
+                                </div>
+                                <div class="form-group" id="nameGroup">
+                                    <label for="customerName">الاسم الكامل *</label>
+                                    <input type="text" id="customerName" placeholder="أدخل اسمك الكامل" required aria-required="true" autocomplete="name" />
+                                    <span class="error-text">الرجاء إدخال الاسم</span>
+                                </div>
+                            `;
+                } else {
+                    // ── DELIVERY FIELDS ──
+                    formHtml += `
+                                <div class="form-group" id="branchGroup">
+                                    <label for="customerBranch">اختر الفرع *</label>
+                                    <select id="customerBranch" required>
+                                        <option value="">-- اختر فرع --</option>
+                                        ${branchOptions}
+                                    </select>
+                                    <span class="error-text">الرجاء اختيار فرع</span>
+                                </div>
+                                <div class="form-group" id="nameGroup">
+                                    <label for="customerName">الاسم الكامل *</label>
+                                    <input type="text" id="customerName" placeholder="أدخل اسمك الكامل" required aria-required="true" autocomplete="name" />
+                                    <span class="error-text">الرجاء إدخال الاسم</span>
+                                </div>
+                                <div class="form-group" id="phoneGroup">
+                                    <label for="customerPhone">رقم الهاتف *</label>
+                                    <input type="tel" id="customerPhone" placeholder="مثال: 0123456789" required aria-required="true" autocomplete="tel" />
+                                    <span class="error-text">الرجاء إدخال رقم هاتف صحيح</span>
+                                </div>
+                                <div class="form-group" id="addressGroup">
+                                    <label for="customerAddress">العنوان *</label>
+                                    <input type="text" id="customerAddress" placeholder="أدخل عنوان التوصيل" required aria-required="true" autocomplete="address-line1" />
+                                    <span class="error-text">الرجاء إدخال العنوان</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerNotes">ملاحظات إضافية</label>
+                                    <textarea id="customerNotes" placeholder="مثل: توصيل سريع، طلب خاص، إلخ..." rows="2"></textarea>
+                                </div>
+                            `;
+                }
+
+                // ── ORDER SUMMARY ── (same for both)
+                formHtml += `
+                            <div class="checkout-summary">
+                                <div style="font-weight:700;color:var(--on-surface);margin-bottom:var(--space-xs);">ملخص الطلب</div>
+                                ${summaryHtml}
+                                <div class="row total"><span>المجموع الكلي</span><span class="amount">${UI.formatPrice(totalPrice)}</span></div>
+                                <div style="font-size:13px;color:var(--on-surface-variant);opacity:0.7;margin-top:var(--space-xs);">عدد العناصر: ${totalItems}</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;padding:var(--space-lg);font-size:16px;"><i class="fab fa-whatsapp"></i> أطلب عبر واتساب</button>
+                        </form>`;
+
+                this.body.innerHTML = formHtml;
+
+                // ─── Bind form submit ──────────────────────────────────────
+                const form = document.getElementById('checkoutForm');
+                form.addEventListener('submit', (e) => { e.preventDefault();
+                    this.handleSubmit(); });
+
+                // ─── Bind validation events ────────────────────────────────
+                const fields = isDineIn ?
+                    ['tableNumber', 'customerName'] :
+                    ['customerBranch', 'customerName', 'customerPhone', 'customerAddress'];
+
+                fields.forEach(id => {
+                    const input = document.getElementById(id);
+                    if (!input) return;
+                    const blurHandler = () => {
+                        const group = input.closest('.form-group');
+                        if (group) {
+                            const val = input.value.trim();
+                            if (val === '' || (id === 'customerBranch' && val === '')) {
+                                group.classList.add('invalid');
+                            } else {
+                                group.classList.remove('invalid');
+                            }
+                        }
+                    };
+                    input.addEventListener('blur', blurHandler);
+                    input.addEventListener('change', blurHandler);
+                    input.addEventListener('input', () => {
+                        const group = input.closest('.form-group');
+                        if (group && group.classList.contains('invalid')) {
+                            const val = input.value.trim();
+                            if (val !== '' && !(id === 'customerBranch' && val === '')) {
+                                group.classList.remove('invalid');
+                            }
+                        }
+                    });
+                });
+
+                // Auto-focus first field
+                const firstInput = this.body.querySelector('input, select, textarea');
+                if (firstInput) {
+                    setTimeout(() => firstInput.focus(), 300);
+                }
+            },
+
+            handleSubmit() {
+                const isDineIn = orderType === 'dinein';
+
+                // ─── Gather values ─────────────────────────────────────────
+                let branch = '';
+                let branchName = '';
+                let name = '';
+                let phone = '';
+                let address = '';
+                let notes = '';
+                let table = '';
+
+                if (isDineIn) {
+                    table = document.getElementById('tableNumber').value.trim();
+                    name = document.getElementById('customerName').value.trim();
+                } else {
+                    branch = document.getElementById('customerBranch').value;
+                    branchName = BRANCHES.find(b => b.id === branch)?.name || '';
+                    name = document.getElementById('customerName').value.trim();
+                    phone = document.getElementById('customerPhone').value.trim();
+                    address = document.getElementById('customerAddress').value.trim();
+                    notes = document.getElementById('customerNotes').value.trim();
+                }
+
+                // ─── Validate ──────────────────────────────────────────────
+                let valid = true;
+
+                if (isDineIn) {
+                    const tableGroup = document.getElementById('tableGroup');
+                    const nameGroup = document.getElementById('nameGroup');
+                    if (!table) { tableGroup.classList.add('invalid');
+                        valid = false; } else { tableGroup.classList.remove('invalid'); }
+                    if (!name) { nameGroup.classList.add('invalid');
+                        valid = false; } else { nameGroup.classList.remove('invalid'); }
+                } else {
+                    const branchGroup = document.getElementById('branchGroup');
+                    const nameGroup = document.getElementById('nameGroup');
+                    const phoneGroup = document.getElementById('phoneGroup');
+                    const addressGroup = document.getElementById('addressGroup');
+
+                    if (!branch) { branchGroup.classList.add('invalid');
+                        valid = false; } else { branchGroup.classList.remove('invalid'); }
+                    if (!name) { nameGroup.classList.add('invalid');
+                        valid = false; } else { nameGroup.classList.remove('invalid'); }
+                    if (!phone || phone.length < 10) { phoneGroup.classList.add('invalid');
+                        valid = false; } else { phoneGroup.classList.remove('invalid'); }
+                    if (!address) { addressGroup.classList.add('invalid');
+                        valid = false; } else { addressGroup.classList.remove('invalid'); }
+                }
+
+                if (!valid) {
+                    Swal.fire({
+                        title: 'بيانات ناقصة',
+                        text: 'الرجاء ملء جميع الحقول المطلوبة',
+                        icon: 'error',
+                        confirmButtonColor: '#A61C2C'
+                    });
+                    return;
+                }
+
+                // ─── Build WhatsApp message ────────────────────────────────
+                const items = Cart.getItems();
+                const orderTypeLabel = isDineIn ? 'صالة' : 'دليفري';
+
+                let orderText = `🍽️ *طلب جديد من كشري الزهراء*%0A%0A`;
+                orderText += `📋 *نوع الطلب:* ${orderTypeLabel}%0A`;
+
+                if (isDineIn) {
+                    // Dine-in: use first branch as default (since we don't ask)
+                    const defaultBranch = BRANCHES[0];
+                    orderText += `📍 *الفرع:* ${encodeURIComponent(defaultBranch.name)}%0A`;
+                    orderText += `🪑 *رقم التابل:* ${encodeURIComponent(table)}%0A`;
+                    orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
+                } else {
+                    orderText += `📍 *الفرع:* ${encodeURIComponent(branchName)}%0A`;
+                    orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
+                    orderText += `📱 *الهاتف:* ${encodeURIComponent(phone)}%0A`;
+                    orderText += `📍 *العنوان:* ${encodeURIComponent(address)}%0A`;
+                    if (notes) orderText += `📝 *ملاحظات:* ${encodeURIComponent(notes)}%0A`;
+                }
+
+                orderText += `%0A*🧾 الطلب:*%0A`;
+                items.forEach((item, i) => {
+                    orderText +=
+                        `${i+1}. ${encodeURIComponent(item.name)} × ${item.quantity} = ${UI.formatPrice(item.price * item.quantity)}%0A`;
+                });
+                orderText += `%0A💰 *المجموع الكلي:* ${UI.formatPrice(Cart.getTotalPrice())}%0A`;
+                orderText += `%0A🙏 *شكراً لتسوقكم مع كشري الزهراء!*`;
+
+                // ─── Choose WhatsApp number ────────────────────────────────
+                const whatsappNumber = isDineIn ? this.DINEIN_WHATSAPP : this.DELIVERY_WHATSAPP;
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderText}`;
+
+                Swal.fire({
+                    title: '✅ تم إتمام الطلب!',
+                    text: `سيتم تحويلك إلى واتساب المطعم (${orderTypeLabel}) لإرسال الطلب`,
+                    icon: 'success',
+                    confirmButtonColor: '#A61C2C',
+                    confirmButtonText: '📱 أرسل الطلب',
+                    showCancelButton: true,
+                    cancelButtonText: 'إلغاء'
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        Cart.clear();
+                        App.updateCartUI();
+                        Menu.renderItems(Menu.currentCategory);
+                        this.close();
+                        window.open(whatsappUrl, '_blank');
+                        Swal.fire({
+                            title: 'شكراً لك!',
+                            text: 'تم إرسال طلبك إلى كشري الزهراء. سنتواصل معك قريباً.',
+                            icon: 'success',
+                            confirmButtonColor: '#A61C2C'
+                        });
+                    }
+                });
+            }
+        };
+
+        // ─── BRANCHES UI ────────────────────────────────────────────────────
+
+        const BranchesUI = {
+            modal: null,
+            body: null,
+            isOpen: false,
+
+            init() {
+                this.modal = document.getElementById('branchesModal');
+                this.body = document.getElementById('branchesModalBody');
+                document.getElementById('branchesModalClose').addEventListener('click', () => this.close());
+                this.modal.addEventListener('click', (e) => { if (e.target === this.modal) this.close(); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.isOpen) this.close(); });
+                document.getElementById('branchesBtn').addEventListener('click', () => this.open());
+                return this;
+            },
+
+            open() {
+                this.isOpen = true;
+                this.modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                this.render();
+                document.getElementById('branchesModalClose').focus();
+            },
+
+            close() {
+                this.isOpen = false;
+                this.modal.classList.remove('open');
+                document.body.style.overflow = '';
+            },
+
+            render() {
+                this.body.innerHTML = `
+                            <div class="branches-grid">
+                                ${BRANCHES.map(branch => `
+                                    <div class="branch-card">
+                                        <div class="branch-icon"><i class="fas fa-store"></i></div>
+                                        <div class="branch-info">
+                                            <div class="branch-name">${branch.name}</div>
+                                            <div class="branch-address">${branch.address}</div>
+                                            <div class="branch-phone">
+                                                <i class="fas fa-phone-alt"></i>
+                                                <span>${BRANCH_PHONES}</span>
+                                            </div>
+                                        </div>
+                                        <a href="${branch.mapUrl}" target="_blank" rel="noopener noreferrer" class="branch-map-btn" aria-label="فتح الموقع على خرائط جوجل"><i class="fas fa-map-marked-alt"></i> خريطة</a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+            }
+        };
+
+        // ─── CHOICE UI ──────────────────────────────────────────────────────
+
+        const ChoiceUI = {
+            modal: null,
+            isOpen: false,
+
+            init() {
+                this.modal = document.getElementById('choiceModal');
+                document.getElementById('deliveryChoice').addEventListener('click', () => {
+                    orderType = 'delivery';
+                    document.body.classList.add('order-type-delivery');
+                    document.body.classList.remove('order-type-dinein');
+                    this.close();
+                    App.startApp();
+                });
+                document.getElementById('dineinChoice').addEventListener('click', () => {
+                    orderType = 'dinein';
+                    document.body.classList.add('order-type-dinein');
+                    document.body.classList.remove('order-type-delivery');
+                    this.close();
+                    App.startApp();
+                });
+                this.modal.addEventListener('click', (e) => { if (e.target === this.modal) return; });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape') return; });
+                return this;
+            },
+
+            open() {
+                this.isOpen = true;
+                this.modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            },
+
+            close() {
+                this.isOpen = false;
+                this.modal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        };
+
+        // ─── APP ────────────────────────────────────────────────────────────
+
+        const App = {
+            initialized: false,
+
+            init() {
+                ChoiceUI.init();
+                ChoiceUI.open();
+            },
+
+            startApp() {
+                if (this.initialized) return;
+                this.initialized = true;
+
+                Cart.init();
+                Menu.init();
+                CartUI.init();
+                CheckoutUI.init();
+                BranchesUI.init();
+
+                document.getElementById('cartBtn').addEventListener('click', () => { CartUI.open(); });
+                this.updateCartUI();
+
+                const header = document.getElementById('appHeader');
+                window.addEventListener('scroll', UI.throttleRAF(() => {
+                    if (window.scrollY > 10) { header.classList.add('scrolled'); } else { header.classList.remove(
+                            'scrolled'); }
+                }));
+
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+                if (prefersReduced.matches) {
+                    document.querySelectorAll('.menu-card').forEach(el => {
+                        el.style.animation = 'none';
+                        el.style.opacity = '1';
+                        el.style.transform = 'none';
+                    });
+                }
+                console.log('🌿 كشري الزهراء — تم تحميل الموقع بنجاح، نوع الطلب:', orderType);
+            },
+
+            updateCartUI() {
+                const total = Cart.getTotalItems();
+                const badge = document.getElementById('cartBadge');
+                const label = document.getElementById('cartLabel');
+                if (badge) { badge.textContent = total;
+                    badge.style.display = total > 0 ? 'flex' : 'none'; }
+                if (label) { label.textContent = total > 0 ? `السلة (${total})` : 'السلة'; }
+                const countEl = document.getElementById('cartModalCount');
+                if (countEl) countEl.textContent = total;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => { App.init(); });
+
+        // Expose for debugging
+        window.App = App;
+        window.Menu = Menu;
+        window.CartUI = CartUI;
+        window.CheckoutUI = CheckoutUI;
+        window.BranchesUI = BranchesUI;
+    </script>
+</body>
+</html>

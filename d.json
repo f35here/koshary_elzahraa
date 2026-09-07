@@ -1,0 +1,401 @@
+{
+  "menu": [
+    {
+      "category": "إضافات الكريب",
+      "items": [
+        { "name": "إضافة موتزريلا", "price": 15 },
+        { "name": "إضافة صوص شيدر", "price": 15 },
+        { "name": "إضافة لحوم", "price": 30 },
+        { "name": "إضافة خضار", "price": 15 },
+        { "name": "إضافة بطاطس", "price": 15 },
+        { "name": "إضافة مشروم", "price": 30 },
+        { "name": "باكيت بطاطس", "price": 30 }
+      ]
+    },
+    {
+      "category": "كريب لولو",
+      "items": [
+        { "name": "كريب توتال", "price": 60 },
+        { "name": "كريب توتال موز", "price": 60 },
+        { "name": "كريب توتال مكسرات", "price": 60 },
+        { "name": "كريب فراكاسة", "price": 125 },
+        { "name": "كريب قطعة وعسل", "price": 125 }
+      ]
+    },
+    {
+      "category": "حلو الزهراء",
+      "items": [
+        { "name": "أرز بلبن سادة", "price": 25 },
+        { "name": "أرز بلبن مكسرات", "price": 30 },
+        { "name": "أرز بلبن كنافة", "price": 30 },
+        { "name": "أرز بلبن نوتيلا", "price": 35 },
+        { "name": "أرز بلبن فرن", "price": 35 },
+        { "name": "أم علي", "price": 25 },
+        { "name": "كريم كراميل", "price": 25 },
+        { "name": "مهلبية", "price": 25 },
+        { "name": "كاسترد", "price": 25 },
+        { "name": "قطينة شوكولاتة", "price": 25 },
+        { "name": "قطينة كريمة", "price": 25 },
+        { "name": "قطينة فراولة", "price": 25 },
+        { "name": "ديسي باتشو", "price": 30 },
+        { "name": "ديسي باتشو كبير", "price": 40 },
+        { "name": "مولتن كيك", "price": 40 },
+        { 
+          "name": "إضافات إضافية",
+          "prices": { "small": 40, "large": 55 }
+        }
+      ]
+    },
+    {
+      "category": "الكريب",
+      "items": [
+        { "name": "كريب بطاطس", "price": 60 },
+        { "name": "كريب بجبن", "price": 80 },
+        { "name": "كريب فاهيتا فراخ", "price": 80 },
+        { "name": "كريب سوسيس", "price": 80 },
+        { "name": "كريب سجق", "price": 90 },
+        { "name": "كريب بانيه", "price": 95 },
+        { "name": "كريب كريسبي", "price": 100 },
+        { "name": "كريب فاهيتا لحمة", "price": 100 },
+        { "name": "كريب ميكس جبن", "price": 100 },
+        { "name": "كريب جبنة رومي", "price": 100 },
+        { "name": "كريب جبنة موتزريلا", "price": 100 },
+        { "name": "كريب شيش طاووق", "price": 105 },
+        { "name": "كريب مشروم", "price": 105 },
+        { "name": "كريب بسترمة", "price": 105 },
+        { "name": "كريب كفتة", "price": 110 },
+        { "name": "كريب سوير كرانشي", "price": 110 },
+        { "name": "كريب سمك فيليه", "price": 110 },
+        { "name": "كريب سموك تركي", "price": 115 },
+        { "name": "كريب ستربس", "price": 125 },
+        { "name": "كريب شاورما فراخ", "price": 125 },
+        { "name": "كريب شاورما لحمة", "price": 125 },
+        { "name": "كريب ميكس شاورما", "price": 135 },
+        { "name": "كريب ميكس فراخ", "price": 140 },
+        { "name": "كريب سوربريم", "price": 140 },
+        { "name": "كريب ميكس لحوم الزهراء", "price": 170 }
+      ]
+    },
+    {
+      "category": "مكرونات الزهراء",
+      "items": [
+        { "name": "مكرونة اسباجيتي سجق", "price": 30 },
+        { "name": "مكرونة اسباجيتي سادة", "price": 40 },
+        { "name": "مكرونة اسباجيتي كفتة", "price": 60 },
+        { "name": "مكرونة اسباجيتي لحمة", "price": 60 },
+        { "name": "مكرونة اسباجيتي فراخ", "price": 60 }
+      ]
+    },
+    {
+      "category": "ميكسات الزهراء",
+      "items": [
+        { "name": "ميكس فراخ", "prices": { "regular": 80, "mozzarella": 105 } },
+        { "name": "ميكس كفتة", "prices": { "regular": 95, "mozzarella": 120 } },
+        { "name": "ميكس لحمة", "prices": { "regular": 75, "mozzarella": 100 } },
+        { "name": "ميكس شاورما لحمة", "prices": { "regular": 80, "mozzarella": 105 } },
+        { "name": "فراخ دوبل", "prices": { "regular": 80, "mozzarella": 105 } },
+        { "name": "كفتة دوبل", "prices": { "regular": 75, "mozzarella": 100 } },
+        { "name": "لحمة دوبل", "prices": { "regular": 70, "mozzarella": 95 } },
+        { "name": "سجق دوبل", "prices": { "regular": 80, "mozzarella": 105 } }
+      ]
+    },
+    {
+      "category": "حواوشي الزهراء",
+      "items": [
+        { "name": "حواوشي لحمة", "prices": { "small": 50, "regular": 65, "large": 85 } },
+        { "name": "حواوشي سجق", "prices": { "small": 50, "regular": 65, "large": 85 } },
+        { "name": "حواوشي مفروم", "prices": { "small": 60, "regular": 75, "large": 95 } },
+        { "name": "حواوشي ميكس لحوم", "prices": { "small": 65, "regular": 80, "large": 100 } },
+        { "name": "حواوشي ميكس الزهراء", "prices": { "small": 70, "regular": 85, "large": 105 } }
+      ]
+    },
+    {
+      "category": "حواوشي وفت بيتزا",
+      "items": [
+        { "name": "حواوشي لحمة", "prices": { "small": 105, "regular": 130, "large": 160 } },
+        { "name": "حواوشي سجق", "prices": { "small": 105, "regular": 130, "large": 160 } },
+        { "name": "حواوشي ميكس لحوم", "prices": { "small": 115, "regular": 140, "large": 170 } },
+        { "name": "حواوشي فراخ", "prices": { "small": 115, "regular": 140, "large": 170 } },
+        { "name": "حواوشي ميكس الزهراء", "prices": { "small": 120, "regular": 150, "large": 180 } }
+      ]
+    },
+    {
+      "category": "الكشري",
+      "items": [
+        { "name": "علبة صغير", "price": 30 },
+        { "name": "علبة سوبر", "price": 35 },
+        { "name": "علبة الزعفران", "price": 40 },
+        { "name": "دبل كشري", "price": 50 },
+        { "name": "فول علباني", "price": 60 }
+      ]
+    },
+    {
+      "category": "طواجن الزهراء",
+      "items": [
+        { "name": "طاجن فراخ", "prices": { "regular": 80, "mozzarella": 105 } },
+        { "name": "طاجن لحمة", "prices": { "regular": 55, "mozzarella": 80 } },
+        { "name": "طاجن كفتة", "prices": { "regular": 70, "mozzarella": 95 } },
+        { "name": "طاجن سجق", "prices": { "regular": 75, "mozzarella": 100 } },
+        { "name": "طاجن سادة", "prices": { "regular": 70, "mozzarella": 95 } }
+      ]
+    },
+    {
+      "category": "وجبات الزهراء",
+      "items": [
+        { "name": "علبة كشري معدل", "prices": { "regular": 80, "mozzarella": 105 } },
+        { "name": "فول كشري سوبر", "prices": { "regular": 85, "mozzarella": 110 } },
+        { "name": "فول كشري الزهراء", "prices": { "regular": 90, "mozzarella": 115 } }
+      ]
+    },
+    {
+      "category": "وجبات الطواجن",
+      "items": [
+        { "name": "طاجن فراخ", "prices": { "regular": 100, "mozzarella": 125 } },
+        { "name": "طاجن لحمة", "prices": { "regular": 95, "mozzarella": 120 } },
+        { "name": "طاجن كفتة", "prices": { "regular": 85, "mozzarella": 110 } },
+        { "name": "طاجن سجق", "prices": { "regular": 90, "mozzarella": 115 } }
+      ]
+    },
+    {
+      "category": "الإضافات الجانبية",
+      "items": [
+        { "name": "إضافة لحمة", "price": 30 },
+        { "name": "إضافة فراخ", "price": 40 },
+        { "name": "إضافة سجق", "price": 30 },
+        { "name": "إضافة موتزريلا", "price": 30 },
+        { "name": "إضافة رومي", "price": 20 },
+        { "name": "إضافة لحوم", "price": 50 }
+      ]
+    },
+    {
+      "category": "المقبلات الجانبية",
+      "items": [
+        { "name": "عدس", "price": 10 },
+        { "name": "تقلية", "price": 10 },
+        { "name": "حمص", "price": 10 },
+        { "name": "خيار", "price": 10 },
+        { "name": "مخلل", "price": 10 },
+        { "name": "عيش توست", "price": 10 },
+        { "name": "علبة خس", "price": 10 },
+        { "name": "طحينة", "price": 10 },
+        { "name": "شطة", "price": 10 },
+        { "name": "طماطم", "price": 10 },
+        { "name": "بطاطس مقلية", "price": 15 },
+        { "name": "علبة كبدة", "price": 30 },
+        { "name": "علبة لحمة", "price": 30 },
+        { "name": "علبة فراخ", "price": 40 }
+      ]
+    },
+    {
+      "category": "المشروبات",
+      "items": [
+        { "name": "بيبسي", "price": 20 },
+        { "name": "سفن أب", "price": 20 },
+        { "name": "ميرندا", "price": 20 },
+        { "name": "مياه معدنية صغيرة", "price": 8 },
+        { "name": "مياه معدنية كبيرة", "price": 15 }
+      ]
+    },
+    {
+      "category": "سواريه الزهراء",
+      "items": [
+        { "name": "سواريه شاورما فراخ", "price": 120 },
+        { "name": "سواريه شيش", "price": 120 },
+        { "name": "سواريه فراخ", "price": 130 },
+        { "name": "سواريه اسكندراني كبير", "price": 140 },
+        { "name": "سواريه جبنة رومي", "price": 140 },
+        { "name": "سواريه جبنة موتزريلا", "price": 140 },
+        { "name": "سواريه سجق اسكندراني", "price": 150 },
+        { "name": "سواريه سجق", "price": 160 },
+        { "name": "سواريه مشروم", "price": 160 },
+        { "name": "سواريه سوسيس", "price": 160 },
+        { "name": "سواريه سجق بلدي", "price": 160 },
+        { "name": "سواريه ساجي", "price": 160 },
+        { "name": "سواريه سموك تركي", "price": 160 },
+        { "name": "سواريه سجق بلدي كبير", "price": 170 },
+        { "name": "سواريه استربس", "price": 170 },
+        { "name": "سواريه تونة", "price": 170 },
+        { "name": "سواريه ميكس فراخ", "price": 180 },
+        { "name": "سواريه ميكس فراخ بالجبنة", "price": 180 },
+        { "name": "سواريه ميكس لحمة", "price": 180 },
+        { "name": "سواريه بسترمة", "price": 180 },
+        { "name": "سواريه ميكس شاورما", "price": 180 },
+        { "name": "سواريه ميكس لحمة بالجبنة", "price": 190 }
+      ]
+    },
+    {
+      "category": "الفطير الحلو",
+      "items": [
+        { "name": "فطيرة سادة", "prices": { "small": 60, "large": 90 } },
+        { "name": "فطيرة بالشطة", "prices": { "small": 70, "large": 110 } },
+        { "name": "فطيرة كاستر", "prices": { "small": 75, "large": 130 } },
+        { "name": "فطيرة كاستر وكنافة", "prices": { "small": 85, "large": 130 } },
+        { "name": "فطيرة كاستر وبسكوتة", "prices": { "small": 85, "large": 130 } },
+        { "name": "فطيرة قشطة وسكر", "prices": { "small": 100, "large": 130 } },
+        { "name": "فطيرة شوكولاتة", "prices": { "small": 110, "large": 140 } },
+        { "name": "فطيرة قشطة وعسل", "prices": { "small": 110, "large": 140 } },
+        { "name": "فطيرة شوكولاتة موز", "prices": { "small": 120, "large": 150 } },
+        { "name": "فطيرة ميكس شوكولاتة", "prices": { "small": 130, "large": 160 } }
+      ]
+    },
+    {
+      "category": "الفطير الحادق",
+      "items": [
+        { "name": "فطيرة سجق اسكندراني", "prices": { "small": 160, "large": 220 } },
+        { "name": "فطيرة سجق بلدي", "prices": { "small": 200, "large": 260 } },
+        { "name": "فطيرة سوسيس", "prices": { "small": 180, "large": 250 } },
+        { "name": "فطيرة بسترمة", "prices": { "small": 240, "large": 260 } },
+        { "name": "فطيرة لحمة مفرومة", "prices": { "small": 240, "large": 280 } },
+        { "name": "فطيرة شاورما لحمة", "prices": { "small": 260, "large": 280 } },
+        { "name": "فطيرة شاورما فراخ", "prices": { "small": 220, "large": 260 } },
+        { "name": "فطيرة ميكس لحوم الزهراء", "prices": { "small": 250, "large": 290 } },
+        { "name": "فطيرة بانيه", "prices": { "small": 200, "large": 250 } },
+        { "name": "فطيرة كريسبي", "prices": { "small": 220, "large": 260 } },
+        { "name": "فطيرة ستربس", "prices": { "small": 250, "large": 290 } },
+        { "name": "فطيرة شيش طاووق", "prices": { "small": 240, "large": 260 } },
+        { "name": "فطيرة فراخ", "prices": { "small": 200, "large": 260 } },
+        { "name": "فطيرة كفتة مشوية", "prices": { "small": 240, "large": 280 } },
+        { "name": "فطيرة تونة", "prices": { "small": 250, "large": 290 } }
+      ]
+    },
+    {
+      "category": "الكانزوني",
+      "items": [
+        { "name": "كانزوني مارغريتا", "prices": { "small": 135, "large": 200 } },
+        { "name": "كانزوني سجق بلدي", "prices": { "small": 150, "large": 220 } },
+        { "name": "كانزوني سجق اسكندراني", "prices": { "small": 145, "large": 215 } },
+        { "name": "كانزوني لحمة مفرومة", "prices": { "small": 150, "large": 220 } },
+        { "name": "كانزوني سوسيس", "prices": { "small": 140, "large": 200 } },
+        { "name": "كانزوني شاورما لحمة", "prices": { "small": 160, "large": 220 } },
+        { "name": "كانزوني ميكس شاورما", "prices": { "small": 150, "large": 210 } },
+        { "name": "كانزوني بسترمة", "prices": { "small": 140, "large": 210 } },
+        { "name": "كانزوني ميكس لحوم الزهراء", "prices": { "small": 180, "large": 250 } },
+        { "name": "كانزوني مشروم", "prices": { "small": 140, "large": 200 } },
+        { "name": "كانزوني شاورما فراخ", "prices": { "small": 140, "large": 200 } },
+        { "name": "كانزوني فراخ رانش", "prices": { "small": 140, "large": 210 } },
+        { "name": "كانزوني فراخ باربكيو", "prices": { "small": 140, "large": 200 } },
+        { "name": "كانزوني كريسبي", "prices": { "small": 150, "large": 210 } },
+        { "name": "كانزوني استربس", "prices": { "small": 150, "large": 200 } },
+        { "name": "كانزوني شيشي", "prices": { "small": 150, "large": 200 } },
+        { "name": "كانزوني سوربريم فراخ", "prices": { "small": 200, "large": 260 } },
+        { "name": "كانزوني ميكس فراخ الزهراء", "prices": { "small": 170, "large": 220 } },
+        { "name": "كانزوني جبنة رومي", "prices": { "small": 140, "large": 180 } },
+        { "name": "كانزوني جبنة كبير", "prices": { "small": 150, "large": 200 } },
+        { "name": "كانزوني ميكس شيش", "prices": { "small": 160, "large": 200 } },
+        { "name": "كانزوني تونة", "prices": { "small": 170, "large": 220 } },
+        { "name": "كانزوني سلمى", "prices": { "small": 150, "large": 200 } },
+        { "name": "كانزوني سموك تركي", "prices": { "small": 150, "large": 200 } },
+        { "name": "كانزوني روز بيف", "prices": { "small": 160, "large": 210 } },
+        { "name": "كانزوني سوبرريم", "prices": { "small": 150, "large": 210 } },
+        { "name": "كانزوني سجق بلدي كبير", "prices": { "small": 250, "large": 280 } }
+      ]
+    },
+    {
+      "category": "البيتزا الشرقي",
+      "items": [
+        { "name": "بيتزا سجق اسكندراني", "prices": { "regular": 170, "mozzarella": 210 } },
+        { "name": "بيتزا سجق بلدي", "prices": { "regular": 200, "mozzarella": 230 } },
+        { "name": "بيتزا سوسيس", "prices": { "regular": 190, "mozzarella": 230 } },
+        { "name": "بيتزا لحمة مفرومة", "prices": { "regular": 190, "mozzarella": 220 } },
+        { "name": "بيتزا شاورما لحمة", "prices": { "regular": 200, "mozzarella": 230 } },
+        { "name": "بيتزا بسترمة", "prices": { "regular": 190, "mozzarella": 230 } },
+        { "name": "بيتزا ميكس لحوم الزهراء", "prices": { "regular": 210, "mozzarella": 250 } },
+        { "name": "بيتزا مشروم", "prices": { "regular": 190, "mozzarella": 220 } },
+        { "name": "بيتزا شاورما فراخ", "prices": { "regular": 190, "mozzarella": 220 } },
+        { "name": "بيتزا فراخ رانش", "prices": { "regular": 210, "mozzarella": 240 } },
+        { "name": "بيتزا فراخ باربكيو", "prices": { "regular": 200, "mozzarella": 240 } },
+        { "name": "بيتزا كريسبي", "prices": { "regular": 220, "mozzarella": 260 } },
+        { "name": "بيتزا استربس", "prices": { "regular": 210, "mozzarella": 250 } },
+        { "name": "بيتزا سوربريم فراخ", "prices": { "regular": 230, "mozzarella": 270 } },
+        { "name": "بيتزا ميكس فراخ الزهراء", "prices": { "regular": 210, "mozzarella": 240 } },
+        { "name": "بيتزا جبنة رومي", "prices": { "regular": 180, "mozzarella": 220 } },
+        { "name": "بيتزا جبنة كبير", "prices": { "regular": 190, "mozzarella": 220 } },
+        { "name": "بيتزا ميكس شيش", "prices": { "regular": 210, "mozzarella": 240 } },
+        { "name": "بيتزا تونة", "prices": { "regular": 190, "mozzarella": 230 } },
+        { "name": "بيتزا سلمى", "prices": { "regular": 200, "mozzarella": 230 } },
+        { "name": "بيتزا سموك تركي", "prices": { "regular": 220, "mozzarella": 250 } },
+        { "name": "بيتزا روز بيف", "prices": { "regular": 200, "mozzarella": 240 } },
+        { "name": "بيتزا سوبرريم", "prices": { "regular": 210, "mozzarella": 250 } }
+      ]
+    },
+    {
+      "category": "البيتزا الإيطالي",
+      "items": [
+        { "name": "بيتزا مارغريتا", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا سجق بلدي", "prices": { "small": 160, "large": 230 } },
+        { "name": "بيتزا سجق اسكندراني", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا سوسيس", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا لحمة مفرومة", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا ميكس لحوم", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا مشروم", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا بسترمة", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا شاورما لحمة", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا شاورما فراخ", "prices": { "small": 170, "large": 230 } },
+        { "name": "بيتزا ميكس شاورما", "prices": { "small": 180, "large": 250 } },
+        { "name": "بيتزا ميكس فراخ", "prices": { "small": 180, "large": 240 } },
+        { "name": "بيتزا فراخ رانش", "prices": { "small": 160, "large": 230 } },
+        { "name": "بيتزا فراخ باربكيو", "prices": { "small": 170, "large": 230 } },
+        { "name": "بيتزا كريسبي", "prices": { "small": 180, "large": 250 } },
+        { "name": "بيتزا ستربس", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا شيش طاووق", "prices": { "small": 170, "large": 230 } },
+        { "name": "بيتزا كفتة مشوية", "prices": { "small": 170, "large": 230 } },
+        { "name": "بيتزا ميكس كفتة", "prices": { "small": 180, "large": 250 } },
+        { "name": "بيتزا تونة", "prices": { "small": 150, "large": 220 } },
+        { "name": "بيتزا ميكس فراخ بالجبنة", "prices": { "small": 160, "large": 240 } },
+        { "name": "بيتزا سوربريم فراخ", "prices": { "small": 200, "large": 280 } },
+        { "name": "بيتزا ميكس لحوم الزهراء", "prices": { "small": 200, "large": 260 } },
+        { "name": "بيتزا سلمى", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا سموك تركي", "prices": { "small": 170, "large": 240 } },
+        { "name": "بيتزا روز بيف", "prices": { "small": 180, "large": 260 } },
+        { "name": "بيتزا سوبرريم", "prices": { "small": 190, "large": 260 } },
+        { "name": "بيتزا ميكس سجق بلدي كبير", "prices": { "small": 190, "large": 260 } },
+        { "name": "بيتزا سجق بلدي كبير", "prices": { "small": 180, "large": 260 } }
+      ]
+    },
+    {
+      "category": "إضافات الحلو",
+      "items": [
+        { "name": "إضافة عسل", "price": 10 },
+        { "name": "إضافة سكر", "price": 10 },
+        { "name": "إضافة شوكولاتة", "price": 10 },
+        { "name": "إضافة مكسرات", "price": 15 },
+        { "name": "إضافة فواكه", "price": 20 },
+        { "name": "إضافة قشطة", "price": 20 }
+      ]
+    },
+    {
+      "category": "إضافات الحادق",
+      "items": [
+        { "name": "إضافة لحمة", "price": 50 },
+        { "name": "إضافة فراخ", "price": 25 },
+        { "name": "إضافة جبنة موتزريلا", "price": 40 },
+        { "name": "إضافة سوسيس", "price": 25 },
+        { "name": "إضافة سجق", "price": 25 },
+        { "name": "إضافة مشروم", "price": 25 },
+        { "name": "إضافة بانيه", "price": 25 },
+        { "name": "إضافة كريسبي", "price": 25 },
+        { "name": "إضافة ستربس", "price": 25 },
+        { "name": "إضافة شيش طاووق", "price": 25 },
+        { "name": "إضافة ميكس فراخ", "price": 35 },
+        { "name": "إضافة ميكس لحوم", "price": 35 },
+        { "name": "إضافة جبنة رومي", "price": 25 },
+        { "name": "إضافة ميكس شاورما", "price": 35 }
+      ]
+    },
+    {
+      "category": "إضافات البيتزا",
+      "items": [
+        { "name": "إضافة لحمة", "price": 30 },
+        { "name": "إضافة فراخ", "price": 30 },
+        { "name": "إضافة سوسيس", "price": 30 },
+        { "name": "إضافة مشروم", "price": 30 },
+        { "name": "إضافة سجق", "price": 30 },
+        { "name": "إضافة جبنة موتزريلا", "price": 30 },
+        { "name": "إضافة جبنة رومي", "price": 30 },
+        { "name": "إضافة سوبريم", "price": 30 },
+        { "name": "إضافة بانيه", "price": 30 },
+        { "name": "إضافة كريسبي", "price": 30 }
+      ]
+    }
+  ]
+}
