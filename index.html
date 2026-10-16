@@ -1896,6 +1896,47 @@
       .checkout-summary-wrap {
         margin-top: var(--space-sm);
       }
+
+      /* ============================================================
+               LAZY IMAGE ENHANCEMENTS
+               ============================================================ */
+      .menu-card-image-wrap img.lazy-img {
+        opacity: 0;
+        filter: blur(6px);
+        transform: scale(1.02);
+        transition:
+          opacity var(--duration-med) var(--ease-out),
+          filter var(--duration-med) var(--ease-out),
+          transform var(--duration-slow) var(--ease-out);
+      }
+
+      .menu-card-image-wrap img.lazy-img.loaded {
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      .menu-card:hover .menu-card-image-wrap img.lazy-img.loaded {
+        transform: scale(1.05);
+      }
+
+      .menu-card-image-wrap img.lazy-img.error {
+        object-fit: contain;
+        padding: var(--space-md);
+        background: var(--surface-container);
+        opacity: 1;
+        filter: none;
+      }
+
+      .menu-card-image-placeholder.shimmer {
+        background: linear-gradient(
+          90deg,
+          var(--surface-container) 25%,
+          var(--surface-container-high) 50%,
+          var(--surface-container) 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
     </style>
   </head>
 
@@ -1904,7 +1945,14 @@
       <div class="header-inner container">
         <div class="header-brand">
           <div class="header-logo" aria-hidden="true">
-            <img src="test/logo/logo.jpg" alt="كشري الزهراء" loading="eager" />
+            <img
+              src="test/logo/logo.jpg"
+              alt="كشري الزهراء"
+              width="54"
+              height="54"
+              decoding="async"
+              fetchpriority="high"
+            />
           </div>
           <div class="header-brand-text">
             <span class="header-brand-name">كشري <span>الزهراء</span></span>
@@ -2073,1902 +2121,1803 @@
       "use strict";
 
       // ─── MENU DATA ──────────────────────────────────────────────────────────
-let MENU_ITEMS = [
-  // ============================================================
-  // 1. الكشري
-  // ============================================================
-  {
-    category: "الكشري",
-    name: "علبة معدل",
-    prices: { regular: 30 },
-    image: "test/koshary.png",
-  },
-  {
-    category: "الكشري",
-    name: "علبة سوبر",
-    prices: { regular: 35 },
-    image: "test/koshary.png",
-  },
-  {
-    category: "الكشري",
-    name: "علبة الزهراء",
-    prices: { regular: 40 },
-    image: "test/koshary.png",
-  },
-  {
-    category: "الكشري",
-    name: "دلع كرشك",
-    prices: { regular: 50 },
-    image: "test/koshary.png",
-  },
-  {
-    category: "الكشري",
-    name: "فويل عائلي",
-    prices: { regular: 60 },
-    image: "test/koshary.png",
-  },
-
-  // ============================================================
-  // 2. طواجن الزهراء
-  // ============================================================
-  {
-    category: "طواجن الزهراء",
-    name: "طاجن فراخ",
-    prices: { regular: 60, mozzarella: 85 },
-    image: "test/tagin.png",
-    desc: "طاجن فراخ من الزهراء."
-  },
-  {
-    category: "طواجن الزهراء",
-    name: "طاجن لحمة",
-    prices: { regular: 50, mozzarella: 75 },
-    image: "test/tagin.png",
-    desc: "طاجن لحمة من الزهراء."
-  },
-  {
-    category: "طواجن الزهراء",
-    name: "طاجن كفتة",
-    prices: { regular: 50, mozzarella: 75 },
-    image: "test/tagin.png",
-    desc: "طاجن كفتة من الزهراء."
-  },
-  {
-    category: "طواجن الزهراء",
-    name: "طاجن سجق",
-    prices: { regular: 50, mozzarella: 75 },
-    image: "test/tagin.png",
-    desc: "طاجن سجق من الزهراء."
-  },
-  {
-    category: "طواجن الزهراء",
-    name: "طاجن سادة",
-    prices: { regular: 40, mozzarella: 70 },
-    image: "test/tagin.png",
-    desc: "طاجن سادة من الزهراء."
-  },
-
-  // ============================================================
-  // 3. وجبات الزهراء
-  // ============================================================
-  {
-    category: "وجبات الزهراء",
-    name: "علبة كشري معدل",
-    prices: { regular: 80 },
-    image: "test/elzahraaW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-  {
-    category: "وجبات الزهراء",
-    name: "فويل كشري سوبر",
-    prices: { regular: 85 },
-    image: "test/elzahraaW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-  {
-    category: "وجبات الزهراء",
-    name: "فويل كشري الزهراء",
-    prices: { regular: 90 },
-    image: "test/elzahraaW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-
-  // ============================================================
-  // 4. وجبات طواجن
-  // ============================================================
-  {
-    category: "وجبات طواجن",
-    name: "طاجن فراخ",
-    prices: { regular: 110 },
-    image: "test/taginW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-  {
-    category: "وجبات طواجن",
-    name: "طاجن لحمة",
-    prices: { regular: 95 },
-    image: "test/taginW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-  {
-    category: "وجبات طواجن",
-    name: "طاجن كفتة",
-    prices: { regular: 95 },
-    image: "test/taginW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-  {
-    category: "وجبات طواجن",
-    name: "طاجن سجق",
-    prices: { regular: 95 },
-    image: "test/taginW.png",
-    desc: " يقدم مع توست و سلطة و حلو "
-  },
-
-  // ============================================================
-  // 5. اضافات
-  // ============================================================
-  {
-    category: "إضافات",
-    name: "عدس - تقلية - حمص",
-    prices: { regular: 10 },
-    image: "test/homsadsbasal.jpg",
-    desc: "إضافة عدس - تقلية - حمص."
-  },
-  {
-    category: "إضافات",
-    name: "عيش توست",
-    prices: { regular: 15 },
-    image: "test/tost.jpg",
-    desc: "إضافة عيش توست."
-  },
-  {
-    category: "إضافات",
-    name: "طماطم متبلة",
-    prices: { regular: 10 },
-    image: "test/tom.png",
-    desc: "إضافة طماطم متبلة."
-  },
-  {
-    category: "إضافات",
-    name: "سلطة طماطم",
-    prices: { regular: 5 },
-    image: "test/salad1.jpg",
-    desc: "إضافة سلطة طماطم."
-  },
-  {
-    category: "إضافات",
-    name: "سلطة خضراء - خيار مخلل",
-    prices: { regular: 10 },
-    image: "test/salad2.jpg",
-    desc: "إضافة سلطة خضراء - خيار مخلل."
-  },
-  {
-    category: "إضافات",
-    name: "علبة سجق",
-    prices: { regular: 40 },
-    image: "test/sogok.png",
-    desc: "إضافة علبة سجق."
-  },
-  {
-    category: "إضافات",
-    name: "علبة كفتة",
-    prices: { regular: 40 },
-    image: "test/kofta.jpg",
-    desc: "إضافة علبة كفتة."
-  },
-  {
-    category: "إضافات",
-    name: "علبة فراخ",
-    prices: { regular: 50 },
-    image: "test/frakh.jpg",
-    desc: "إضافة علبة فراخ."
-  },
-  {
-    category: "إضافات",
-    name: "علبة لحمة",
-    prices: { regular: 40 },
-    image: "test/lahma.jpg",
-    desc: "إضافة علبة لحمة."
-  },
-
-  // ============================================================
-  // 6. مشروبات
-  // ============================================================
-  {
-    category: "المشروبات",
-    name: "بيبسي / سفن / ميرندا",
-    prices: { regular: 20 },
-    image: "test/drinks.jpg",
-    desc: "بيبسي / سفن أب / ميرندا."
-  },
-  {
-    category: "المشروبات",
-    name: "مياه معدنية صغيرة",
-    prices: { regular: 8 },
-    image: "test/bigW.jpg",
-    desc: "مياه معدنية صغيرة."
-  },
-  {
-    category: "المشروبات",
-    name: "مياه معدنية كبيرة",
-    prices: { regular: 15 },
-    image: "test/smallW.jpg",
-    desc: "مياه معدنية كبيرة."
-  },
-
-  // ============================================================
-  // 7. مكرونات الزهراء
-  // ============================================================
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي سجق",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي سجق من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي كفتة",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي كفتة من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي لحمة",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي لحمة من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي فراخ",
-    prices: { regular: 75, mozzarella: 105 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي فراخ من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي سادة",
-    prices: { regular: 40, mozzarella: 70 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي سادة من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي سجق",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي بسجق من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي كفتة",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي بكفتة من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي لحمة",
-    prices: { regular: 60, mozzarella: 90 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي بلحمة من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي فراخ",
-    prices: { regular: 75, mozzarella: 105 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي بفراخ من الزهراء."
-  },
-  {
-    category: "مكرونات الزهراء",
-    name: "مكرونة اسباجيتي سادة",
-    prices: { regular: 40, mozzarella: 70 },
-    image: "test/makr.jpg",
-    desc: "مكرونة اسباجيتي سادة من الزهراء."
-  },
-
-  // ============================================================
-  // 8. ميكسات الزهراء
-  // ============================================================
-  {
-    category: "ميكسات الزهراء",
-    name: "ميكس فراخ",
-    prices: { regular: 85, mozzarella: 110 },
-    image: "assets/mixes/mixfarakh.jpg",
-    desc: "ميكس فراخ طازج مع صوص الزهراء المميز."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "ميكس كفتة",
-    prices: { regular: 75, mozzarella: 95 },
-    image: "assets/mixes/mixkofta.jpg",
-    desc: "ميكس كفتة مشوية على الفحم مع صوص خاص."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "ميكس لحمة",
-    prices: { regular: 75, mozzarella: 95 },
-    image: "assets/mixes/mixlahma.jpg",
-    desc: "ميكس لحمة من أجود المكونات مع صوص الزهراء المميز."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "ميكس سجق",
-    prices: { regular: 75, mozzarella: 95 },
-    image: "assets/mixes/mixsog.jpg",
-    desc: "ميكس سجق مع صوص الزهراء."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "فراخ دوبل",
-    prices: { regular: 120, mozzarella: 145 },
-    image: "assets/mixes/farakhdouble.jpg",
-    desc: "وجبة فراخ دوبل مع صوص الزهراء."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "كفتة دوبل",
-    prices: { regular: 100, mozzarella: 125 },
-    image: "assets/mixes/koftadouble.jpg",
-    desc: "كفتة دوبل مشوية مع صوص خاص."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "لحمة دوبل",
-    prices: { regular: 100, mozzarella: 125 },
-    image: "assets/mixes/lahmadouble.jpg",
-    desc: "لحمة دوبل مع صوص الزهراء المميز."
-  },
-  {
-    category: "ميكسات الزهراء",
-    name: "سجق دوبل",
-    prices: { regular: 100, mozzarella: 125 },
-    image: "assets/mixes/sogdouble.jpg",
-    desc: "سجق دوبل مع صوص الزهراء الشهي."
-  },
-
-  // ============================================================
-  // 9. حواوشي الزهراء
-  // ============================================================
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي لحمة",
-    prices: { small: 50, medium: 85, large: 105 },
-    image: "assets/hawawshy/hawawshylahma.jpg",
-  },
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي سجق",
-    prices: { small: 65, medium: 90, large: 110 },
-    image: "assets/hawawshy/hawawshysog.jpg",
-  },
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي فراخ",
-    prices: { small: 65, medium: 90, large: 110 },
-    image: "assets/hawawshy/hawawshyfarakh.jpg",
-  },
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي ميكس لحوم",
-    prices: { small: 100, medium: 120, large: 140 },
-    image: "assets/hawawshy/hawawshymixlahom.jpg",
-  },
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي ميكس الزهراء",
-    prices: { small: 100, medium: 120, large: 140 },
-    image: "assets/hawawshy/hawawshymix.jpg",
-  },
-  {
-    category: "حواوشي الزهراء",
-    name: "حواوشي بسطرمة",
-    prices: { small: 100, medium: 130, large: 160 },
-    image: "assets/hawawshy/hawawshybasterma.jpg",
-  },
-
-  // ============================================================
-  // 10. حواوشي وش بيتزا
-  // ============================================================
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي لحمة",
-    prices: { small: 100, medium: 135, large: 155 },
-    image: "assets/hawawshypizza/hawawshylahmapizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي سجق",
-    prices: { small: 115, medium: 140, large: 160 },
-    image: "assets/hawawshypizza/hawawshysogpizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي ميكس لحوم",
-    prices: { small: 140, medium: 160, large: 180 },
-    image: "assets/hawawshypizza/hawawshymixlahompizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي ميكس الزهراء",
-    prices: { small: 140, medium: 160, large: 180 },
-    image: "assets/hawawshypizza/hawawshymixpizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي مشكل الجبن",
-    prices: { small: 100, medium: 125, large: 150 },
-    image: "assets/hawawshypizza/hawawshymixcheesepizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي فراخ",
-    prices: { small: 115, medium: 135, large: 160 },
-    image: "assets/hawawshypizza/hawawshyfarakhpizza.jpg",
-  },
-  {
-    category: "حواوشي وش بيتزا",
-    name: "حواوشي بسطرمة",
-    prices: { small: 150, medium: 180, large: 200 },
-    image: "assets/hawawshypizza/hawawshybastermapizza.jpg",
-  },
-
-  // ============================================================
-  // 11. حواوشي بلدي
-  // ============================================================
-  {
-    category: "حواوشي بلدي",
-    name: "حواوشي لحمة بلدي",
-    prices: { regular: 60 },
-    image: "assets/hawawshybaladi/hawawshylahmabaladi.jpg",
-    desc: "حواوشي لحمة بلدي."
-  },
-  {
-    category: "حواوشي بلدي",
-    name: "حواوشي سجق بلدي",
-    prices: { regular: 70 },
-    image: "assets/hawawshybaladi/hawawshysogbaladi.jpg",
-    desc: "حواوشي سجق بلدي."
-  },
-  {
-    category: "حواوشي بلدي",
-    name: "حواوشي فراخ بلدي",
-    prices: { regular: 70 },
-    image: "assets/hawawshybaladi/hawawshyfarakhbaladi.jpg",
-    desc: "حواوشي فراخ بلدي."
-  },
-
-  // ============================================================
-  // 12. إضافات الحواوشي
-  // ============================================================
- {
-    category: "اضافات حواوشي",
-    name: "اضافة موتزاريلا",
-    prices: { small: 30, medium: 40, large: 50 },
-    image: "addonspizza/mozzarella.png",
-    desc: "اضافة موتزاريلا للحواوشي."
-  },
-  {
-    category: "اضافات حواوشي",
-    name: "اضافة رومي",
-    prices: { small: 30, medium: 40, large: 50 },
-    image: "addonspizza/romy.png",
-    desc: "اضافة رومي للحواوشي."
-  },
-  {
-    category: "اضافات حواوشي",
-    name: "اضافة كيري",
-    prices: { small: 30, medium: 40, large: 50 },
-    image: "addonspizza/kiri.png",
-    desc: "اضافة كيري للحواوشي."
-  },
-
-  // ============================================================
-  // 13. الكريب
-  // ============================================================
- 
-  {
-    category: "الكريب",
-    name: "كريب بطاطس",
-    prices: { regular: 70 },
-    image: "test/crep.png",
-    desc: "كريب محشي ببطاطس مقلية مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب بانيه",
-    prices: { regular: 120 },
-    image: "test/crep2.png",
-    desc: "كريب بانيه مقرمش مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب كريسبي",
-    prices: { regular: 130 },
-    image: "test/crep2.png",
-    desc: "كريب كريسبي مع صوص الزهراء المميز."
-  },
-  {
-    category: "الكريب",
-    name: "كريب ستربس",
-    prices: { regular: 135 },
-    image: "test/crep2.png",
-    desc: "كريب ستربس مقرمش مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب سوبر كرانشي",
-    prices: { regular: 140 },
-    image: "test/crepS.png",
-    desc: "كريب سوير كرانشي مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب شيش طاووق",
-    prices: { regular: 140 },
-    image: "test/crepSH.png",
-    desc: "كريب شيش طاووق مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب فاهيتا فراخ",
-    prices: { regular: 140 },
-    image: "test/crepF.png",
-    desc: "كريب فاهيتا فراخ مع خضار طازجة."
-  },
-  {
-    category: "الكريب",
-    name: "كريب ميكس فراخ",
-    prices: { regular: 170 },
-    image: "test/crepF.png",
-    desc: "كريب ميكس فراخ مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب ميكس شاورما",
-    prices: { regular: 150 },
-    image: "test/crepmix.png",
-    desc: "كريب ميكس شاورما مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب شاورما لحمة",
-    prices: { regular: 150 },
-    image: "test/crepSH.png",
-    desc: "كريب شاورما لحمة مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب شاورما فراخ",
-    prices: { regular: 140 },
-    image: "test/crepSH.png",
-    desc: "كريب شاورما فراخ مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب بسطرمة",
-    prices: { regular: 150 },
-    image: "test/crePbastarma.png",
-    desc: "كريب بسطرمة مع صوص الزهراء المميز."
-  }, 
-  {
-    category: "الكريب",
-    name: "كريب برجر",
-    prices: { regular: 130 },
-    image: "test/crepBUR.png",
-    desc: "كريب برجر مع صوص الزهراء المميز."},
-
-  {
-    category: "الكريب",
-    name: "كريب فاهيتا لحمة",
-    prices: { regular: 140 },
-    image: "test/crepFL.png",
-    desc: "كريب محشي فاهيتا لحمة مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب سجق",
-    prices: { regular: 120 },
-    image: "test/crepSog.png",
-    desc: "كريب محشي سجق مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب لحمة مفرومة",
-    prices: { regular: 120 },
-    image: "test/crepFL.png",
-    desc: "كريب محشي لحمة مفرومة مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب سوسيس",
-    prices: { regular: 120 },
-    image: "test/crepSog.png",
-    desc: "كريب محشي سوسيس مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب ميكس جبن",
-    prices: { regular: 120 },
-    image: "test/crepMIXG.png",
-    desc: "كريب بمزيج من الأجبان مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب جبنة رومي",
-    prices: { regular: 95 },
-    image: "test/crepMIXG.png",
-    desc: "كريب بجبنة رومي مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب جبنة موتزاريلا",
-    prices: { regular: 95 },
-    image: "test/crepMIXG.png",
-    desc: "كريب بجبنة موتزاريلا مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب سلامي",
-    prices: { regular: 130 },
-    image: "test/crepSAL.png",
-    desc: "كريب محشي سلامي مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب سموك تركي",
-    prices: { regular: 130 },
-    image: "test/crepST.png",
-    desc: "كريب سموك تركي مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب  سوبر سوبريم",
-    prices: { regular: 150 },
-    image: "test/superS.png",
-    desc: "كريب سوبر سوبريم مع صوص الزهراء المميز."
-  },
-  {
-    category: "الكريب",
-    name: "كريب مشروم",
-    prices: { regular: 115 },
-    image: "test/crepMash.png",
-    desc: "كريب محشي مشروم مع صوص خاص."
-  },
-  {
-    category: "الكريب",
-    name: "كريب زنجر",
-    prices: { regular: 135 },
-    image: "test/crep2.png",
-    desc: "كريب زنجر مع صوص الزهراء."
-  },
-  {
-    category: "الكريب",
-    name: "كريب ميكس لحوم الزهراء",
-    prices: { regular: 180 },
-    image: "test/crepmix.png",
-    desc: "كريب ميكس لحوم الزهراء مع صوص خاص."
-  },
-
-
-  // ============================================================
-  // 14. اضافات الكريب
-  // ============================================================
-   {
-    category: "إضافات الكريب",
-    name: "إضافة موتزريلا",
-    prices: { regular: 30 },
-    image: "crepAdd/mozzarella.png",
-    desc: "إضافة جبنة موتزريلا للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "إضافة صوص شيدر",
-    prices: { regular: 20 },
-    image: "crepAdd/cheddar.png",
-    desc: "إضافة صوص شيدر للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "إضافة فراخ",
-    prices: { regular: 50 },
-    image: "crepAdd/farakh.png",
-    desc: "إضافة فراخ للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "إضافة لحوم",
-    prices: { regular: 50 },
-    image: "crepAdd/lahom.png",
-    desc: "إضافة لحوم للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "إضافة بطاطس",
-    prices: { regular: 20 },
-    image: "crepAdd/batates.png",
-    desc: "إضافة بطاطس مقلية للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "إضافة مشروم",
-    prices: { regular: 20 },
-    image: "crepAdd/mashroom.png",
-    desc: "إضافة مشروم للكريب."
-  },
-  {
-    category: "إضافات الكريب",
-    name: "باكيت بطاطس",
-    prices: { regular: 35 },
-    image: "crepAdd/baketbatates.png",
-    desc: "باكيت بطاطس مقلية."
-  },
-
-  // ============================================================
-  // 15. كريب حلو
-  // ============================================================
-   {
-    category: "كريب حلو",
-    name: "كريب نوتيلا",
-    prices: { regular: 65 },
-    image: "crepHelw/crepenutella.png",
-    desc: "كريب نوتيلا."
-  },
-  {
-    category: "كريب حلو",
-    name: "كريب نوتيلا موز",
-    prices: { regular: 75 },
-    image: "crepHelw/crepenutellamoz.png",
-    desc: "كريب نوتيلا موز."
-  },
-  {
-    category: "كريب حلو",
-    name: "كريب نوتيلا مكسرات",
-    prices: { regular: 85 },
-    image: "crepHelw/crepenutellamokassarat.png",
-    desc: "كريب نوتيلا مكسرات."
-  },
-  {
-    category: "كريب حلو",
-    name: "كريب فواكهة",
-    prices: { regular: 90 },
-    image: "crepHelw/crepefawakeh.png",
-    desc: "كريب فواكهة."
-  },
-
-  // ============================================================
-  // 16. حلو الزهراء
-  // ============================================================
-  {
-    category: "حلو الزهراء",
-    name: "أرز بلبن سادة",
-    prices: { regular: 25 },
-    image: "assets/sweets/arazbalabansada.jpg",
-    desc: "أرز بلبن سادة من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "أرز بلبن مكسرات",
-    prices: { regular: 30 },
-    image: "assets/sweets/arazbalabanmokassarat.jpg",
-    desc: "أرز بلبن مكسرات من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "أرز بلبن كنافة",
-    prices: { regular: 30 },
-    image: "assets/sweets/arazbalabankonafa.jpg",
-    desc: "أرز بلبن كنافة من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "أرز بلبن مانجا",
-    prices: { regular: 35 },
-    image: "assets/sweets/arazbalabanmanga.jpg",
-    desc: "أرز بلبن مانجا من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "أرز بلبن فرن",
-    prices: { regular: 30 },
-    image: "assets/sweets/arazbalabanforn.jpg",
-    desc: "أرز بلبن محضر بالفرن."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "أم علي",
-    prices: { regular: 30 },
-    image: "assets/sweets/omali.jpg",
-    desc: "أم علي من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "كريم كراميل",
-    prices: { regular: 25 },
-    image: "assets/sweets/creamcaramel.jpg",
-    desc: "كريم كراميل من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "مهلبية",
-    prices: { regular: 25 },
-    image: "assets/sweets/mahalabya.jpg",
-    desc: "مهلبية من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "كاسترد",
-    prices: { regular: 25 },
-    image: "assets/sweets/custard.jpg",
-    desc: "كاسترد من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "قنبلة شوكولاتة",
-    prices: { regular: 30 },
-    image: "assets/sweets/otaynashokolata.jpg",
-    desc: "قنبلة شوكولاتة من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "قنبلة كريمة",
-    prices: { regular: 30 },
-    image: "assets/sweets/otaynacrema.jpg",
-    desc: "قنبلة كريمة من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "قنبلة فراولة",
-    prices: { regular: 30 },
-    image: "assets/sweets/otaynafarawla.jpg",
-    desc: "قنبلة فراولة من الزهراء."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "ديسيباتشو صغير",
-    prices: { regular: 40 },
-    image: "assets/sweets/desypatchosmall.jpg",
-    desc: "ديسيباتشو حجم صغير."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "ديسيباتشو كبير",
-    prices: { regular: 50 },
-    image: "assets/sweets/desypatchobig.jpg",
-    desc: "ديسيباتشو حجم كبير."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "مولتن كيك كبير",
-    prices: { regular: 60 },
-    image: "assets/sweets/moltencakebig.jpg",
-    desc: "مولتن كيك حجم كبير."
-  },
-  {
-    category: "حلو الزهراء",
-    name: "طلوا جن نوتيلا",
-    prices: { regular: 40 },
-    image: "assets/sweets/talwajannutella.jpg",
-    desc: "طلوا جن نوتيلا."
-  },
-
-  // ============================================================
-  // 17. البيتزا الايطالي
-  // ============================================================
-{
-    category: "البيتزا الإيطالي",
-    name: "بيتزا مارغريتا",
-    prices: { small: 135, medium: 155, large: 220 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبن"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا فيجيتيريان",
-    prices: { small: 145, medium: 165, large: 230 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا +  خضار + جبن +زيتون + صوص طماطم"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سجق بلدي",
-    prices: { small: 170, medium: 220, large: 300 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق بلدي"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سجق اسكندراني",
-    prices: { small: 150, medium: 195, large: 255 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا لحمة مفرومة",
-    prices: { small: 155, medium: 200, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + لحمة مفرومة"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سوسيس",
-    prices: { small: 145, medium: 185, large: 250 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سوسيس"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا شاورما لحمة",
-    prices: { small: 165, medium: 215, large: 280 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شاورما لحمة"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا ميكس شاورما",
-    prices: { small: 170, medium: 215, large: 280 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شاورما لحمة + فراخ"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا بسطرمة",
-    prices: { small: 160, medium: 220, large: 265 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + بسطرمة"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا ميكس لحوم الزهراء",
-    prices: { small: 180, medium: 230, large: 295 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق + لحمة مفرومة + سوسيس + بسطرمة"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا فونجي",
-    prices: { small: 140, medium: 190, large: 250 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + مشروم"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا فراخ",
-    prices: { small: 145, medium: 180, large: 255 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + فراخ"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا فراخ رانش",
-    prices: { small: 150, medium: 200, large: 270 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + فراخ + رانش"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا فراخ باربيكيو",
-    prices: { small: 150, medium: 205, large: 270 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + باربيكيو"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا كرسبي",
-    prices: { small: 145, medium: 190, large: 255 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + كرسبي"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا استربس",
-    prices: { small: 150, medium: 200, large: 265 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + استربس"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا شيش",
-    prices: { small: 150, medium: 195, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شيش"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا ميكس فراخ الزهراء",
-    prices: { small: 180, medium: 220, large: 290 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شيش + استربس + كرسبي + شاورما فراخ"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا جبنة رومي",
-    prices: { small: 140, medium: 180, large: 230 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبنة رومي"
-  },
-    {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا جبنة كيري",
-    prices: { small: 140, medium: 180, large: 230 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبنة كيري"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا ميكس تشيز",
-    prices: { small: 150, medium: 190, large: 240 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + رومي + موتزاريلا + كيري + شيدر"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا تونة",
-    prices: { small: 190, medium: 230, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + تونة قطع"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا بيبروني",
-    prices: { small: 145, medium: 190, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سموك تركي",
-    prices: { small: 145, medium: 190, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سموك تركي"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا روز بيف",
-    prices: { small: 150, medium: 200, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + روز بيف"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سوبر سوبريم",
-    prices: { small: 190, medium: 230, large: 290 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "سلامي + بسطرمة + لحمة + مشروم"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا سجق بلدي كيري",
-    prices: { small: 160, medium: 195, large: 260 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق بلدي + جبن كيري"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا هاواي",
-    prices: { small: 140, medium: 170, large: 220 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + هوت دوج + مشروم"
-  },
-  {
-    category: "البيتزا الإيطالي",
-    name: "بيتزا الزهراء",
-    prices: { small: 200, medium: 240, large: 290 },
-    image: "italyPIZ/ITPizz.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + كرسبي + فاهيتا + رانش"
-  },
-
-  // ============================================================
-  // 18. البيتزا الشرقي
-  // ============================================================
-{
-    category: "البيتزا الشرقي",
-    name: "بيتزا سجق اسكندراني",
-    prices: { small: 150, medium: 180, large: 230 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق اسكندراني"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سجق بلدي",
-    prices: { small: 155, medium: 190, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق بلدي"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سوسيس",
-    prices: { small: 150, medium: 180, large: 220 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سوسيس"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا لحمة مفرومة",
-    prices: { small: 160, medium: 190, large: 260 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + لحمة مفرومة"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا شاورما لحمة",
-    prices: { small: 160, medium: 210, large: 270 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + شاورما لحمة"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا بسطرمة",
-    prices: { small: 160, medium: 200, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + بسطرمة"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا ميكس لحوم الزهراء",
-    prices: { small: 190, medium: 230, large: 290 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق + لحمة + سوسيس + بسطرمة"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سجق بلدي + كيري",
-    prices: { small: 185, medium: 220, large: 260 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق بلدي + كيري"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سجق اسكندراني + كيري",
-    prices: { small: 180, medium: 210, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق اسكندراني + كيري"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا فراخ",
-    prices: { small: 150, medium: 180, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا تشيكن رانش",
-    prices: { small: 170, medium: 200, large: 260 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ + صوص رانش"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا تشيكن باربيكيو",
-    prices: { small: 170, medium: 200, large: 260 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ + صوص باربيكيو"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا كرسبي",
-    prices: { small: 160, medium: 190, large: 240 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + كرسبي"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا استربس",
-    prices: { small: 170, medium: 200, large: 240 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + استربس"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا ميكس فراخ الزهراء",
-    prices: { small: 200, medium: 240, large: 290 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + شيش + فاهيتا فراخ + كرسبي"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا ميكس جبن",
-    prices: { small: 180, medium: 210, large: 260 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + موتزاريلا + رومي + كيري + شيدر"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا فونجي",
-    prices: { small: 150, medium: 190, large: 230 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + مشروم"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا بيبروني",
-    prices: { small: 150, medium: 200, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا روز بيف",
-    prices: { small: 150, medium: 200, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + روز بيف"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سموك تركي",
-    prices: { small: 150, medium: 200, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سموك تركي"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا سوبر سوبريم",
-    prices: { small: 180, medium: 230, large: 280 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي + بسطرمة + مشروم"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا تونة",
-    prices: { small: 180, medium: 220, large: 250 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + تونة"
-  },
-  {
-    category: "البيتزا الشرقي",
-    name: "بيتزا الزهراء",
-    prices: { small: 190, medium: 230, large: 280 },
-    image: "sharkiPIZZ/SHARKI.png",
-    desc: "جبنة رومي + بيض + فلفل + طماطم + كراتشي + تركي + رانش"
-  },
-
-  // ============================================================
-  // 19. اضافات البيتزا
-  // ============================================================
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة تونة",
-    prices: { regular: 70 },
-    image: "addonspizza/tuna.png",
-    desc: "إضافة تونة للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة جبنة موتزريلا",
-    prices: { regular: 35 },
-    image: "addonspizza/mozzarella.png",
-    desc: "إضافة جبنة موتزريلا للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة رومي",
-    prices: { regular: 30 },
-    image: "addonspizza/romy.png",
-    desc: "إضافة جبنة رومي للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة كيري",
-    prices: { regular: 30 },
-    image: "addonspizza/kiri.png",
-    desc: "إضافة جبنة كيري للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة شيدر",
-    prices: { regular: 30 },
-    image: "addonspizza/cheddar.png",
-    desc: "إضافة جبنة شيدر للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة ميكس لحوم",
-    prices: { regular: 50 },
-    image: "addonspizza/mixmeat.png",
-    desc: "إضافة ميكس لحوم للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة باربيكيو",
-    prices: { regular: 25 },
-    image: "addonspizza/bbq.png",
-    desc: "إضافة صوص باربيكيو للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة سجق",
-    prices: { regular: 40 },
-    image: "addonspizza/sog.png",
-    desc: "إضافة سجق للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة لحمة",
-    prices: { regular: 40 },
-    image: "addonspizza/lahma.png",
-    desc: "إضافة لحمة للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة فراخ",
-    prices: { regular: 50 },
-    image: "addonspizza/farakh.png",
-    desc: "إضافة فراخ للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة بسطرمة",
-    prices: { regular: 50 },
-    image: "addonspizza/basterma.png",
-    desc: "إضافة بسطرمة للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة سوسيس",
-    prices: { regular: 40 },
-    image: "addonspizza/sosis.png",
-    desc: "إضافة سوسيس للبيتزا."
-  },
-  {
-    category: "إضافات البيتزا",
-    name: "إضافة صوص رانش",
-    prices: { regular: 25 },
-    image: "addonspizza/ranch.png",
-    desc: "إضافة صوص رانش للبيتزا."
-  },
-
-
-  // ============================================================
-  // 20. الفطير الحادق
-  // ============================================================
-    {
-    category: "الفطير الحادق",
-    name: "فطيرة سجق اسكندراني",
-    prices: { small: 140, medium: 170, large: 220 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق اسكندراني"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة سجق بلدي",
-    prices: { small: 150, medium: 180, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق بلدي"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة لحمة مفرومة",
-    prices: { small: 150, medium: 180, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + لحمة مفرومة"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة سوسيس",
-    prices: { small: 140, medium: 170, large: 210 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سوسيس"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة بسطرمة",
-    prices: { small: 150, medium: 190, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + بسطرمة"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة ميكس لحوم الزهراء",
-    prices: { small: 180, medium: 220, large: 280 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق + لحمة + سوسيس + بسطرمة"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة سجق بلدي كيري",
-    prices: { small: 180, medium: 210, large: 250 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق بلدي + كيري"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة سجق اسكندراني + كيري",
-    prices: { small: 170, medium: 200, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق اسكندراني + كيري"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة فراخ",
-    prices: { small: 140, medium: 170, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + فراخ"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة شيش",
-    prices: { small: 155, medium: 185, large: 255 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + شيش"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة كرسبي",
-    prices: { small: 150, medium: 180, large: 230 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + كرسبي"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة استريس",
-    prices: { small: 160, medium: 190, large: 230 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + استريس"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة تشيكن رانش",
-    prices: { small: 160, medium: 190, large: 250 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + تشيكن + صوص رانش"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة تشيكن باربيكيو",
-    prices: { small: 160, medium: 190, large: 250 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + تشيكن + صوص باربيكيو"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة ميكس فراخ الزهراء",
-    prices: { small: 190, medium: 230, large: 280 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + شيش + شاورما + بليه + استريس"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة تونة",
-    prices: { small: 170, medium: 210, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + تونة"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة كيري",
-    prices: { small: 150, medium: 180, large: 240 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + كيري"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة ميكس جبن",
-    prices: { small: 170, medium: 200, large: 250 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + كيري + شيدر"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة فونجي",
-    prices: { small: 140, medium: 180, large: 220 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + مشروم"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة سجق بسطرمة كيري",
-    prices: { small: 200, medium: 250, large: 290 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق + بسطرمة + كيري"
-  },
-  {
-    category: "الفطير الحادق",
-    name: "فطيرة الزهراء",
-    prices: { small: 180, medium: 220, large: 270 },
-    image: "fiterHAD/FITER.png",
-    desc: "خضار + جبنة رومي + جبنة موتزاريلا + استريس + فراخ + تركي + كيري"
-  },
-
-  // ============================================================
-  // 21. الفطير الحلو
-  // ============================================================
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة سادة",
-    prices: { small: 60, large: 100 },
-    image: "assets/fteer/fteersada.jpg",
-    desc: "فطيرة سادة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة بغاشة",
-    prices: { small: 70, large: 110 },
-    image: "assets/fteer/fteerbghasha.jpg",
-    desc: "فطيرة بغاشة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة كاستر",
-    prices: { small: 85, large: 150 },
-    image: "assets/fteer/fteercaster.jpg",
-    desc: "فطيرة كاستر من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة كاستر وكنافة",
-    prices: { small: 100, large: 135 },
-    image: "assets/fteer/fteercasterwkonafa.jpg",
-    desc: "فطيرة كاستر وكنافة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة كاستر وبسبوسة",
-    prices: { small: 100, large: 150 },
-    image: "assets/fteer/fteercasterwbaskota.jpg",
-    desc: "فطيرة كاستر وبسبوسة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة شيكولاتة",
-    prices: { small: 130, large: 170 },
-    image: "assets/fteer/fteershokolata.jpg",
-    desc: "فطيرة شيكولاتة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة شيكولاتة موز",
-    prices: { small: 140, large: 180 },
-    image: "assets/fteer/fteershokolatamoz.jpg",
-    desc: "فطيرة شيكولاتة موز من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة ميكس شوكولاتة",
-    prices: { small: 150, large: 200 },
-    image: "assets/fteer/fteermixshokolata.jpg",
-    desc: "فطيرة ميكس شوكولاتة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة قشطة وعسل",
-    prices: { small: 130, large: 160 },
-    image: "assets/fteer/fteeroshtawaasal.jpg",
-    desc: "فطيرة قشطة وعسل من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة قشطة وسكر",
-    prices: { small: 100, large: 130 },
-    image: "assets/fteer/fteeroshta.jpg",
-    desc: "فطيرة قشطة وسكر من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة مربي",
-    prices: { small: 90, large: 130 },
-    image: "assets/fteer/fteermuraba.jpg",
-    desc: "فطيرة مربي من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة كاستر وقرفة",
-    prices: { small: 100, large: 150 },
-    image: "assets/fteer/fteercasterwqerfa.jpg",
-    desc: "فطيرة كاستر وقرفة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة عسل",
-    prices: { small: 90, large: 130 },
-    image: "assets/fteer/fteerasal.jpg",
-    desc: "فطيرة عسل من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة بغاشة بالقرفة",
-    prices: { small: 80, large: 120 },
-    image: "assets/fteer/fteerbghashabelqerfa.jpg",
-    desc: "فطيرة بغاشة بالقرفة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة موز",
-    prices: { small: 85, large: 125 },
-    image: "assets/fteer/fteermoz.jpg",
-    desc: "فطيرة موز من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة فواكة",
-    prices: { small: 150, large: 220 },
-    image: "assets/fteer/fteerfawaka.jpg",
-    desc: "فطيرة فواكة من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة لوتس",
-    prices: { small: 150, large: 200 },
-    image: "assets/fteer/fteerlotus.jpg",
-    desc: "فطيرة لوتس من الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة ميكس الزهراء",
-    prices: { small: 150, large: 200 },
-    image: "assets/fteer/fteermixelzahraa.jpg",
-    desc: "فطيرة ميكس الزهراء."
-  },
-  {
-    category: "الفطير الحلو",
-    name: "فطيرة مشلتت الزهراء",
-    prices: { small: 180, large: 220 },
-    image: "assets/fteer/fteermeshaltetelzahraa.jpg",
-    desc: "كاستر + بسبوسة + كنافة + مكسرات + قشطة + عسل"
-  },
-
-  // ============================================================
-  // 22. نجريسكو
-  // ============================================================
-  {
-    category: "نجرسكو",
-    name: "نجرسكو فراخ",
-    prices: { regular: 130 },
-    image: "assets/negresso/farakh.jpg",
-    desc: "نجرسكو فراخ من الزهراء."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو لحمة",
-    prices: { regular: 125 },
-    image: "assets/negresso/lahma.jpg",
-    desc: "نجرسكو لحمة من الزهراء."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو سجق بلدي",
-    prices: { regular: 125 },
-    image: "assets/negresso/sogbalady.jpg",
-    desc: "نجرسكو سجق بلدي من الزهراء."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو استربس",
-    prices: { regular: 125 },
-    image: "assets/negresso/strips.jpg",
-    desc: "نجرسكو استربس من الزهراء."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو سوسيس",
-    prices: { regular: 125 },
-    image: "assets/negresso/sosis.jpg",
-    desc: "نجرسكو سوسيس من الزهراء."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو فاهيتا لحمة",
-    prices: { regular: 135 },
-    image: "assets/negresso/fahitalahma.jpg",
-    desc: "نجرسكو فاهيتا لحمة + مشروم + لحمة."
-  },
-  {
-    category: "نجرسكو",
-    name: "نجرسكو فاهيتا فراخ",
-    prices: { regular: 135 },
-    image: "assets/negresso/fahitafarakh.jpg",
-    desc: "نجرسكو فاهيتا فراخ + مشروم + فراخ."
-  },
-
-  // ============================================================
-  // 23. صواريخ الزهراء
-  // ============================================================
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سجق اسكندراني",
-    prices: { regular: 160 },
-    image: "assets/sawarekh/sawarekh_sog_eskandrany.jpg",
-    desc: "صاروخ سجق اسكندراني من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ لحمة",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_lahma.jpg",
-    desc: "صاروخ لحمة من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ مشروم",
-    prices: { regular: 160 },
-    image: "assets/sawarekh/sawarekh_mashroom.jpg",
-    desc: "صاروخ مشروم من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سوسيس",
-    prices: { regular: 150 },
-    image: "assets/sawarekh/sawarekh_sosis.jpg",
-    desc: "صاروخ سوسيس من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سجق بلدي",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_sog_balady.jpg",
-    desc: "صاروخ سجق بلدي من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ اسكندراني كيري",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_eskandrany_kiri.jpg",
-    desc: "صاروخ سجق اسكندراني مع جبنة كيري."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سجق بلدي كيري",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_sog_balady_kiri.jpg",
-    desc: "صاروخ سجق بلدي مع جبنة كيري."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ جبنة رومي",
-    prices: { regular: 140 },
-    image: "assets/sawarekh/sawarekh_gebna_romy.jpg",
-    desc: "صاروخ محشي جبنة رومي."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ جبنة موتزريلا",
-    prices: { regular: 160 },
-    image: "assets/sawarekh/sawarekh_gebna_mozzarella.jpg",
-    desc: "صاروخ محشي جبنة موتزريلا."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ فراخ",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_farakh.jpg",
-    desc: "صاروخ فراخ من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ شاورما فراخ",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_shawarma_farakh.jpg",
-    desc: "صاروخ شاورما فراخ من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ شيش",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_shish.jpg",
-    desc: "صاروخ شيش طاووق من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ كرسبي",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_crispy.jpg",
-    desc: "صاروخ كرسبي من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ استربس",
-    prices: { regular: 170 },
-    image: "assets/sawarekh/sawarekh_strips.jpg",
-    desc: "صاروخ استربس من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ ميكس فراخ",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_mix_farakh.jpg",
-    desc: "شيش + شاورما + فراخ + استربس"
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ ميكس لحمة",
-    prices: { regular: 200 },
-    image: "assets/sawarekh/sawarekh_mix_lahma.jpg",
-    desc: "سجق + لحمة + سوسيس + بسطرمة"
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ تونة",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_tuna.jpg",
-    desc: "صاروخ تونة من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ بسطرمة",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_basterma.jpg",
-    desc: "صاروخ بسطرمة من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ ميكس شاورما",
-    prices: { regular: 190 },
-    image: "assets/sawarekh/sawarekh_mix_shawarma.jpg",
-    desc: "صاروخ ميكس شاورما من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سلامي",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_salami.jpg",
-    desc: "صاروخ سلامي من الزهراء."
-  },
-  {
-    category: "صوارخ الزهراء",
-    name: "صاروخ سموك تركي",
-    prices: { regular: 180 },
-    image: "assets/sawarekh/sawarekh_smoke_turkey.jpg",
-    desc: "صاروخ سموك تركي من الزهراء."
-  },
-
-  // ============================================================
-  // 24. اضافات الحلو
-  // ============================================================
-  {
-    category: "إضافات الحلو",
-    name: "إضافة لبن",
-    prices: { regular: 20 },
-    image: "helwADDS/milk.png",
-    desc: "إضافة لبن للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة سكر",
-    prices: { regular: 10 },
-    image: "helwADDS/sugar.png",
-    desc: "إضافة سكر للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة شوكولاتة",
-    prices: { regular: 40 },
-    image: "helwADDS/shokolata.png",
-    desc: "إضافة شوكولاتة للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة قشطة",
-    prices: { regular: 20 },
-    image: "helwADDS/oshta.jpg",
-    desc: "إضافة قشطة للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة عسل",
-    prices: { regular: 20 },
-    image: "helwADDS/asal.jpg",
-    desc: "إضافة عسل للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة مكسرات",
-    prices: { regular: 25 },
-    image: "helwADDS/mokassarat.png",
-    desc: "إضافة مكسرات للحلويات."
-  },
-  {
-    category: "إضافات الحلو",
-    name: "إضافة فواكة",
-    prices: { regular: 30 },
-    image: "helwADDS/fawakeh.png",
-    desc: "إضافة فواكة للحلويات."
-  }
-
-];
+      let MENU_ITEMS = [
+        {
+          category: "الكشري",
+          name: "علبة معدل",
+          prices: { regular: 30 },
+          image: "test/koshary.png",
+        },
+        {
+          category: "الكشري",
+          name: "علبة سوبر",
+          prices: { regular: 35 },
+          image: "test/koshary.png",
+        },
+        {
+          category: "الكشري",
+          name: "علبة الزهراء",
+          prices: { regular: 40 },
+          image: "test/koshary.png",
+        },
+        {
+          category: "الكشري",
+          name: "دلع كرشك",
+          prices: { regular: 50 },
+          image: "test/koshary.png",
+        },
+        {
+          category: "الكشري",
+          name: "فويل عائلي",
+          prices: { regular: 60 },
+          image: "test/koshary.png",
+        },
+        {
+          category: "طواجن الزهراء",
+          name: "طاجن فراخ",
+          prices: { regular: 60, mozzarella: 85 },
+          image: "test/tagin.png",
+          desc: "طاجن فراخ من الزهراء.",
+        },
+        {
+          category: "طواجن الزهراء",
+          name: "طاجن لحمة",
+          prices: { regular: 50, mozzarella: 75 },
+          image: "test/tagin.png",
+          desc: "طاجن لحمة من الزهراء.",
+        },
+        {
+          category: "طواجن الزهراء",
+          name: "طاجن كفتة",
+          prices: { regular: 50, mozzarella: 75 },
+          image: "test/tagin.png",
+          desc: "طاجن كفتة من الزهراء.",
+        },
+        {
+          category: "طواجن الزهراء",
+          name: "طاجن سجق",
+          prices: { regular: 50, mozzarella: 75 },
+          image: "test/tagin.png",
+          desc: "طاجن سجق من الزهراء.",
+        },
+        {
+          category: "طواجن الزهراء",
+          name: "طاجن سادة",
+          prices: { regular: 40, mozzarella: 70 },
+          image: "test/tagin.png",
+          desc: "طاجن سادة من الزهراء.",
+        },
+        {
+          category: "وجبات الزهراء",
+          name: "علبة كشري معدل",
+          prices: { regular: 80 },
+          image: "test/elzahraaW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات الزهراء",
+          name: "فويل كشري سوبر",
+          prices: { regular: 85 },
+          image: "test/elzahraaW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات الزهراء",
+          name: "فويل كشري الزهراء",
+          prices: { regular: 90 },
+          image: "test/elzahraaW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات طواجن",
+          name: "طاجن فراخ",
+          prices: { regular: 110 },
+          image: "test/taginW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات طواجن",
+          name: "طاجن لحمة",
+          prices: { regular: 95 },
+          image: "test/taginW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات طواجن",
+          name: "طاجن كفتة",
+          prices: { regular: 95 },
+          image: "test/taginW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "وجبات طواجن",
+          name: "طاجن سجق",
+          prices: { regular: 95 },
+          image: "test/taginW.png",
+          desc: " يقدم مع توست و سلطة و حلو ",
+        },
+        {
+          category: "إضافات",
+          name: "عدس - تقلية - حمص",
+          prices: { regular: 10 },
+          image: "test/homsadsbasal.jpg",
+          desc: "إضافة عدس - تقلية - حمص.",
+        },
+        {
+          category: "إضافات",
+          name: "عيش توست",
+          prices: { regular: 15 },
+          image: "test/tost.jpg",
+          desc: "إضافة عيش توست.",
+        },
+        {
+          category: "إضافات",
+          name: "طماطم متبلة",
+          prices: { regular: 10 },
+          image: "test/tom.png",
+          desc: "إضافة طماطم متبلة.",
+        },
+        {
+          category: "إضافات",
+          name: "سلطة طماطم",
+          prices: { regular: 5 },
+          image: "test/salad1.jpg",
+          desc: "إضافة سلطة طماطم.",
+        },
+        {
+          category: "إضافات",
+          name: "سلطة خضراء - خيار مخلل",
+          prices: { regular: 10 },
+          image: "test/salad2.jpg",
+          desc: "إضافة سلطة خضراء - خيار مخلل.",
+        },
+        {
+          category: "إضافات",
+          name: "علبة سجق",
+          prices: { regular: 40 },
+          image: "test/sogok.png",
+          desc: "إضافة علبة سجق.",
+        },
+        {
+          category: "إضافات",
+          name: "علبة كفتة",
+          prices: { regular: 40 },
+          image: "test/kofta.jpg",
+          desc: "إضافة علبة كفتة.",
+        },
+        {
+          category: "إضافات",
+          name: "علبة فراخ",
+          prices: { regular: 50 },
+          image: "test/frakh.jpg",
+          desc: "إضافة علبة فراخ.",
+        },
+        {
+          category: "إضافات",
+          name: "علبة لحمة",
+          prices: { regular: 40 },
+          image: "test/lahma.jpg",
+          desc: "إضافة علبة لحمة.",
+        },
+        {
+          category: "المشروبات",
+          name: "بيبسي / سفن / ميرندا",
+          prices: { regular: 20 },
+          image: "test/drinks.jpg",
+          desc: "بيبسي / سفن أب / ميرندا.",
+        },
+        {
+          category: "المشروبات",
+          name: "مياه معدنية صغيرة",
+          prices: { regular: 8 },
+          image: "test/bigW.jpg",
+          desc: "مياه معدنية صغيرة.",
+        },
+        {
+          category: "المشروبات",
+          name: "مياه معدنية كبيرة",
+          prices: { regular: 15 },
+          image: "test/smallW.jpg",
+          desc: "مياه معدنية كبيرة.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي سجق",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي سجق من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي كفتة",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي كفتة من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي لحمة",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي لحمة من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي فراخ",
+          prices: { regular: 75, mozzarella: 105 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي فراخ من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي سادة",
+          prices: { regular: 40, mozzarella: 70 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي سادة من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي سجق",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي بسجق من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي كفتة",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي بكفتة من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي لحمة",
+          prices: { regular: 60, mozzarella: 90 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي بلحمة من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي فراخ",
+          prices: { regular: 75, mozzarella: 105 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي بفراخ من الزهراء.",
+        },
+        {
+          category: "مكرونات الزهراء",
+          name: "مكرونة اسباجيتي سادة",
+          prices: { regular: 40, mozzarella: 70 },
+          image: "test/makr.jpg",
+          desc: "مكرونة اسباجيتي سادة من الزهراء.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "ميكس فراخ",
+          prices: { regular: 85, mozzarella: 110 },
+          image: "assets/mixes/mixfarakh.jpg",
+          desc: "ميكس فراخ طازج مع صوص الزهراء المميز.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "ميكس كفتة",
+          prices: { regular: 75, mozzarella: 95 },
+          image: "assets/mixes/mixkofta.jpg",
+          desc: "ميكس كفتة مشوية على الفحم مع صوص خاص.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "ميكس لحمة",
+          prices: { regular: 75, mozzarella: 95 },
+          image: "assets/mixes/mixlahma.jpg",
+          desc: "ميكس لحمة من أجود المكونات مع صوص الزهراء المميز.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "ميكس سجق",
+          prices: { regular: 75, mozzarella: 95 },
+          image: "assets/mixes/mixsog.jpg",
+          desc: "ميكس سجق مع صوص الزهراء.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "فراخ دوبل",
+          prices: { regular: 120, mozzarella: 145 },
+          image: "assets/mixes/farakhdouble.jpg",
+          desc: "وجبة فراخ دوبل مع صوص الزهراء.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "كفتة دوبل",
+          prices: { regular: 100, mozzarella: 125 },
+          image: "assets/mixes/koftadouble.jpg",
+          desc: "كفتة دوبل مشوية مع صوص خاص.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "لحمة دوبل",
+          prices: { regular: 100, mozzarella: 125 },
+          image: "assets/mixes/lahmadouble.jpg",
+          desc: "لحمة دوبل مع صوص الزهراء المميز.",
+        },
+        {
+          category: "ميكسات الزهراء",
+          name: "سجق دوبل",
+          prices: { regular: 100, mozzarella: 125 },
+          image: "assets/mixes/sogdouble.jpg",
+          desc: "سجق دوبل مع صوص الزهراء الشهي.",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي لحمة",
+          prices: { small: 50, medium: 85, large: 105 },
+          image: "assets/hawawshy/hawawshylahma.jpg",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي سجق",
+          prices: { small: 65, medium: 90, large: 110 },
+          image: "assets/hawawshy/hawawshysog.jpg",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي فراخ",
+          prices: { small: 65, medium: 90, large: 110 },
+          image: "assets/hawawshy/hawawshyfarakh.jpg",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي ميكس لحوم",
+          prices: { small: 100, medium: 120, large: 140 },
+          image: "assets/hawawshy/hawawshymixlahom.jpg",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي ميكس الزهراء",
+          prices: { small: 100, medium: 120, large: 140 },
+          image: "assets/hawawshy/hawawshymix.jpg",
+        },
+        {
+          category: "حواوشي الزهراء",
+          name: "حواوشي بسطرمة",
+          prices: { small: 100, medium: 130, large: 160 },
+          image: "assets/hawawshy/hawawshybasterma.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي لحمة",
+          prices: { small: 100, medium: 135, large: 155 },
+          image: "assets/hawawshypizza/hawawshylahmapizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي سجق",
+          prices: { small: 115, medium: 140, large: 160 },
+          image: "assets/hawawshypizza/hawawshysogpizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي ميكس لحوم",
+          prices: { small: 140, medium: 160, large: 180 },
+          image: "assets/hawawshypizza/hawawshymixlahompizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي ميكس الزهراء",
+          prices: { small: 140, medium: 160, large: 180 },
+          image: "assets/hawawshypizza/hawawshymixpizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي مشكل الجبن",
+          prices: { small: 100, medium: 125, large: 150 },
+          image: "assets/hawawshypizza/hawawshymixcheesepizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي فراخ",
+          prices: { small: 115, medium: 135, large: 160 },
+          image: "assets/hawawshypizza/hawawshyfarakhpizza.jpg",
+        },
+        {
+          category: "حواوشي وش بيتزا",
+          name: "حواوشي بسطرمة",
+          prices: { small: 150, medium: 180, large: 200 },
+          image: "assets/hawawshypizza/hawawshybastermapizza.jpg",
+        },
+        {
+          category: "حواوشي بلدي",
+          name: "حواوشي لحمة بلدي",
+          prices: { regular: 60 },
+          image: "assets/hawawshybaladi/hawawshylahmabaladi.jpg",
+          desc: "حواوشي لحمة بلدي.",
+        },
+        {
+          category: "حواوشي بلدي",
+          name: "حواوشي سجق بلدي",
+          prices: { regular: 70 },
+          image: "assets/hawawshybaladi/hawawshysogbaladi.jpg",
+          desc: "حواوشي سجق بلدي.",
+        },
+        {
+          category: "حواوشي بلدي",
+          name: "حواوشي فراخ بلدي",
+          prices: { regular: 70 },
+          image: "assets/hawawshybaladi/hawawshyfarakhbaladi.jpg",
+          desc: "حواوشي فراخ بلدي.",
+        },
+        {
+          category: "اضافات حواوشي",
+          name: "اضافة موتزاريلا",
+          prices: { small: 30, medium: 40, large: 50 },
+          image: "addonspizza/mozzarella.png",
+          desc: "اضافة موتزاريلا للحواوشي.",
+        },
+        {
+          category: "اضافات حواوشي",
+          name: "اضافة رومي",
+          prices: { small: 30, medium: 40, large: 50 },
+          image: "addonspizza/romy.png",
+          desc: "اضافة رومي للحواوشي.",
+        },
+        {
+          category: "اضافات حواوشي",
+          name: "اضافة كيري",
+          prices: { small: 30, medium: 40, large: 50 },
+          image: "addonspizza/kiri.png",
+          desc: "اضافة كيري للحواوشي.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب بطاطس",
+          prices: { regular: 70 },
+          image: "test/crep.png",
+          desc: "كريب محشي ببطاطس مقلية مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب بانيه",
+          prices: { regular: 120 },
+          image: "test/crep2.png",
+          desc: "كريب بانيه مقرمش مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب كريسبي",
+          prices: { regular: 130 },
+          image: "test/crep2.png",
+          desc: "كريب كريسبي مع صوص الزهراء المميز.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب ستربس",
+          prices: { regular: 135 },
+          image: "test/crep2.png",
+          desc: "كريب ستربس مقرمش مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب سوبر كرانشي",
+          prices: { regular: 140 },
+          image: "test/crepS.png",
+          desc: "كريب سوير كرانشي مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب شيش طاووق",
+          prices: { regular: 140 },
+          image: "test/crepSH.png",
+          desc: "كريب شيش طاووق مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب فاهيتا فراخ",
+          prices: { regular: 140 },
+          image: "test/crepF.png",
+          desc: "كريب فاهيتا فراخ مع خضار طازجة.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب ميكس فراخ",
+          prices: { regular: 170 },
+          image: "test/crepF.png",
+          desc: "كريب ميكس فراخ مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب ميكس شاورما",
+          prices: { regular: 150 },
+          image: "test/crepmix.png",
+          desc: "كريب ميكس شاورما مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب شاورما لحمة",
+          prices: { regular: 150 },
+          image: "test/crepSH.png",
+          desc: "كريب شاورما لحمة مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب شاورما فراخ",
+          prices: { regular: 140 },
+          image: "test/crepSH.png",
+          desc: "كريب شاورما فراخ مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب بسطرمة",
+          prices: { regular: 150 },
+          image: "test/crePbastarma.png",
+          desc: "كريب بسطرمة مع صوص الزهراء المميز.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب برجر",
+          prices: { regular: 130 },
+          image: "test/crepBUR.png",
+          desc: "كريب برجر مع صوص الزهراء المميز.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب فاهيتا لحمة",
+          prices: { regular: 140 },
+          image: "test/crepFL.png",
+          desc: "كريب محشي فاهيتا لحمة مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب سجق",
+          prices: { regular: 120 },
+          image: "test/crepSog.png",
+          desc: "كريب محشي سجق مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب لحمة مفرومة",
+          prices: { regular: 120 },
+          image: "test/crepFL.png",
+          desc: "كريب محشي لحمة مفرومة مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب سوسيس",
+          prices: { regular: 120 },
+          image: "test/crepSog.png",
+          desc: "كريب محشي سوسيس مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب ميكس جبن",
+          prices: { regular: 120 },
+          image: "test/crepMIXG.png",
+          desc: "كريب بمزيج من الأجبان مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب جبنة رومي",
+          prices: { regular: 95 },
+          image: "test/crepMIXG.png",
+          desc: "كريب بجبنة رومي مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب جبنة موتزاريلا",
+          prices: { regular: 95 },
+          image: "test/crepMIXG.png",
+          desc: "كريب بجبنة موتزاريلا مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب سلامي",
+          prices: { regular: 130 },
+          image: "test/crepSAL.png",
+          desc: "كريب محشي سلامي مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب سموك تركي",
+          prices: { regular: 130 },
+          image: "test/crepST.png",
+          desc: "كريب سموك تركي مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب  سوبر سوبريم",
+          prices: { regular: 150 },
+          image: "test/superS.png",
+          desc: "كريب سوبر سوبريم مع صوص الزهراء المميز.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب مشروم",
+          prices: { regular: 115 },
+          image: "test/crepMash.png",
+          desc: "كريب محشي مشروم مع صوص خاص.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب زنجر",
+          prices: { regular: 135 },
+          image: "test/crep2.png",
+          desc: "كريب زنجر مع صوص الزهراء.",
+        },
+        {
+          category: "الكريب",
+          name: "كريب ميكس لحوم الزهراء",
+          prices: { regular: 180 },
+          image: "test/crepmix.png",
+          desc: "كريب ميكس لحوم الزهراء مع صوص خاص.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة موتزريلا",
+          prices: { regular: 30 },
+          image: "crepAdd/mozzarella.png",
+          desc: "إضافة جبنة موتزريلا للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة صوص شيدر",
+          prices: { regular: 20 },
+          image: "crepAdd/cheddar.png",
+          desc: "إضافة صوص شيدر للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة فراخ",
+          prices: { regular: 50 },
+          image: "crepAdd/farakh.png",
+          desc: "إضافة فراخ للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة لحوم",
+          prices: { regular: 50 },
+          image: "crepAdd/lahom.png",
+          desc: "إضافة لحوم للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة بطاطس",
+          prices: { regular: 20 },
+          image: "crepAdd/batates.png",
+          desc: "إضافة بطاطس مقلية للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "إضافة مشروم",
+          prices: { regular: 20 },
+          image: "crepAdd/mashroom.png",
+          desc: "إضافة مشروم للكريب.",
+        },
+        {
+          category: "إضافات الكريب",
+          name: "باكيت بطاطس",
+          prices: { regular: 35 },
+          image: "crepAdd/baketbatates.png",
+          desc: "باكيت بطاطس مقلية.",
+        },
+        {
+          category: "كريب حلو",
+          name: "كريب نوتيلا",
+          prices: { regular: 65 },
+          image: "crepHelw/crepenutella.png",
+          desc: "كريب نوتيلا.",
+        },
+        {
+          category: "كريب حلو",
+          name: "كريب نوتيلا موز",
+          prices: { regular: 75 },
+          image: "crepHelw/crepenutellamoz.png",
+          desc: "كريب نوتيلا موز.",
+        },
+        {
+          category: "كريب حلو",
+          name: "كريب نوتيلا مكسرات",
+          prices: { regular: 85 },
+          image: "crepHelw/crepenutellamokassarat.png",
+          desc: "كريب نوتيلا مكسرات.",
+        },
+        {
+          category: "كريب حلو",
+          name: "كريب فواكهة",
+          prices: { regular: 90 },
+          image: "crepHelw/crepefawakeh.png",
+          desc: "كريب فواكهة.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أرز بلبن سادة",
+          prices: { regular: 25 },
+          image: "assets/sweets/arazbalabansada.jpg",
+          desc: "أرز بلبن سادة من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أرز بلبن مكسرات",
+          prices: { regular: 30 },
+          image: "assets/sweets/arazbalabanmokassarat.jpg",
+          desc: "أرز بلبن مكسرات من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أرز بلبن كنافة",
+          prices: { regular: 30 },
+          image: "assets/sweets/arazbalabankonafa.jpg",
+          desc: "أرز بلبن كنافة من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أرز بلبن مانجا",
+          prices: { regular: 35 },
+          image: "assets/sweets/arazbalabanmanga.jpg",
+          desc: "أرز بلبن مانجا من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أرز بلبن فرن",
+          prices: { regular: 30 },
+          image: "assets/sweets/arazbalabanforn.jpg",
+          desc: "أرز بلبن محضر بالفرن.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "أم علي",
+          prices: { regular: 30 },
+          image: "assets/sweets/omali.jpg",
+          desc: "أم علي من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "كريم كراميل",
+          prices: { regular: 25 },
+          image: "assets/sweets/creamcaramel.jpg",
+          desc: "كريم كراميل من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "مهلبية",
+          prices: { regular: 25 },
+          image: "assets/sweets/mahalabya.jpg",
+          desc: "مهلبية من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "كاسترد",
+          prices: { regular: 25 },
+          image: "assets/sweets/custard.jpg",
+          desc: "كاسترد من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "قنبلة شوكولاتة",
+          prices: { regular: 30 },
+          image: "assets/sweets/otaynashokolata.jpg",
+          desc: "قنبلة شوكولاتة من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "قنبلة كريمة",
+          prices: { regular: 30 },
+          image: "assets/sweets/otaynacrema.jpg",
+          desc: "قنبلة كريمة من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "قنبلة فراولة",
+          prices: { regular: 30 },
+          image: "assets/sweets/otaynafarawla.jpg",
+          desc: "قنبلة فراولة من الزهراء.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "ديسيباتشو صغير",
+          prices: { regular: 40 },
+          image: "assets/sweets/desypatchosmall.jpg",
+          desc: "ديسيباتشو حجم صغير.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "ديسيباتشو كبير",
+          prices: { regular: 50 },
+          image: "assets/sweets/desypatchobig.jpg",
+          desc: "ديسيباتشو حجم كبير.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "مولتن كيك كبير",
+          prices: { regular: 60 },
+          image: "assets/sweets/moltencakebig.jpg",
+          desc: "مولتن كيك حجم كبير.",
+        },
+        {
+          category: "حلو الزهراء",
+          name: "طلوا جن نوتيلا",
+          prices: { regular: 40 },
+          image: "assets/sweets/talwajannutella.jpg",
+          desc: "طلوا جن نوتيلا.",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا مارغريتا",
+          prices: { small: 135, medium: 155, large: 220 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبن",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا فيجيتيريان",
+          prices: { small: 145, medium: 165, large: 230 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا +  خضار + جبن +زيتون + صوص طماطم",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سجق بلدي",
+          prices: { small: 170, medium: 220, large: 300 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق بلدي",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سجق اسكندراني",
+          prices: { small: 150, medium: 195, large: 255 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا لحمة مفرومة",
+          prices: { small: 155, medium: 200, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + لحمة مفرومة",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سوسيس",
+          prices: { small: 145, medium: 185, large: 250 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سوسيس",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا شاورما لحمة",
+          prices: { small: 165, medium: 215, large: 280 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شاورما لحمة",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا ميكس شاورما",
+          prices: { small: 170, medium: 215, large: 280 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شاورما لحمة + فراخ",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا بسطرمة",
+          prices: { small: 160, medium: 220, large: 265 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + بسطرمة",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا ميكس لحوم الزهراء",
+          prices: { small: 180, medium: 230, large: 295 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق + لحمة مفرومة + سوسيس + بسطرمة",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا فونجي",
+          prices: { small: 140, medium: 190, large: 250 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + مشروم",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا فراخ",
+          prices: { small: 145, medium: 180, large: 255 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + فراخ",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا فراخ رانش",
+          prices: { small: 150, medium: 200, large: 270 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + فراخ + رانش",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا فراخ باربيكيو",
+          prices: { small: 150, medium: 205, large: 270 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + باربيكيو",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا كرسبي",
+          prices: { small: 145, medium: 190, large: 255 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + كرسبي",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا استربس",
+          prices: { small: 150, medium: 200, large: 265 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + استربس",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا شيش",
+          prices: { small: 150, medium: 195, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شيش",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا ميكس فراخ الزهراء",
+          prices: { small: 180, medium: 220, large: 290 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + شيش + استربس + كرسبي + شاورما فراخ",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا جبنة رومي",
+          prices: { small: 140, medium: 180, large: 230 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبنة رومي",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا جبنة كيري",
+          prices: { small: 140, medium: 180, large: 230 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + جبنة كيري",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا ميكس تشيز",
+          prices: { small: 150, medium: 190, large: 240 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + رومي + موتزاريلا + كيري + شيدر",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا تونة",
+          prices: { small: 190, medium: 230, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + تونة قطع",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا بيبروني",
+          prices: { small: 145, medium: 190, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سموك تركي",
+          prices: { small: 145, medium: 190, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سموك تركي",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا روز بيف",
+          prices: { small: 150, medium: 200, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + روز بيف",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سوبر سوبريم",
+          prices: { small: 190, medium: 230, large: 290 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "سلامي + بسطرمة + لحمة + مشروم",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا سجق بلدي كيري",
+          prices: { small: 160, medium: 195, large: 260 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سجق بلدي + جبن كيري",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا هاواي",
+          prices: { small: 140, medium: 170, large: 220 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + هوت دوج + مشروم",
+        },
+        {
+          category: "البيتزا الإيطالي",
+          name: "بيتزا الزهراء",
+          prices: { small: 200, medium: 240, large: 290 },
+          image: "italyPIZ/ITPizz.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + كرسبي + فاهيتا + رانش",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سجق اسكندراني",
+          prices: { small: 150, medium: 180, large: 230 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق اسكندراني",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سجق بلدي",
+          prices: { small: 155, medium: 190, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق بلدي",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سوسيس",
+          prices: { small: 150, medium: 180, large: 220 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سوسيس",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا لحمة مفرومة",
+          prices: { small: 160, medium: 190, large: 260 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + لحمة مفرومة",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا شاورما لحمة",
+          prices: { small: 160, medium: 210, large: 270 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + شاورما لحمة",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا بسطرمة",
+          prices: { small: 160, medium: 200, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + بسطرمة",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا ميكس لحوم الزهراء",
+          prices: { small: 190, medium: 230, large: 290 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق + لحمة + سوسيس + بسطرمة",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سجق بلدي + كيري",
+          prices: { small: 185, medium: 220, large: 260 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق بلدي + كيري",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سجق اسكندراني + كيري",
+          prices: { small: 180, medium: 210, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + سجق اسكندراني + كيري",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا فراخ",
+          prices: { small: 150, medium: 180, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا تشيكن رانش",
+          prices: { small: 170, medium: 200, large: 260 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ + صوص رانش",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا تشيكن باربيكيو",
+          prices: { small: 170, medium: 200, large: 260 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + فراخ + صوص باربيكيو",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا كرسبي",
+          prices: { small: 160, medium: 190, large: 240 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + كرسبي",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا استربس",
+          prices: { small: 170, medium: 200, large: 240 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + استربس",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا ميكس فراخ الزهراء",
+          prices: { small: 200, medium: 240, large: 290 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + شيش + فاهيتا فراخ + كرسبي",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا ميكس جبن",
+          prices: { small: 180, medium: 210, large: 260 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + موتزاريلا + رومي + كيري + شيدر",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا فونجي",
+          prices: { small: 150, medium: 190, large: 230 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + مشروم",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا بيبروني",
+          prices: { small: 150, medium: 200, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا روز بيف",
+          prices: { small: 150, medium: 200, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + روز بيف",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سموك تركي",
+          prices: { small: 150, medium: 200, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سموك تركي",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا سوبر سوبريم",
+          prices: { small: 180, medium: 230, large: 280 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + سلامي + بسطرمة + مشروم",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا تونة",
+          prices: { small: 180, medium: 220, large: 250 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + زيتون + تونة",
+        },
+        {
+          category: "البيتزا الشرقي",
+          name: "بيتزا الزهراء",
+          prices: { small: 190, medium: 230, large: 280 },
+          image: "sharkiPIZZ/SHARKI.png",
+          desc: "جبنة رومي + بيض + فلفل + طماطم + كراتشي + تركي + رانش",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة تونة",
+          prices: { regular: 70 },
+          image: "addonspizza/tuna.png",
+          desc: "إضافة تونة للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة جبنة موتزريلا",
+          prices: { regular: 35 },
+          image: "addonspizza/mozzarella.png",
+          desc: "إضافة جبنة موتزريلا للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة رومي",
+          prices: { regular: 30 },
+          image: "addonspizza/romy.png",
+          desc: "إضافة جبنة رومي للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة كيري",
+          prices: { regular: 30 },
+          image: "addonspizza/kiri.png",
+          desc: "إضافة جبنة كيري للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة شيدر",
+          prices: { regular: 30 },
+          image: "addonspizza/cheddar.png",
+          desc: "إضافة جبنة شيدر للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة ميكس لحوم",
+          prices: { regular: 50 },
+          image: "addonspizza/mixmeat.png",
+          desc: "إضافة ميكس لحوم للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة باربيكيو",
+          prices: { regular: 25 },
+          image: "addonspizza/bbq.png",
+          desc: "إضافة صوص باربيكيو للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة سجق",
+          prices: { regular: 40 },
+          image: "addonspizza/sog.png",
+          desc: "إضافة سجق للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة لحمة",
+          prices: { regular: 40 },
+          image: "addonspizza/lahma.png",
+          desc: "إضافة لحمة للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة فراخ",
+          prices: { regular: 50 },
+          image: "addonspizza/farakh.png",
+          desc: "إضافة فراخ للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة بسطرمة",
+          prices: { regular: 50 },
+          image: "addonspizza/basterma.png",
+          desc: "إضافة بسطرمة للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة سوسيس",
+          prices: { regular: 40 },
+          image: "addonspizza/sosis.png",
+          desc: "إضافة سوسيس للبيتزا.",
+        },
+        {
+          category: "إضافات البيتزا",
+          name: "إضافة صوص رانش",
+          prices: { regular: 25 },
+          image: "addonspizza/ranch.png",
+          desc: "إضافة صوص رانش للبيتزا.",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سجق اسكندراني",
+          prices: { small: 140, medium: 170, large: 220 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق اسكندراني",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سجق بلدي",
+          prices: { small: 150, medium: 180, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق بلدي",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة لحمة مفرومة",
+          prices: { small: 150, medium: 180, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + لحمة مفرومة",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سوسيس",
+          prices: { small: 140, medium: 170, large: 210 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سوسيس",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة بسطرمة",
+          prices: { small: 150, medium: 190, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + بسطرمة",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة ميكس لحوم الزهراء",
+          prices: { small: 180, medium: 220, large: 280 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق + لحمة + سوسيس + بسطرمة",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سجق بلدي كيري",
+          prices: { small: 180, medium: 210, large: 250 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق بلدي + كيري",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سجق اسكندراني + كيري",
+          prices: { small: 170, medium: 200, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق اسكندراني + كيري",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة فراخ",
+          prices: { small: 140, medium: 170, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + فراخ",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة شيش",
+          prices: { small: 155, medium: 185, large: 255 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + شيش",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة كرسبي",
+          prices: { small: 150, medium: 180, large: 230 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + كرسبي",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة استريس",
+          prices: { small: 160, medium: 190, large: 230 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + استريس",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة تشيكن رانش",
+          prices: { small: 160, medium: 190, large: 250 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + تشيكن + صوص رانش",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة تشيكن باربيكيو",
+          prices: { small: 160, medium: 190, large: 250 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + تشيكن + صوص باربيكيو",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة ميكس فراخ الزهراء",
+          prices: { small: 190, medium: 230, large: 280 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + شيش + شاورما + بليه + استريس",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة تونة",
+          prices: { small: 170, medium: 210, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + تونة",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة كيري",
+          prices: { small: 150, medium: 180, large: 240 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + كيري",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة ميكس جبن",
+          prices: { small: 170, medium: 200, large: 250 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + كيري + شيدر",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة فونجي",
+          prices: { small: 140, medium: 180, large: 220 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + مشروم",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة سجق بسطرمة كيري",
+          prices: { small: 200, medium: 250, large: 290 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + سجق + بسطرمة + كيري",
+        },
+        {
+          category: "الفطير الحادق",
+          name: "فطيرة الزهراء",
+          prices: { small: 180, medium: 220, large: 270 },
+          image: "fiterHAD/FITER.png",
+          desc: "خضار + جبنة رومي + جبنة موتزاريلا + استريس + فراخ + تركي + كيري",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة سادة",
+          prices: { small: 60, large: 100 },
+          image: "assets/fteer/fteersada.jpg",
+          desc: "فطيرة سادة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة بغاشة",
+          prices: { small: 70, large: 110 },
+          image: "assets/fteer/fteerbghasha.jpg",
+          desc: "فطيرة بغاشة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة كاستر",
+          prices: { small: 85, large: 150 },
+          image: "assets/fteer/fteercaster.jpg",
+          desc: "فطيرة كاستر من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة كاستر وكنافة",
+          prices: { small: 100, large: 135 },
+          image: "assets/fteer/fteercasterwkonafa.jpg",
+          desc: "فطيرة كاستر وكنافة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة كاستر وبسبوسة",
+          prices: { small: 100, large: 150 },
+          image: "assets/fteer/fteercasterwbaskota.jpg",
+          desc: "فطيرة كاستر وبسبوسة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة شيكولاتة",
+          prices: { small: 130, large: 170 },
+          image: "assets/fteer/fteershokolata.jpg",
+          desc: "فطيرة شيكولاتة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة شيكولاتة موز",
+          prices: { small: 140, large: 180 },
+          image: "assets/fteer/fteershokolatamoz.jpg",
+          desc: "فطيرة شيكولاتة موز من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة ميكس شوكولاتة",
+          prices: { small: 150, large: 200 },
+          image: "assets/fteer/fteermixshokolata.jpg",
+          desc: "فطيرة ميكس شوكولاتة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة قشطة وعسل",
+          prices: { small: 130, large: 160 },
+          image: "assets/fteer/fteeroshtawaasal.jpg",
+          desc: "فطيرة قشطة وعسل من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة قشطة وسكر",
+          prices: { small: 100, large: 130 },
+          image: "assets/fteer/fteeroshta.jpg",
+          desc: "فطيرة قشطة وسكر من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة مربي",
+          prices: { small: 90, large: 130 },
+          image: "assets/fteer/fteermuraba.jpg",
+          desc: "فطيرة مربي من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة كاستر وقرفة",
+          prices: { small: 100, large: 150 },
+          image: "assets/fteer/fteercasterwqerfa.jpg",
+          desc: "فطيرة كاستر وقرفة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة عسل",
+          prices: { small: 90, large: 130 },
+          image: "assets/fteer/fteerasal.jpg",
+          desc: "فطيرة عسل من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة بغاشة بالقرفة",
+          prices: { small: 80, large: 120 },
+          image: "assets/fteer/fteerbghashabelqerfa.jpg",
+          desc: "فطيرة بغاشة بالقرفة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة موز",
+          prices: { small: 85, large: 125 },
+          image: "assets/fteer/fteermoz.jpg",
+          desc: "فطيرة موز من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة فواكة",
+          prices: { small: 150, large: 220 },
+          image: "assets/fteer/fteerfawaka.jpg",
+          desc: "فطيرة فواكة من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة لوتس",
+          prices: { small: 150, large: 200 },
+          image: "assets/fteer/fteerlotus.jpg",
+          desc: "فطيرة لوتس من الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة ميكس الزهراء",
+          prices: { small: 150, large: 200 },
+          image: "assets/fteer/fteermixelzahraa.jpg",
+          desc: "فطيرة ميكس الزهراء.",
+        },
+        {
+          category: "الفطير الحلو",
+          name: "فطيرة مشلتت الزهراء",
+          prices: { small: 180, large: 220 },
+          image: "assets/fteer/fteermeshaltetelzahraa.jpg",
+          desc: "كاستر + بسبوسة + كنافة + مكسرات + قشطة + عسل",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو فراخ",
+          prices: { regular: 130 },
+          image: "assets/negresso/farakh.jpg",
+          desc: "نجرسكو فراخ من الزهراء.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو لحمة",
+          prices: { regular: 125 },
+          image: "assets/negresso/lahma.jpg",
+          desc: "نجرسكو لحمة من الزهراء.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو سجق بلدي",
+          prices: { regular: 125 },
+          image: "assets/negresso/sogbalady.jpg",
+          desc: "نجرسكو سجق بلدي من الزهراء.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو استربس",
+          prices: { regular: 125 },
+          image: "assets/negresso/strips.jpg",
+          desc: "نجرسكو استربس من الزهراء.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو سوسيس",
+          prices: { regular: 125 },
+          image: "assets/negresso/sosis.jpg",
+          desc: "نجرسكو سوسيس من الزهراء.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو فاهيتا لحمة",
+          prices: { regular: 135 },
+          image: "assets/negresso/fahitalahma.jpg",
+          desc: "نجرسكو فاهيتا لحمة + مشروم + لحمة.",
+        },
+        {
+          category: "نجرسكو",
+          name: "نجرسكو فاهيتا فراخ",
+          prices: { regular: 135 },
+          image: "assets/negresso/fahitafarakh.jpg",
+          desc: "نجرسكو فاهيتا فراخ + مشروم + فراخ.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سجق اسكندراني",
+          prices: { regular: 160 },
+          image: "assets/sawarekh/sawarekh_sog_eskandrany.jpg",
+          desc: "صاروخ سجق اسكندراني من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ لحمة",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_lahma.jpg",
+          desc: "صاروخ لحمة من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ مشروم",
+          prices: { regular: 160 },
+          image: "assets/sawarekh/sawarekh_mashroom.jpg",
+          desc: "صاروخ مشروم من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سوسيس",
+          prices: { regular: 150 },
+          image: "assets/sawarekh/sawarekh_sosis.jpg",
+          desc: "صاروخ سوسيس من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سجق بلدي",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_sog_balady.jpg",
+          desc: "صاروخ سجق بلدي من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ اسكندراني كيري",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_eskandrany_kiri.jpg",
+          desc: "صاروخ سجق اسكندراني مع جبنة كيري.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سجق بلدي كيري",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_sog_balady_kiri.jpg",
+          desc: "صاروخ سجق بلدي مع جبنة كيري.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ جبنة رومي",
+          prices: { regular: 140 },
+          image: "assets/sawarekh/sawarekh_gebna_romy.jpg",
+          desc: "صاروخ محشي جبنة رومي.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ جبنة موتزريلا",
+          prices: { regular: 160 },
+          image: "assets/sawarekh/sawarekh_gebna_mozzarella.jpg",
+          desc: "صاروخ محشي جبنة موتزريلا.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ فراخ",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_farakh.jpg",
+          desc: "صاروخ فراخ من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ شاورما فراخ",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_shawarma_farakh.jpg",
+          desc: "صاروخ شاورما فراخ من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ شيش",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_shish.jpg",
+          desc: "صاروخ شيش طاووق من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ كرسبي",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_crispy.jpg",
+          desc: "صاروخ كرسبي من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ استربس",
+          prices: { regular: 170 },
+          image: "assets/sawarekh/sawarekh_strips.jpg",
+          desc: "صاروخ استربس من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ ميكس فراخ",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_mix_farakh.jpg",
+          desc: "شيش + شاورما + فراخ + استربس",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ ميكس لحمة",
+          prices: { regular: 200 },
+          image: "assets/sawarekh/sawarekh_mix_lahma.jpg",
+          desc: "سجق + لحمة + سوسيس + بسطرمة",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ تونة",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_tuna.jpg",
+          desc: "صاروخ تونة من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ بسطرمة",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_basterma.jpg",
+          desc: "صاروخ بسطرمة من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ ميكس شاورما",
+          prices: { regular: 190 },
+          image: "assets/sawarekh/sawarekh_mix_shawarma.jpg",
+          desc: "صاروخ ميكس شاورما من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سلامي",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_salami.jpg",
+          desc: "صاروخ سلامي من الزهراء.",
+        },
+        {
+          category: "صوارخ الزهراء",
+          name: "صاروخ سموك تركي",
+          prices: { regular: 180 },
+          image: "assets/sawarekh/sawarekh_smoke_turkey.jpg",
+          desc: "صاروخ سموك تركي من الزهراء.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة لبن",
+          prices: { regular: 20 },
+          image: "helwADDS/milk.png",
+          desc: "إضافة لبن للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة سكر",
+          prices: { regular: 10 },
+          image: "helwADDS/sugar.png",
+          desc: "إضافة سكر للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة شوكولاتة",
+          prices: { regular: 40 },
+          image: "helwADDS/shokolata.png",
+          desc: "إضافة شوكولاتة للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة قشطة",
+          prices: { regular: 20 },
+          image: "helwADDS/oshta.png",
+          desc: "إضافة قشطة للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة عسل",
+          prices: { regular: 20 },
+          image: "helwADDS/asal.png",
+          desc: "إضافة عسل للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة مكسرات",
+          prices: { regular: 25 },
+          image: "helwADDS/mokassarat.png",
+          desc: "إضافة مكسرات للحلويات.",
+        },
+        {
+          category: "إضافات الحلو",
+          name: "إضافة فواكة",
+          prices: { regular: 30 },
+          image: "helwADDS/fawakeh.png",
+          desc: "إضافة فواكة للحلويات.",
+        },
+      ];
 
       // ─── BUILD MENU DATA ──────────────────────────────────────────────────
 
@@ -4037,7 +3986,7 @@ let MENU_ITEMS = [
           name: " زهراء مدينة نصر",
           address: "زهراء مدينة نصر - شارع الميثقاق - بجوار معرض سيارات سيد مكاوي - امام سنترال وي",
           mapUrl: "https://maps.app.goo.gl/LQwERtqx4p99bLBQ8",
-        }
+        },
       ];
 
       const BRANCH_PHONES = "201040346247";
@@ -4164,47 +4113,82 @@ let MENU_ITEMS = [
       const LazyLoader = {
         observer: null,
         initialized: false,
+        supportsIO: "IntersectionObserver" in window,
+
         init() {
           if (this.initialized) return;
+          this.initialized = true;
+
+          // Global image error handler (capture phase catches error events)
+          document.addEventListener(
+            "error",
+            (e) => {
+              const img = e.target;
+              if (!(img instanceof HTMLImageElement)) return;
+              img.classList.add("error");
+              if (img.dataset.fallback === "hide") {
+                img.style.visibility = "hidden";
+              }
+            },
+            true,
+          );
+
+          if (!this.supportsIO) return;
+
           this.observer = new IntersectionObserver(
-            (entries) => {
+            (entries, obs) => {
               entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  const img = entry.target;
-                  const src = img.dataset.src;
-                  if (src) {
-                    img.src = src;
-                    img.onload = () => {
-                      img.classList.add("loaded");
-                      const placeholder = img.parentElement.querySelector(
-                        ".menu-card-image-placeholder",
-                      );
-                      if (placeholder) placeholder.classList.add("hidden");
-                    };
-                    img.onerror = () => {
-                      img.classList.add("error");
-                      img.alt = "صورة غير متوفرة";
-                      const placeholder = img.parentElement.querySelector(
-                        ".menu-card-image-placeholder",
-                      );
-                      if (placeholder) placeholder.classList.add("hidden");
-                    };
-                    img.removeAttribute("data-src");
-                  }
-                  this.observer.unobserve(img);
-                }
+                if (!entry.isIntersecting) return;
+                this.load(entry.target);
+                obs.unobserve(entry.target);
               });
             },
-            { rootMargin: "150px 0px", threshold: 0.01 },
+            { rootMargin: "300px 0px", threshold: 0.01 },
           );
-          this.initialized = true;
         },
+
+        load(img) {
+          const src = img.dataset.src;
+          if (!src) return;
+
+          // remove data-src first so it's never loaded twice
+          img.removeAttribute("data-src");
+
+          const onLoad = () => this.reveal(img, false);
+          const onError = () => this.reveal(img, true);
+
+          // attach handlers BEFORE setting src (avoids race with cached images)
+          img.addEventListener("load", onLoad, { once: true });
+          img.addEventListener("error", onError, { once: true });
+
+          img.src = src;
+        },
+
+        reveal(img, isError) {
+          const placeholder = img.parentElement?.querySelector(
+            ".menu-card-image-placeholder",
+          );
+          if (placeholder) placeholder.classList.add("hidden");
+
+          if (isError) {
+            img.classList.add("error");
+            img.alt = "صورة غير متوفرة";
+          } else {
+            img.classList.add("loaded");
+          }
+        },
+
         observeAll(images) {
           if (!this.initialized) this.init();
+
           images.forEach((img) => {
-            if (img.dataset.src) {
-              this.observer.observe(img);
+            if (!img.dataset.src) return;
+            // No IntersectionObserver? Just load them all (graceful fallback)
+            if (!this.supportsIO) {
+              this.load(img);
+              return;
             }
+            this.observer.observe(img);
           });
         },
       };
@@ -4287,8 +4271,8 @@ let MENU_ITEMS = [
               html += `
                                     <div class="menu-card" style="animation-delay: ${(index % 6) * 0.05}s" role="article" aria-label="${item.name}">
                                         <div class="menu-card-image-wrap">
-                                            <img data-src="${item.image}" alt="${item.name}" loading="lazy" width="400" height="300" />
-                                            <div class="menu-card-image-placeholder" aria-hidden="true"><i class="fas fa-utensils"></i></div>
+                                            <img class="lazy-img" data-src="${item.image}" alt="${item.name}" loading="lazy" decoding="async" width="400" height="300" />
+                                            <div class="menu-card-image-placeholder shimmer" aria-hidden="true"><i class="fas fa-utensils"></i></div>
                                         </div>
                                         <div class="menu-card-body">
                                             <h3 class="menu-card-name">${item.name}</h3>
@@ -4493,7 +4477,7 @@ let MENU_ITEMS = [
           items.forEach((item) => {
             itemsHtml += `
                                 <div class="cart-item" data-item-id="${item.id}">
-                                    <img class="cart-item-image" src="${item.image}" alt="${item.name}" loading="lazy" />
+                                    <img class="cart-item-image" src="${item.image}" alt="${item.name}" width="48" height="48" loading="lazy" decoding="async" data-fallback="hide" />
                                     <div class="cart-item-info">
                                         <div class="cart-item-name">${item.name}</div>
                                         <div class="cart-item-price">${UI.formatPrice(item.price)}</div>
@@ -5050,6 +5034,7 @@ let MENU_ITEMS = [
         initialized: false,
 
         init() {
+          LazyLoader.init();
           ChoiceUI.init();
           ChoiceUI.open();
         },
@@ -5123,6 +5108,7 @@ let MENU_ITEMS = [
       window.CartUI = CartUI;
       window.CheckoutUI = CheckoutUI;
       window.BranchesUI = BranchesUI;
+      window.LazyLoader = LazyLoader;
     </script>
   </body>
 </html>
