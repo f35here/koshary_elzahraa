@@ -4687,9 +4687,9 @@ let MENU_ITEMS = [
           if (isDineIn) {
             formHtml += `
                                 <div class="form-group" id="tableGroup">
-                                    <label for="tableNumber">رقم التابل *</label>
-                                    <input type="text" id="tableNumber" placeholder="أدخل رقم التابل الذي تجلس عليه" required aria-required="true" autofocus />
-                                    <span class="error-text">الرجاء إدخال رقم التابل</span>
+                                    <label for="tableNumber">رقم الترابيزه  *</label>
+                                    <input type="text" id="tableNumber" placeholder="أدخل رقم الترابيزه الذي تجلس عليه" required aria-required="true" autofocus />
+                                    <span class="error-text">الرجاء إدخال رقم الترابيزه</span>
                                 </div>
                                 <div class="form-group" id="nameGroup">
                                     <label for="customerName">الاسم الكامل *</label>
@@ -4889,7 +4889,7 @@ let MENU_ITEMS = [
             // Dine-in: use first branch as default (since we don't ask)
             const defaultBranch = BRANCHES[0];
             orderText += `📍 *الفرع:* ${encodeURIComponent(defaultBranch.name)}%0A`;
-            orderText += `🪑 *رقم التابل:* ${encodeURIComponent(table)}%0A`;
+            orderText += `🪑 *رقم الترابيزه:* ${encodeURIComponent(table)}%0A`;
             orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
           } else {
             orderText += `📍 *الفرع:* ${encodeURIComponent(branchName)}%0A`;
