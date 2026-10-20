@@ -661,7 +661,6 @@
         border-radius: var(--radius-sm);
         background: var(--surface-container-low);
         border-inline-start: 3px solid var(--secondary-light);
-        /* show the full text – no more truncation */
         display: block;
         -webkit-line-clamp: unset;
         -webkit-box-orient: unset;
@@ -959,120 +958,6 @@
         flex-shrink: 0;
         background: var(--surface-container-low);
         border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
-      }
-
-      /* ============================================================
-               CHOICE MODAL
-               ============================================================ */
-      .choice-modal-content {
-        max-width: 520px;
-        border-radius: var(--radius-2xl);
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: var(--space-2xl) var(--space-xl);
-        background: var(--surface-container-lowest);
-        transform: scale(0.92) translateY(20px);
-        transition:
-          transform var(--duration-slow) var(--ease-spring),
-          opacity var(--duration-med) var(--ease-out);
-      }
-
-      .modal-overlay.open .choice-modal-content {
-        transform: scale(1) translateY(0);
-      }
-
-      .choice-header h2 {
-        font: var(--headline-lg);
-        color: var(--on-surface);
-        margin-bottom: var(--space-xs);
-      }
-
-      .choice-header p {
-        font: var(--body-lg);
-        color: var(--on-surface-variant);
-        opacity: 0.8;
-        margin-bottom: var(--space-2xl);
-      }
-
-      .choice-options {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-lg);
-        width: 100%;
-      }
-
-      .choice-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--space-md);
-        padding: var(--space-lg) var(--space-xl);
-        border-radius: var(--radius-xl);
-        border: 2px solid var(--outline-variant);
-        background: var(--surface-container-low);
-        transition: all var(--duration-fast) var(--ease-out);
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--on-surface);
-        cursor: pointer;
-        width: 100%;
-        text-align: right;
-      }
-
-      .choice-btn i {
-        font-size: 32px;
-        color: var(--primary);
-        width: 48px;
-        text-align: center;
-      }
-
-      .choice-btn:hover {
-        border-color: var(--primary);
-        background: var(--surface-container);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-      }
-
-      .choice-btn:active {
-        transform: scale(0.96);
-      }
-
-      .choice-btn .btn-text {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-xs);
-      }
-
-      .choice-btn .btn-text small {
-        font-size: 14px;
-        font-weight: 400;
-        color: var(--on-surface-variant);
-        opacity: 0.7;
-      }
-
-      .choice-btn.delivery-btn i {
-        color: var(--secondary);
-      }
-
-      .choice-btn.dinein-btn i {
-        color: var(--primary);
-      }
-
-      @media (min-width: 600px) {
-        .choice-options {
-          flex-direction: row;
-        }
-        .choice-btn {
-          flex: 1;
-        }
-        .modal-overlay {
-          align-items: center;
-        }
-        .choice-modal-content {
-          border-radius: var(--radius-2xl);
-        }
       }
 
       /* ============================================================
@@ -1841,28 +1726,6 @@
         font-size: 16px;
       }
 
-      /* --- Dine-in helper --- */
-      .field-dinein-only {
-        display: none;
-      }
-      .field-delivery-only {
-        display: none;
-      }
-
-      body.order-type-dinein .field-dinein-only {
-        display: flex;
-      }
-      body.order-type-dinein .field-delivery-only {
-        display: none;
-      }
-
-      body.order-type-delivery .field-dinein-only {
-        display: none;
-      }
-      body.order-type-delivery .field-delivery-only {
-        display: flex;
-      }
-
       /* ---- Checkout form field visibility (JS-driven) ---- */
       .checkout-field {
         transition:
@@ -1892,7 +1755,6 @@
         display: none !important;
       }
 
-      /* small tweak for the checkout summary */
       .checkout-summary-wrap {
         margin-top: var(--space-sm);
       }
@@ -1998,38 +1860,6 @@
     >
       <div class="category-nav-inner" id="categoryNavInner"></div>
     </nav>
-
-    <!-- Choice Modal (Delivery / Dine-in) -->
-    <div
-      class="modal-overlay"
-      id="choiceModal"
-      role="dialog"
-      aria-modal="true"
-      aria-label="اختر طريقة الطلب"
-    >
-      <div class="modal-content choice-modal-content">
-        <div class="choice-header">
-          <h2>مرحباً بك في كشري الزهراء</h2>
-          <p>اختر طريقة الطلب</p>
-        </div>
-        <div class="choice-options">
-          <button class="choice-btn delivery-btn" id="deliveryChoice">
-            <i class="fas fa-truck"></i>
-            <span class="btn-text">
-              <span>دليفري</span>
-              <small>طلب توصيل للمنزل</small>
-            </span>
-          </button>
-          <button class="choice-btn dinein-btn" id="dineinChoice">
-            <i class="fas fa-utensils"></i>
-            <span class="btn-text">
-              <span>صالة</span>
-              <small>تناول الطعام في المطعم</small>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
 
     <!-- Cart Modal -->
     <div
@@ -2348,7 +2178,6 @@
           image: "test/smallW.jpg",
           desc: "مياه معدنية كبيرة.",
         },
-        //-------------------------------
         {
           category: "مكرونات الزهراء",
           name: "مكرونة اسباجيتي سجق",
@@ -2419,7 +2248,6 @@
           image: "test/makr.jpg",
           desc: "مكرونة اسباجيتي سادة من الزهراء.",
         },
-        //-------------------------------
         {
           category: "ميكسات الزهراء",
           name: "ميكس فراخ",
@@ -2476,7 +2304,6 @@
           image: "assets/mixes/sogdouble.jpg",
           desc: "سجق دوبل مع صوص الزهراء الشهي.",
         },
-        //-------------------------------
         {
           category: "حواوشي الزهراء",
           name: "حواوشي لحمة",
@@ -2513,8 +2340,6 @@
           prices: { small: 100, medium: 130, large: 160 },
           image: "assets/hawawshy/hawawshybasterma.jpg",
         },
-        //-------------------------------
-
         {
           category: "حواوشي وش بيتزا",
           name: "حواوشي لحمة",
@@ -2557,8 +2382,6 @@
           prices: { small: 150, medium: 180, large: 200 },
           image: "assets/hawawshypizza/hawawshybastermapizza.jpg",
         },
-        //-------------------------------
-
         {
           category: "حواوشي بلدي",
           name: "حواوشي لحمة بلدي",
@@ -2580,7 +2403,6 @@
           image: "assets/hawawshybaladi/hawawshyfarakhbaladi.jpg",
           desc: "حواوشي فراخ بلدي.",
         },
-        //-------------------------------
         {
           category: "اضافات حواوشي",
           name: "اضافة موتزاريلا",
@@ -2602,7 +2424,6 @@
           image: "addonspizza/kiri.png",
           desc: "اضافة كيري للحواوشي.",
         },
-        //-------------------------------
         {
           category: "الكريب",
           name: "كريب بطاطس",
@@ -2785,7 +2606,6 @@
           image: "test/crepmix.png",
           desc: "كريب ميكس لحوم الزهراء مع صوص خاص.",
         },
-        //-------------------------------
         {
           category: "إضافات الكريب",
           name: "إضافة موتزريلا",
@@ -2835,7 +2655,6 @@
           image: "crepAdd/baketbatates.png",
           desc: "باكيت بطاطس مقلية.",
         },
-        //-------------------------------
         {
           category: "كريب حلو",
           name: "كريب نوتيلا",
@@ -2864,7 +2683,6 @@
           image: "crepHelw/crepefawakeh.png",
           desc: "كريب فواكهة.",
         },
-        //-------------------------------
         {
           category: "حلو الزهراء",
           name: "أرز بلبن سادة",
@@ -2977,7 +2795,6 @@
           image: "assets/sweets/talwajannutella.jpg",
           desc: "طلوا جن نوتيلا.",
         },
-        //-------------------------------
         {
           category: "البيتزا الإيطالي",
           name: "بيتزا مارغريتا",
@@ -3181,8 +2998,6 @@
           image: "italyPIZ/ITPizz.png",
           desc: "جبنة موتزاريلا + فلفل ألوان + زيتون + صوص طماطم + كرسبي + فاهيتا + رانش",
         },
-        //-------------------------------
-
         {
           category: "البيتزا الشرقي",
           name: "بيتزا سجق اسكندراني",
@@ -3344,8 +3159,6 @@
           image: "sharkiPIZZ/SHARKI.png",
           desc: "جبنة رومي + بيض + فلفل + طماطم + كراتشي + تركي + رانش",
         },
-        //-------------------------------
-
         {
           category: "إضافات البيتزا",
           name: "إضافة تونة",
@@ -3437,8 +3250,6 @@
           image: "addonspizza/ranch.png",
           desc: "إضافة صوص رانش للبيتزا.",
         },
-        //-------------------------------
-
         {
           category: "الفطير الحادق",
           name: "فطيرة سجق اسكندراني",
@@ -3502,7 +3313,6 @@
           image: "fiterHAD/FITER.png",
           desc: "خضار + جبنة رومي + جبنة موتزاريلا + فراخ",
         },
-
         {
           category: "الفطير الحادق",
           name: "فطيرة شاورما فراخ",
@@ -3594,8 +3404,6 @@
           image: "fiterHAD/FITER.png",
           desc: "خضار + جبنة رومي + جبنة موتزاريلا + استريس + فراخ + تركي + كيري",
         },
-        //-------------------------------
-
         {
           category: "الفطير الحلو",
           name: "فطيرة سادة",
@@ -3729,7 +3537,6 @@
           image: "assets/fteer/fteermeshaltetelzahraa.jpg",
           desc: "كاستر + بسبوسة + كنافة + مكسرات + قشطة + عسل",
         },
-        //-------------------------------
         {
           category: "نجرسكو",
           name: "نجرسكو فراخ",
@@ -3779,7 +3586,6 @@
           image: "neg/fahitafarakh.png",
           desc: "نجرسكو فاهيتا فراخ + مشروم + فراخ.",
         },
-
         {
           category: "نجرسكو",
           name: "نجرسكو مكس لحوم",
@@ -3787,7 +3593,6 @@
           image: "neg/fahitalahma.png",
           desc: "نجرسكو مكس لحوم + سجق + لحمة + سوسيس + بسطرمة.",
         },
-
         {
           category: "نجرسكو",
           name: "نجرسكو مكس فراخ",
@@ -3795,8 +3600,6 @@
           image: "neg/fahitalahma.png",
           desc: "نجرسكو مكس فراخ + شيش + شاورما + كرسبي + استربس.",
         },
-        //-------------------------------
-
         {
           category: "صوارخ الزهراء",
           name: "صاروخ سجق اسكندراني",
@@ -3944,7 +3747,6 @@
           image: "assets/sawarekh/sawarekh_smoke_turkey.jpg",
           desc: "صاروخ سموك تركي من الزهراء.",
         },
-        //-------------------------------
         {
           category: "إضافات الحلو",
           name: "إضافة لبن",
@@ -4068,10 +3870,6 @@
       ];
 
       const BRANCH_PHONES = "201040346247";
-
-      // ─── GLOBAL ORDER TYPE ──────────────────────────────────────────────
-
-      let orderType = null; // 'delivery' or 'dinein'
 
       // ─── STORAGE ────────────────────────────────────────────────────────
 
@@ -4197,7 +3995,6 @@
           if (this.initialized) return;
           this.initialized = true;
 
-          // Global image error handler (capture phase catches error events)
           document.addEventListener(
             "error",
             (e) => {
@@ -4228,14 +4025,11 @@
         load(img) {
           const src = img.dataset.src;
           if (!src) return;
-
-          // remove data-src first so it's never loaded twice
           img.removeAttribute("data-src");
 
           const onLoad = () => this.reveal(img, false);
           const onError = () => this.reveal(img, true);
 
-          // attach handlers BEFORE setting src (avoids race with cached images)
           img.addEventListener("load", onLoad, { once: true });
           img.addEventListener("error", onError, { once: true });
 
@@ -4261,7 +4055,6 @@
 
           images.forEach((img) => {
             if (!img.dataset.src) return;
-            // No IntersectionObserver? Just load them all (graceful fallback)
             if (!this.supportsIO) {
               this.load(img);
               return;
@@ -4676,7 +4469,6 @@
         body: null,
         isOpen: false,
         DELIVERY_WHATSAPP: "201040346247",
-        DINEIN_WHATSAPP: "201040346247",
 
         init() {
           this.modal = document.getElementById("checkoutModal");
@@ -4711,7 +4503,6 @@
           const items = Cart.getItems();
           const totalItems = Cart.getTotalItems();
           const totalPrice = Cart.getTotalPrice();
-          const isDineIn = orderType === "dinein";
 
           if (items.length === 0) {
             this.body.innerHTML = `<div class="cart-empty"><i class="fas fa-clipboard-list"></i><h3>السلة فارغة</h3><p>أضف أطباقك المفضلة أولاً</p><button class="btn btn-primary" id="backToCartBtn" style="margin-top:var(--space-md);">العودة للسلة</button></div>`;
@@ -4729,33 +4520,12 @@
             (b) => `<option value="${b.id}">${b.name}</option>`,
           ).join("");
 
-          // Build summary of items
           let summaryHtml = "";
           items.forEach((item) => {
             summaryHtml += `<div style="display:flex;justify-content:space-between;font-size:14px;padding:var(--space-xs) 0;border-bottom:1px solid var(--outline-variant);"><span>${item.name} × ${item.quantity}</span><span>${UI.formatPrice(item.price * item.quantity)}</span></div>`;
           });
 
-          // ─── Build the form conditionally ──────────────────────────
-
-          let formHtml = `<form class="checkout-form" id="checkoutForm" novalidate>`;
-
-          // ── DINE-IN FIELDS ──
-          if (isDineIn) {
-            formHtml += `
-                                <div class="form-group" id="tableGroup">
-                                    <label for="tableNumber">رقم الترابيزه  *</label>
-                                    <input type="text" id="tableNumber" placeholder="أدخل رقم الترابيزه الذي تجلس عليه" required aria-required="true" autofocus />
-                                    <span class="error-text">الرجاء إدخال رقم الترابيزه</span>
-                                </div>
-                                <div class="form-group" id="nameGroup">
-                                    <label for="customerName">الاسم الكامل *</label>
-                                    <input type="text" id="customerName" placeholder="أدخل اسمك الكامل" required aria-required="true" autocomplete="name" />
-                                    <span class="error-text">الرجاء إدخال الاسم</span>
-                                </div>
-                            `;
-          } else {
-            // ── DELIVERY FIELDS ──
-            formHtml += `
+          let formHtml = `<form class="checkout-form" id="checkoutForm" novalidate>
                                 <div class="form-group" id="branchGroup">
                                     <label for="customerBranch">اختر الفرع *</label>
                                     <select id="customerBranch" required>
@@ -4783,11 +4553,6 @@
                                     <label for="customerNotes">ملاحظات إضافية</label>
                                     <textarea id="customerNotes" placeholder="مثل: توصيل سريع، طلب خاص، إلخ..." rows="2"></textarea>
                                 </div>
-                            `;
-          }
-
-          // ── ORDER SUMMARY ── (same for both)
-          formHtml += `
                             <div class="checkout-summary">
                                 <div style="font-weight:700;color:var(--on-surface);margin-bottom:var(--space-xs);">ملخص الطلب</div>
                                 ${summaryHtml}
@@ -4799,22 +4564,18 @@
 
           this.body.innerHTML = formHtml;
 
-          // ─── Bind form submit ──────────────────────────────────────
           const form = document.getElementById("checkoutForm");
           form.addEventListener("submit", (e) => {
             e.preventDefault();
             this.handleSubmit();
           });
 
-          // ─── Bind validation events ────────────────────────────────
-          const fields = isDineIn
-            ? ["tableNumber", "customerName"]
-            : [
-                "customerBranch",
-                "customerName",
-                "customerPhone",
-                "customerAddress",
-              ];
+          const fields = [
+            "customerBranch",
+            "customerName",
+            "customerPhone",
+            "customerAddress",
+          ];
 
           fields.forEach((id) => {
             const input = document.getElementById(id);
@@ -4843,7 +4604,6 @@
             });
           });
 
-          // Auto-focus first field
           const firstInput = this.body.querySelector("input, select, textarea");
           if (firstInput) {
             setTimeout(() => firstInput.focus(), 300);
@@ -4851,77 +4611,45 @@
         },
 
         handleSubmit() {
-          const isDineIn = orderType === "dinein";
+          const branch = document.getElementById("customerBranch").value;
+          const branchName = BRANCHES.find((b) => b.id === branch)?.name || "";
+          const name = document.getElementById("customerName").value.trim();
+          const phone = document.getElementById("customerPhone").value.trim();
+          const address = document
+            .getElementById("customerAddress")
+            .value.trim();
+          const notes = document.getElementById("customerNotes").value.trim();
 
-          // ─── Gather values ─────────────────────────────────────────
-          let branch = "";
-          let branchName = "";
-          let name = "";
-          let phone = "";
-          let address = "";
-          let notes = "";
-          let table = "";
-
-          if (isDineIn) {
-            table = document.getElementById("tableNumber").value.trim();
-            name = document.getElementById("customerName").value.trim();
-          } else {
-            branch = document.getElementById("customerBranch").value;
-            branchName = BRANCHES.find((b) => b.id === branch)?.name || "";
-            name = document.getElementById("customerName").value.trim();
-            phone = document.getElementById("customerPhone").value.trim();
-            address = document.getElementById("customerAddress").value.trim();
-            notes = document.getElementById("customerNotes").value.trim();
-          }
-
-          // ─── Validate ──────────────────────────────────────────────
           let valid = true;
 
-          if (isDineIn) {
-            const tableGroup = document.getElementById("tableGroup");
-            const nameGroup = document.getElementById("nameGroup");
-            if (!table) {
-              tableGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              tableGroup.classList.remove("invalid");
-            }
-            if (!name) {
-              nameGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              nameGroup.classList.remove("invalid");
-            }
-          } else {
-            const branchGroup = document.getElementById("branchGroup");
-            const nameGroup = document.getElementById("nameGroup");
-            const phoneGroup = document.getElementById("phoneGroup");
-            const addressGroup = document.getElementById("addressGroup");
+          const branchGroup = document.getElementById("branchGroup");
+          const nameGroup = document.getElementById("nameGroup");
+          const phoneGroup = document.getElementById("phoneGroup");
+          const addressGroup = document.getElementById("addressGroup");
 
-            if (!branch) {
-              branchGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              branchGroup.classList.remove("invalid");
-            }
-            if (!name) {
-              nameGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              nameGroup.classList.remove("invalid");
-            }
-            if (!phone || phone.length < 10) {
-              phoneGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              phoneGroup.classList.remove("invalid");
-            }
-            if (!address) {
-              addressGroup.classList.add("invalid");
-              valid = false;
-            } else {
-              addressGroup.classList.remove("invalid");
-            }
+          if (!branch) {
+            branchGroup.classList.add("invalid");
+            valid = false;
+          } else {
+            branchGroup.classList.remove("invalid");
+          }
+          if (!name) {
+            nameGroup.classList.add("invalid");
+            valid = false;
+          } else {
+            nameGroup.classList.remove("invalid");
+          }
+          if (!phone || phone.length < 10) {
+            phoneGroup.classList.add("invalid");
+            valid = false;
+          } else {
+            phoneGroup.classList.remove("invalid");
+          }
+          if (!address) {
+            addressGroup.classList.add("invalid");
+            valid = false;
+          } else {
+            addressGroup.classList.remove("invalid");
           }
 
           if (!valid) {
@@ -4934,27 +4662,15 @@
             return;
           }
 
-          // ─── Build WhatsApp message ────────────────────────────────
           const items = Cart.getItems();
-          const orderTypeLabel = isDineIn ? "صالة" : "دليفري";
 
           let orderText = `🍽️ *طلب جديد من كشري الزهراء*%0A%0A`;
-          orderText += `📋 *نوع الطلب:* ${orderTypeLabel}%0A`;
-
-          if (isDineIn) {
-            // Dine-in: use first branch as default (since we don't ask)
-            const defaultBranch = BRANCHES[0];
-            orderText += `📍 *الفرع:* ${encodeURIComponent(defaultBranch.name)}%0A`;
-            orderText += `🪑 *رقم الترابيزه:* ${encodeURIComponent(table)}%0A`;
-            orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
-          } else {
-            orderText += `📍 *الفرع:* ${encodeURIComponent(branchName)}%0A`;
-            orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
-            orderText += `📱 *الهاتف:* ${encodeURIComponent(phone)}%0A`;
-            orderText += `📍 *العنوان:* ${encodeURIComponent(address)}%0A`;
-            if (notes)
-              orderText += `📝 *ملاحظات:* ${encodeURIComponent(notes)}%0A`;
-          }
+          orderText += `📋 *نوع الطلب:* دليفري%0A`;
+          orderText += `📍 *الفرع:* ${encodeURIComponent(branchName)}%0A`;
+          orderText += `👤 *الاسم:* ${encodeURIComponent(name)}%0A`;
+          orderText += `📱 *الهاتف:* ${encodeURIComponent(phone)}%0A`;
+          orderText += `📍 *العنوان:* ${encodeURIComponent(address)}%0A`;
+          if (notes) orderText += `📝 *ملاحظات:* ${encodeURIComponent(notes)}%0A`;
 
           orderText += `%0A*🧾 الطلب:*%0A`;
           items.forEach((item, i) => {
@@ -4963,15 +4679,12 @@
           orderText += `%0A💰 *المجموع الكلي:* ${UI.formatPrice(Cart.getTotalPrice())}%0A`;
           orderText += `%0A🙏 *شكراً لتسوقكم مع كشري الزهراء!*`;
 
-          // ─── Choose WhatsApp number ────────────────────────────────
-          const whatsappNumber = isDineIn
-            ? this.DINEIN_WHATSAPP
-            : this.DELIVERY_WHATSAPP;
+          const whatsappNumber = this.DELIVERY_WHATSAPP;
           const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderText}`;
 
           Swal.fire({
             title: "✅ تم إتمام الطلب!",
-            text: `سيتم تحويلك إلى واتساب المطعم (${orderTypeLabel}) لإرسال الطلب`,
+            text: `سيتم تحويلك إلى واتساب المطعم لإرسال الطلب`,
             icon: "success",
             confirmButtonColor: "#A61C2C",
             confirmButtonText: "📱 أرسل الطلب",
@@ -5058,54 +4771,6 @@
         },
       };
 
-      // ─── CHOICE UI ──────────────────────────────────────────────────────
-
-      const ChoiceUI = {
-        modal: null,
-        isOpen: false,
-
-        init() {
-          this.modal = document.getElementById("choiceModal");
-          document
-            .getElementById("deliveryChoice")
-            .addEventListener("click", () => {
-              orderType = "delivery";
-              document.body.classList.add("order-type-delivery");
-              document.body.classList.remove("order-type-dinein");
-              this.close();
-              App.startApp();
-            });
-          document
-            .getElementById("dineinChoice")
-            .addEventListener("click", () => {
-              orderType = "dinein";
-              document.body.classList.add("order-type-dinein");
-              document.body.classList.remove("order-type-delivery");
-              this.close();
-              App.startApp();
-            });
-          this.modal.addEventListener("click", (e) => {
-            if (e.target === this.modal) return;
-          });
-          document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") return;
-          });
-          return this;
-        },
-
-        open() {
-          this.isOpen = true;
-          this.modal.classList.add("open");
-          document.body.style.overflow = "hidden";
-        },
-
-        close() {
-          this.isOpen = false;
-          this.modal.classList.remove("open");
-          document.body.style.overflow = "";
-        },
-      };
-
       // ─── APP ────────────────────────────────────────────────────────────
 
       const App = {
@@ -5113,8 +4778,7 @@
 
         init() {
           LazyLoader.init();
-          ChoiceUI.init();
-          ChoiceUI.open();
+          this.startApp();
         },
 
         startApp() {
@@ -5154,10 +4818,7 @@
               el.style.transform = "none";
             });
           }
-          console.log(
-            "🌿 كشري الزهراء — تم تحميل الموقع بنجاح، نوع الطلب:",
-            orderType,
-          );
+          console.log("🌿 كشري الزهراء — تم تحميل الموقع بنجاح (دليفري)");
         },
 
         updateCartUI() {
