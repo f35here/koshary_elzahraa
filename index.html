@@ -4499,6 +4499,14 @@
           document.body.style.overflow = "";
         },
 
+        // استخراج الصنف الأصلي من MENU_DATA بناءً على cart item id
+        // cartItem.id = "item-12-عادي"  →  menuItemId = "item-12"
+        getMenuItemFromCartItem(cartItem) {
+          if (!cartItem || !cartItem.id) return null;
+          const menuItemId = cartItem.id.split("-").slice(0, 2).join("-");
+          return MENU_DATA.find((i) => i.id === menuItemId) || null;
+        },
+
         render() {
           const items = Cart.getItems();
           const totalItems = Cart.getTotalItems();
@@ -4674,9 +4682,23 @@
 
           orderText += `%0A*🧾 الطلب:*%0A`;
           items.forEach((item, i) => {
-            orderText += `${i + 1}. ${encodeURIComponent(item.name)} × ${item.quantity} = ${UI.formatPrice(item.price * item.quantity)}%0A`;
+            const menuItem = this.getMenuItemFromCartItem(item);
+            const category = menuItem ? menuItem.category : "";
+
+            // إضافة اسم الكاتيجوري للبيتزا الإيطالي والشرقي فقط (بأسماء مختصرة)
+            let categoryLabel = "";
+            if (category === "البيتزا الإيطالي") categoryLabel = "بيتزا ايطالي";
+            else if (category === "البيتزا الشرقي") categoryLabel = "بيتزا شرقي";
+
+            const displayName = categoryLabel
+              ? `${item.name} - ${categoryLabel}`
+              : item.name;
+
+            orderText += `${i + 1}. ${encodeURIComponent(displayName)} × ${item.quantity} = ${UI.formatPrice(item.price * item.quantity)}%0A`;
           });
+
           orderText += `%0A💰 *المجموع الكلي:* ${UI.formatPrice(Cart.getTotalPrice())}%0A`;
+          orderText += `%0A⚠️ *ملحوظة:* السعر غير شامل خدمة التوصيل%0A`;
           orderText += `%0A🙏 *شكراً لتسوقكم مع كشري الزهراء!*`;
 
           const whatsappNumber = this.DELIVERY_WHATSAPP;
