@@ -22,6 +22,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- ⚡ ENHANCED: Preload LCP image -->
+    <link rel="preload" as="image" href="test/koshary.png" fetchpriority="high" />
+
     <style>
       /* ============================================================
          ROOT – Brand identity matched to logo
@@ -549,21 +552,26 @@
 
       /* ============================================================
          MENU CARD
+         ⚡ ENHANCED: removed entrance animation, added content-visibility
          ============================================================ */
       .menu-card {
         background: var(--surface-container-lowest);
         border-radius: var(--radius-lg);
         overflow: hidden;
         box-shadow: var(--shadow-xs);
-        transition: all var(--duration-med) var(--ease-out);
+        transition:
+          box-shadow var(--duration-med) var(--ease-out),
+          transform var(--duration-med) var(--ease-out),
+          border-color var(--duration-med) var(--ease-out);
         border: 1px solid var(--surface-container);
         display: flex;
         flex-direction: column;
         position: relative;
-        opacity: 0;
-        transform: translateY(16px);
-        animation: cardFadeIn 0.5s var(--ease-spring) forwards;
-        will-change: transform, opacity;
+
+        /* ⚡ ENHANCED: skip layout/paint for off-screen cards */
+        content-visibility: auto;
+        contain-intrinsic-size: 320px;
+        contain-intrinsic-size: auto 320px;
       }
 
       .menu-card:hover {
@@ -576,6 +584,7 @@
         transform: scale(0.98);
       }
 
+      /* ⚡ ENHANCED: kept because .cart-item still references it */
       @keyframes cardFadeIn {
         to {
           opacity: 1;
@@ -1526,10 +1535,7 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
-        .menu-card {
-          opacity: 1;
-          transform: none;
-        }
+        /* ⚡ ENHANCED: removed .menu-card override (no longer animates) */
         .cart-badge.bump {
           animation: none;
         }
@@ -1729,19 +1735,16 @@
         margin-top: var(--space-sm);
       }
 
+      /* ⚡ ENHANCED: removed expensive blur, simplified transition */
       .menu-card-image-wrap img.lazy-img {
         opacity: 0;
-        filter: blur(6px);
         transform: scale(1.02);
-        transition:
-          opacity var(--duration-med) var(--ease-out),
-          filter var(--duration-med) var(--ease-out),
-          transform var(--duration-slow) var(--ease-out);
+        transition: opacity 250ms ease-out, transform 350ms ease-out;
       }
 
       .menu-card-image-wrap img.lazy-img.loaded {
         opacity: 1;
-        filter: blur(0);
+        transform: scale(1);
       }
 
       .menu-card:hover .menu-card-image-wrap img.lazy-img.loaded {
@@ -1753,7 +1756,6 @@
         padding: var(--space-md);
         background: var(--surface-container);
         opacity: 1;
-        filter: none;
       }
 
       .menu-card-image-placeholder.shimmer {
@@ -3925,10 +3927,12 @@
         },
       };
 
+      /* ⚡ ENHANCED: fully rewritten LazyLoader */
       const LazyLoader = {
         observer: null,
         initialized: false,
         supportsIO: "IntersectionObserver" in window,
+        loadedUrls: new Set(),
 
         init() {
           if (this.initialized) return;
@@ -3952,11 +3956,13 @@
             (entries, obs) => {
               entries.forEach((entry) => {
                 if (!entry.isIntersecting) return;
-                this.load(entry.target);
-                obs.unobserve(entry.target);
+                const card = entry.target;
+                const img = card.querySelector?.("img[data-src]");
+                if (img) this.load(img);
+                obs.unobserve(card);
               });
             },
-            { rootMargin: "300px 0px", threshold: 0.01 },
+            { rootMargin: "600px 0px", threshold: 0.01 },
           );
         },
 
@@ -3964,35 +3970,70 @@
           const src = img.dataset.src;
           if (!src) return;
           img.removeAttribute("data-src");
-          const onLoad = () => this.reveal(img, false);
-          const onError = () => this.reveal(img, true);
+
+          const placeholder = img.parentElement?.querySelector(
+            ".menu-card-image-placeholder",
+          );
+          const markLoaded = () => {
+            if (placeholder) placeholder.classList.add("hidden");
+            img.classList.add("loaded");
+          };
+
+          // Already cached → show instantly
+          if (this.loadedUrls.has(src)) {
+            img.src = src;
+            markLoaded();
+            return;
+          }
+
+          const onLoad = () => {
+            this.loadedUrls.add(src);
+            if (img.decode) {
+              img.decode().then(markLoaded).catch(markLoaded);
+            } else {
+              markLoaded();
+            }
+          };
+          const onError = () => {
+            if (placeholder) placeholder.classList.add("hidden");
+            img.classList.add("error");
+            img.alt = "صورة غير متوفرة";
+          };
+
           img.addEventListener("load", onLoad, { once: true });
           img.addEventListener("error", onError, { once: true });
           img.src = src;
         },
 
-        reveal(img, isError) {
-          const placeholder = img.parentElement?.querySelector(
-            ".menu-card-image-placeholder",
-          );
-          if (placeholder) placeholder.classList.add("hidden");
-          if (isError) {
-            img.classList.add("error");
-            img.alt = "صورة غير متوفرة";
-          } else {
-            img.classList.add("loaded");
-          }
+        loadEager(cards) {
+          const vh =
+            window.innerHeight || document.documentElement.clientHeight;
+          const eagerRange = vh * 1.2;
+          let firstImage = null;
+
+          cards.forEach((card) => {
+            const img = card.querySelector?.("img[data-src]");
+            if (!img) return;
+            const rect = card.getBoundingClientRect();
+            if (rect.top < eagerRange && rect.bottom > -eagerRange) {
+              if (!firstImage) {
+                firstImage = img;
+                img.setAttribute("fetchpriority", "high");
+              }
+              this.load(img);
+            }
+          });
         },
 
-        observeAll(images) {
+        observeAll(cards) {
           if (!this.initialized) this.init();
-          images.forEach((img) => {
-            if (!img.dataset.src) return;
+          cards.forEach((card) => {
             if (!this.supportsIO) {
-              this.load(img);
+              const img = card.querySelector?.("img[data-src]");
+              if (img) this.load(img);
               return;
             }
-            this.observer.observe(img);
+            this.observer.observe(card);
           });
         },
       };
@@ -4071,7 +4112,7 @@
               }
 
               html += `
-                <div class="menu-card" style="animation-delay: ${(index % 6) * 0.05}s" role="article" aria-label="${item.name}">
+                <div class="menu-card" role="article" aria-label="${item.name}">
                   <div class="menu-card-image-wrap">
                     <img class="lazy-img" data-src="${item.image}" alt="${item.name}" loading="lazy" decoding="async" width="400" height="300" />
                     <div class="menu-card-image-placeholder shimmer" aria-hidden="true"><i class="fas fa-utensils"></i></div>
@@ -4094,8 +4135,15 @@
           }
 
           this.container.innerHTML = html;
-          const images = this.container.querySelectorAll("img[data-src]");
-          LazyLoader.observeAll(images);
+
+          /* ⚡ ENHANCED: eager-load visible + observe the rest */
+          const cards = this.container.querySelectorAll(".menu-card");
+          LazyLoader.loadEager(cards);
+
+          const remaining = Array.from(cards).filter((c) =>
+            c.querySelector("img[data-src]"),
+          );
+          LazyLoader.observeAll(remaining);
         },
 
         renderQuantityControls(itemId, qty) {
@@ -4715,24 +4763,19 @@
           this.updateCartUI();
 
           const header = document.getElementById("appHeader");
+
+          /* ⚡ ENHANCED: passive scroll listener */
           window.addEventListener(
             "scroll",
             UI.throttleRAF(() => {
               if (window.scrollY > 10) header.classList.add("scrolled");
               else header.classList.remove("scrolled");
             }),
+            { passive: true },
           );
 
-          const prefersReduced = window.matchMedia(
-            "(prefers-reduced-motion: reduce)",
-          );
-          if (prefersReduced.matches) {
-            document.querySelectorAll(".menu-card").forEach((el) => {
-              el.style.animation = "none";
-              el.style.opacity = "1";
-              el.style.transform = "none";
-            });
-          }
+          /* ⚡ ENHANCED: prefers-reduced block removed (no menu-card animation anymore) */
+
           console.log("🌿 كشري الزهراء — تم تحميل الموقع بنجاح (دليفري)");
         },
 
