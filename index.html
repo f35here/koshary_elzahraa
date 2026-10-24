@@ -11,6 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="image"
+      href="test/logo/logo.jpeg"
+      fetchpriority="high"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
@@ -21,9 +27,6 @@
     />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- ⚡ ENHANCED: Preload LCP image -->
-    <link rel="preload" as="image" href="test/koshary.png" fetchpriority="high" />
 
     <style>
       /* ============================================================
@@ -552,26 +555,21 @@
 
       /* ============================================================
          MENU CARD
-         ⚡ ENHANCED: removed entrance animation, added content-visibility
          ============================================================ */
       .menu-card {
         background: var(--surface-container-lowest);
         border-radius: var(--radius-lg);
         overflow: hidden;
         box-shadow: var(--shadow-xs);
-        transition:
-          box-shadow var(--duration-med) var(--ease-out),
-          transform var(--duration-med) var(--ease-out),
-          border-color var(--duration-med) var(--ease-out);
+        transition: all var(--duration-med) var(--ease-out);
         border: 1px solid var(--surface-container);
         display: flex;
         flex-direction: column;
         position: relative;
-
-        /* ⚡ ENHANCED: skip layout/paint for off-screen cards */
-        content-visibility: auto;
-        contain-intrinsic-size: 320px;
-        contain-intrinsic-size: auto 320px;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: cardFadeIn 0.5s var(--ease-spring) forwards;
+        will-change: transform, opacity;
       }
 
       .menu-card:hover {
@@ -584,7 +582,6 @@
         transform: scale(0.98);
       }
 
-      /* ⚡ ENHANCED: kept because .cart-item still references it */
       @keyframes cardFadeIn {
         to {
           opacity: 1;
@@ -1535,7 +1532,10 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
-        /* ⚡ ENHANCED: removed .menu-card override (no longer animates) */
+        .menu-card {
+          opacity: 1;
+          transform: none;
+        }
         .cart-badge.bump {
           animation: none;
         }
@@ -1735,16 +1735,19 @@
         margin-top: var(--space-sm);
       }
 
-      /* ⚡ ENHANCED: removed expensive blur, simplified transition */
       .menu-card-image-wrap img.lazy-img {
         opacity: 0;
+        filter: blur(6px);
         transform: scale(1.02);
-        transition: opacity 250ms ease-out, transform 350ms ease-out;
+        transition:
+          opacity var(--duration-med) var(--ease-out),
+          filter var(--duration-med) var(--ease-out),
+          transform var(--duration-slow) var(--ease-out);
       }
 
       .menu-card-image-wrap img.lazy-img.loaded {
         opacity: 1;
-        transform: scale(1);
+        filter: blur(0);
       }
 
       .menu-card:hover .menu-card-image-wrap img.lazy-img.loaded {
@@ -1756,6 +1759,7 @@
         padding: var(--space-md);
         background: var(--surface-container);
         opacity: 1;
+        filter: none;
       }
 
       .menu-card-image-placeholder.shimmer {
@@ -1767,6 +1771,17 @@
         );
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
+      }
+
+      /* ---- Lazy-load speed-ups ---- */
+      .menu-card-image-wrap img.lazy-img.instant {
+        transition: none;
+        filter: none;
+      }
+
+      .menu-section {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 700px;
       }
     </style>
   </head>
@@ -3927,12 +3942,21 @@
         },
       };
 
-      /* ⚡ ENHANCED: fully rewritten LazyLoader */
       const LazyLoader = {
         observer: null,
         initialized: false,
         supportsIO: "IntersectionObserver" in window,
-        loadedUrls: new Set(),
+        loadedSrcs: new Set(), // صور اتحملت قبل كده (كتير منها مكررة: all.jpg, koshary.png...)
+        prefetched: new Set(),
+        EAGER_COUNT: 8, // أول صور بتتحمل فورًا بأولوية عالية
+        conn: navigator.connection || {},
+
+        get lowData() {
+          return (
+            this.conn.saveData ||
+            /(^|-)2g$|3g/.test(this.conn.effectiveType || "")
+          );
+        },
 
         init() {
           if (this.initialized) return;
@@ -3956,85 +3980,110 @@
             (entries, obs) => {
               entries.forEach((entry) => {
                 if (!entry.isIntersecting) return;
-                const card = entry.target;
-                const img = card.querySelector?.("img[data-src]");
-                if (img) this.load(img);
-                obs.unobserve(card);
+                this.load(entry.target, false);
+                obs.unobserve(entry.target);
               });
             },
-            { rootMargin: "600px 0px", threshold: 0.01 },
+            { rootMargin: "900px 0px", threshold: 0 }, // يبدأ التحميل قبل ما توصله بمسافة كبيرة
           );
         },
 
-        load(img) {
+        load(img, priority) {
           const src = img.dataset.src;
           if (!src) return;
           img.removeAttribute("data-src");
 
-          const placeholder = img.parentElement?.querySelector(
-            ".menu-card-image-placeholder",
-          );
-          const markLoaded = () => {
-            if (placeholder) placeholder.classList.add("hidden");
-            img.classList.add("loaded");
-          };
-
-          // Already cached → show instantly
-          if (this.loadedUrls.has(src)) {
+          // صورة اتحملت قبل كده: تظهر فورًا بدون shimmer أو fade
+          if (this.loadedSrcs.has(src)) {
+            img.classList.add("instant");
             img.src = src;
-            markLoaded();
+            this.reveal(img, false);
             return;
           }
 
-          const onLoad = () => {
-            this.loadedUrls.add(src);
-            if (img.decode) {
-              img.decode().then(markLoaded).catch(markLoaded);
-            } else {
-              markLoaded();
-            }
-          };
-          const onError = () => {
-            if (placeholder) placeholder.classList.add("hidden");
-            img.classList.add("error");
-            img.alt = "صورة غير متوفرة";
-          };
+          img.decoding = "async";
+          if (priority) {
+            img.loading = "eager";
+            img.fetchPriority = "high";
+          }
 
-          img.addEventListener("load", onLoad, { once: true });
-          img.addEventListener("error", onError, { once: true });
+          img.addEventListener(
+            "load",
+            () => {
+              const finish = () => {
+                this.loadedSrcs.add(src);
+                this.reveal(img, false);
+              };
+              // decode قبل الإظهار عشان ما يحصلش تقطيع أثناء السكرول
+              img.decode ? img.decode().then(finish, finish) : finish();
+            },
+            { once: true },
+          );
+          img.addEventListener("error", () => this.reveal(img, true), {
+            once: true,
+          });
           img.src = src;
         },
 
-        loadEager(cards) {
-          const vh =
-            window.innerHeight || document.documentElement.clientHeight;
-          const eagerRange = vh * 1.2;
-          let firstImage = null;
+        reveal(img, isError) {
+          const placeholder = img.parentElement?.querySelector(
+            ".menu-card-image-placeholder",
+          );
+          if (placeholder) placeholder.classList.add("hidden");
+          if (isError) {
+            img.classList.add("error");
+            img.alt = "صورة غير متوفرة";
+          } else {
+            img.classList.add("loaded");
+          }
+        },
 
-          cards.forEach((card) => {
-            const img = card.querySelector?.("img[data-src]");
-            if (!img) return;
-            const rect = card.getBoundingClientRect();
-            if (rect.top < eagerRange && rect.bottom > -eagerRange) {
-              if (!firstImage) {
-                firstImage = img;
-                img.setAttribute("fetchpriority", "high");
-              }
-              this.load(img);
+        observeAll(images) {
+          if (!this.initialized) this.init();
+          let n = 0;
+          images.forEach((img) => {
+            if (!img.dataset.src) return;
+            if (!this.supportsIO || n < this.EAGER_COUNT) {
+              this.load(img, n < this.EAGER_COUNT);
+              n++;
+              return;
             }
+            n++;
+            this.observer.observe(img);
           });
         },
 
-        observeAll(cards) {
-          if (!this.initialized) this.init();
-          cards.forEach((card) => {
-            if (!this.supportsIO) {
-              const img = card.querySelector?.("img[data-src]");
-              if (img) this.load(img);
-              return;
+        // تحميل باقي الصور في الخلفية وقت الخمول (الصور الأهم أولًا)
+        prefetchIdle(currentCategory) {
+          if (this.lowData) return;
+          const ordered = [
+            ...MENU_DATA.filter((i) => i.category === currentCategory),
+            ...MENU_DATA.filter((i) => i.category !== currentCategory),
+          ].map((i) => i.image);
+          const queue = [...new Set(ordered)].filter(
+            (u) => !this.prefetched.has(u) && !this.loadedSrcs.has(u),
+          );
+          let active = 0;
+          const MAX = 3;
+          const idle =
+            window.requestIdleCallback || ((cb) => setTimeout(cb, 300));
+
+          const pump = () => {
+            while (active < MAX && queue.length) {
+              const url = queue.shift();
+              this.prefetched.add(url);
+              active++;
+              const im = new Image();
+              im.decoding = "async";
+              im.onload = im.onerror = () => {
+                if (im.naturalWidth) this.loadedSrcs.add(url);
+                active--;
+                idle(pump);
+              };
+              im.src = url;
             }
-            this.observer.observe(card);
-          });
+          };
+          idle(pump);
         },
       };
 
@@ -4112,9 +4161,9 @@
               }
 
               html += `
-                <div class="menu-card" role="article" aria-label="${item.name}">
+                <div class="menu-card" style="animation-delay: ${(index % 6) * 0.05}s" role="article" aria-label="${item.name}">
                   <div class="menu-card-image-wrap">
-                    <img class="lazy-img" data-src="${item.image}" alt="${item.name}" loading="lazy" decoding="async" width="400" height="300" />
+                    <img class="lazy-img" data-src="${item.image}" alt="${item.name}" decoding="async" width="400" height="300" />
                     <div class="menu-card-image-placeholder shimmer" aria-hidden="true"><i class="fas fa-utensils"></i></div>
                   </div>
                   <div class="menu-card-body">
@@ -4135,15 +4184,9 @@
           }
 
           this.container.innerHTML = html;
-
-          /* ⚡ ENHANCED: eager-load visible + observe the rest */
-          const cards = this.container.querySelectorAll(".menu-card");
-          LazyLoader.loadEager(cards);
-
-          const remaining = Array.from(cards).filter((c) =>
-            c.querySelector("img[data-src]"),
-          );
-          LazyLoader.observeAll(remaining);
+          const images = this.container.querySelectorAll("img[data-src]");
+          LazyLoader.observeAll(images);
+          LazyLoader.prefetchIdle(categoryId);
         },
 
         renderQuantityControls(itemId, qty) {
@@ -4763,19 +4806,24 @@
           this.updateCartUI();
 
           const header = document.getElementById("appHeader");
-
-          /* ⚡ ENHANCED: passive scroll listener */
           window.addEventListener(
             "scroll",
             UI.throttleRAF(() => {
               if (window.scrollY > 10) header.classList.add("scrolled");
               else header.classList.remove("scrolled");
             }),
-            { passive: true },
           );
 
-          /* ⚡ ENHANCED: prefers-reduced block removed (no menu-card animation anymore) */
-
+          const prefersReduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          );
+          if (prefersReduced.matches) {
+            document.querySelectorAll(".menu-card").forEach((el) => {
+              el.style.animation = "none";
+              el.style.opacity = "1";
+              el.style.transform = "none";
+            });
+          }
           console.log("🌿 كشري الزهراء — تم تحميل الموقع بنجاح (دليفري)");
         },
 
